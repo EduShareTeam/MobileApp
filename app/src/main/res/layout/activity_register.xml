@@ -37,7 +37,7 @@
                     android:id="@+id/textInputUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="First and Last name"
+                    android:hint="İsim ve Soyisim"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -70,7 +70,7 @@
                     android:id="@+id/textInputEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="Eposta Adresi"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -102,7 +102,7 @@
                     android:id="@+id/uniname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="unimame"
+                    android:hint="Üniversite İsmi"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -130,7 +130,7 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/Departmant"
+                    android:id="@+id/department"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Fakülte"
@@ -165,7 +165,7 @@
                     android:id="@+id/bio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Hakkımda"
+                    android:hint="Hakkında"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -238,14 +238,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/back"
+            android:id="@+id/btnBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_margin="20dp"
             android:background="@drawable/rounded_button"
             android:backgroundTint="@color/colorAccent"
-            android:text="Register "
+            android:text="Back "
             android:textColor="@color/colorWhite" />
 
 
@@ -256,12 +256,12 @@
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="back "
+        android:layout_gravity="bottom"
+        android:layout_margin="20dp"
         android:background="@drawable/rounded_button"
         android:backgroundTint="@color/colorAccent"
-        android:layout_gravity="bottom"
-        android:textColor="@color/colorWhite"
-        android:layout_margin="20dp"/>
+        android:text="Register"
+        android:textColor="@color/colorWhite" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
