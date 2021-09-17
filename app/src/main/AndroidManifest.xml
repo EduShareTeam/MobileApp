@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EduSharedemo">
         <activity
-            android:name=".CompleteProfileActivity"
+            android:name=".activities.CompleteProfileActivity"
             android:exported="true" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".activities.HomeActivity"
             android:exported="true" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".activities.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
