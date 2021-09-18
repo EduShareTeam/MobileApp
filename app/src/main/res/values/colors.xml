@@ -13,4 +13,9 @@
     <color name="colorAccent">#F6292F</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
+
+    <color name="colorGray">#D5D2D2</color>
+
+
+    <color name="colorDarkBlue">#090B17</color>
 </resources>
