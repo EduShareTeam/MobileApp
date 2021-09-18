@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.databinding.ActivityMainBinding;
 import com.fatihbaser.edusharedemo.models.User;
-import com.fatihbaser.edusharedemo.models.UsersProvider;
+import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -23,15 +23,9 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import dmax.dialog.SpotsDialog;
 
@@ -39,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     AuthProvider mAuthProvider;
-    FirebaseFirestore mFirestore;
+    //FirebaseFirestore mFirestore;
     UsersProvider mUsersProvider;
     private GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "GoogleActivity";
@@ -53,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
         mAuthProvider = new AuthProvider();
-        mFirestore = FirebaseFirestore.getInstance();
+        //mFirestore = FirebaseFirestore.getInstance();
 
         mDialog = new SpotsDialog.Builder()
                 .setContext(this)
-                .setMessage("Espere un momento")
+                .setMessage("Giriş Yapılıyor ...")
                 .setCancelable(false).build();
 
         // Configure Google Sign In

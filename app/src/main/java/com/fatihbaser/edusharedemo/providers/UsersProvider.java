@@ -1,5 +1,6 @@
-package com.fatihbaser.edusharedemo.models;
+package com.fatihbaser.edusharedemo.providers;
 
+import com.fatihbaser.edusharedemo.models.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,6 +28,10 @@ public class UsersProvider {
     public Task<Void> update(User user) {
         Map<String, Object> map = new HashMap<>();
         map.put("username", user.getUsername());
+        map.put("university", user.getUniversity());
+        map.put("department", user.getDepartment());
+        map.put("bio", user.getBio());
+
         return mCollection.document(user.getId()).update(map);
     }
 }

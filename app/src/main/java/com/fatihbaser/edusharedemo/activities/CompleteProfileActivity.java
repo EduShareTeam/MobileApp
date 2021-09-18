@@ -3,12 +3,16 @@ package com.fatihbaser.edusharedemo.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.fatihbaser.edusharedemo.databinding.ActivityCompleteProfileBinding;
+import com.fatihbaser.edusharedemo.models.User;
+import com.fatihbaser.edusharedemo.providers.AuthProvider;
+import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,8 +23,11 @@ import java.util.Map;
 
 public class CompleteProfileActivity extends AppCompatActivity {
     private ActivityCompleteProfileBinding binding;
-    FirebaseAuth mAuth;
-    FirebaseFirestore mFirestore;
+    //FirebaseAuth mAuth;
+    //FirebaseFirestore mFirestore;
+    AuthProvider mAuthProvider;
+    UsersProvider mUsersProvider;
+    AlertDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +36,11 @@ public class CompleteProfileActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        mAuth = FirebaseAuth.getInstance();
-        mFirestore = FirebaseFirestore.getInstance();
+
+        mAuthProvider = new AuthProvider();
+        mUsersProvider = new UsersProvider();
+        //mAuth = FirebaseAuth.getInstance();
+        //mFirestore = FirebaseFirestore.getInstance();
 
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,15 +65,18 @@ public class CompleteProfileActivity extends AppCompatActivity {
     }
 
     private void updateUser(final String username,final String university,final String faculty,final String bio) {
-        String id = mAuth.getCurrentUser().getUid();
-        Map<String, Object> map = new HashMap<>();
-        map.put("Isim ve soyisim", username);
-        map.put("Üniversite İsmi", university);
-        map.put("Fakulte", faculty);
-        map.put("Bio", bio);
-        mFirestore.collection("Users").document(id).update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+        String id = mAuthProvider.getUid();
+        User user = new User();
+        user.setId(id);
+        user.setUsername(username);
+        user.setUniversity(university);
+        user.setDepartment(faculty);
+        user.setBio(bio);
+        mDialog.show();
+        mUsersProvider.update(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+                mDialog.dismiss();
                 if (task.isSuccessful()) {
                     Intent intent = new Intent(CompleteProfileActivity.this, HomeActivity.class);
                     startActivity(intent);
