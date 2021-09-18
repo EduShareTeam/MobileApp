@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import dmax.dialog.SpotsDialog;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
@@ -45,6 +47,11 @@ public class RegisterActivity extends AppCompatActivity {
        // mFirestore = FirebaseFirestore.getInstance();
         mAuthProvider = new AuthProvider();
         mUsersProvider = new UsersProvider();
+
+        mDialog = new SpotsDialog.Builder()
+                .setContext(this)
+                .setMessage("Kayıt  Yapılıyor ...")
+                .setCancelable(false).build();
 
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUser(final String username, final String email, final String password, final String university, final String department, final String bio) {
-       // mDialog.show();
+        mDialog.show();
         mAuthProvider.register(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -119,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
                     mUsersProvider.create(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                           // mDialog.dismiss();
+                            mDialog.dismiss();
                             if (task.isSuccessful()) {
                                 Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -132,7 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
                     });
                 }
                 else {
-                   // mDialog.dismiss();
+                    mDialog.dismiss();
                     Toast.makeText(RegisterActivity.this, "Kullanıcı kaydedilemedi", Toast.LENGTH_SHORT).show();
                 }
             }

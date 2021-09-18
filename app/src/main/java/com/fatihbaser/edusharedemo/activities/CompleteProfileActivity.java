@@ -21,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class CompleteProfileActivity extends AppCompatActivity {
     private ActivityCompleteProfileBinding binding;
     //FirebaseAuth mAuth;
@@ -41,6 +43,11 @@ public class CompleteProfileActivity extends AppCompatActivity {
         mUsersProvider = new UsersProvider();
         //mAuth = FirebaseAuth.getInstance();
         //mFirestore = FirebaseFirestore.getInstance();
+
+        mDialog = new SpotsDialog.Builder()
+                .setContext(this)
+                .setMessage("Kayıt  Yapılıyor ...")
+                .setCancelable(false).build();
 
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
