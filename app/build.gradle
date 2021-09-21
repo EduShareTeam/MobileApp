@@ -46,6 +46,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+
+
+    //SÜRÜM DEĞİŞTİRME compressor
+    implementation 'id.zelory:compressor:2.1.1'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     //CircleView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
