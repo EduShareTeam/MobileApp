@@ -43,20 +43,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
 
 public class PostActivity extends AppCompatActivity {
-
-    /*ImageView mImageViewPost1;
-    ImageView mImageViewPost2;
-
-    Button mButtonPost;
-
-    TextInputEditText mTextInputTitle;
-    TextInputEditText mTextInputDescription;
-    ImageView mImageViewPC;
-    ImageView mImageViewPS4;
-    ImageView mImageViewXBOX;
-    ImageView mImageViewNitendo;
-    CircleImageView mCircleImageBack;
-    TextView mTextViewCategory;*/
     ImageProvider mImageProvider;
     PostProvider mPostProvider;
     AuthProvider mAuthProvider;
@@ -105,19 +91,6 @@ public class PostActivity extends AppCompatActivity {
         mBuilderSelector.setTitle("Bir seçenek seçin");
          options = new CharSequence[] {"Galeriden Resmi alın", "Fotograf çek "};
 
-        /*
-        mImageViewPost1 = findViewById(R.id.imageViewPost1);
-        mImageViewPost2 = findViewById(R.id.imageViewPost2);
-        mButtonPost = findViewById(R.id.btnPost);
-        mTextInputTitle = findViewById(R.id.textInputVideoGame);
-        mTextInputDescription = findViewById(R.id.textInputDescription);
-        mImageViewPC = findViewById(R.id.imageViewPc);
-        mImageViewPS4 = findViewById(R.id.imageViewPS4);
-        mImageViewXBOX = findViewById(R.id.imageViewXbox);
-        mImageViewNitendo = findViewById(R.id.imageViewNintendo);
-        mTextViewCategory = findViewById(R.id.textViewCategory);
-        mCircleImageBack = findViewById(R.id.circleImageBack);*/
-
         binding.circleImageBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,7 +122,7 @@ public class PostActivity extends AppCompatActivity {
         binding.imageViewPc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCategory = "PC";
+                mCategory = "Elektronik ve mimarlık";
                 binding.textViewCategory.setText(mCategory);
             }
         });
@@ -157,7 +130,7 @@ public class PostActivity extends AppCompatActivity {
         binding.imageViewPS4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCategory = "PS4";
+                mCategory = "Dil ve Edebiyat";
                 binding.textViewCategory.setText(mCategory);
             }
         });
@@ -165,7 +138,7 @@ public class PostActivity extends AppCompatActivity {
         binding.imageViewXbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCategory = "XBOX";
+                mCategory = "Sanat";
                 binding.textViewCategory.setText(mCategory);
             }
         });
@@ -173,7 +146,7 @@ public class PostActivity extends AppCompatActivity {
         binding.imageViewNintendo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCategory = "NINTENDO";
+                mCategory = "Fen Bilimleri";
                 binding.textViewCategory.setText(mCategory);
             }
         });
@@ -202,9 +175,7 @@ public class PostActivity extends AppCompatActivity {
                 }
             }
         });
-
         mBuilderSelector.show();
-
     }
 
     private void takePhoto(int requestCode) {
@@ -217,7 +188,6 @@ public class PostActivity extends AppCompatActivity {
             } catch(Exception e) {
                 Toast.makeText(this, "Dosyada bir hata oluştu " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
-
             if (photoFile != null) {
                 Uri photoUri = FileProvider.getUriForFile(PostActivity.this, "com.fatihbaser.edusharedemo", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
@@ -231,8 +201,7 @@ public class PostActivity extends AppCompatActivity {
         File photoFile = File.createTempFile(
                 new Date() + "_photo",
                 ".jpg",
-                storageDir
-        );
+                storageDir);
         if (requestCode == PHOTO_REQUEST_CODE) {
             mPhotoPath = "file:" + photoFile.getAbsolutePath();
             mAbsolutePhotoPath = photoFile.getAbsolutePath();
@@ -244,17 +213,15 @@ public class PostActivity extends AppCompatActivity {
         return photoFile;
     }
 
-
     private void clickPost() {
-
         mTitle = binding.textInputVideoGame.getText().toString();
         mDescription = binding.textInputDescription.getText().toString();
         if (!mTitle.isEmpty() && !mDescription.isEmpty() && !mCategory.isEmpty()) {
-            // SELECCIONO AMBAS IMAGENES DE LA GALERIA
+            // GALERİDEN İKİ RESİM SEÇİYORUM
             if (mImageFile != null && mImageFile2 != null ) {
                 saveImage(mImageFile, mImageFile2);
             }
-            // TOMO LAS DOS FOTOS DE LA CAMARA
+            // KAMERANIN İKİ RESİMİNİ ÇEKİYORUM
             else if (mPhotoFile != null && mPhotoFile2 != null) {
                 saveImage(mPhotoFile, mPhotoFile2);
             }
@@ -335,7 +302,7 @@ public class PostActivity extends AppCompatActivity {
     private void clearForm() {
         binding.textInputVideoGame.setText("");
         binding.textInputDescription.setText("");
-        binding.textViewCategory.setText("CATEGORIAS");
+        binding.textViewCategory.setText("KATEGORİ");
         binding.imageViewPost1.setImageResource(R.drawable.img);
         binding.imageViewPost2.setImageResource(R.drawable.img);
         mTitle = "";
@@ -355,7 +322,7 @@ public class PostActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         /**
-         * SELECCION DE IMAGEN DESDE LA GALERIA
+         * GALERİDEN GÖRÜNTÜ SEÇİMİ
          */
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK) {
             try {
@@ -367,7 +334,6 @@ public class PostActivity extends AppCompatActivity {
                 Toast.makeText(this, "Bir hata oluştu" + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
-
         if (requestCode == GALLERY_REQUEST_CODE_2 && resultCode == RESULT_OK) {
             try {
                 mPhotoFile2 = null;
@@ -378,9 +344,8 @@ public class PostActivity extends AppCompatActivity {
                 Toast.makeText(this, "Bir hata oluştu " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
-
         /**
-         * SELECCION DE FOTOGRAFIA
+         * FOTOĞRAF SEÇİMİ
          */
         if (requestCode == PHOTO_REQUEST_CODE && resultCode == RESULT_OK) {
             mImageFile = null;
@@ -389,7 +354,7 @@ public class PostActivity extends AppCompatActivity {
         }
 
         /**
-         * SELECCION DE FOTOGRAFIA
+         * FOTOĞRAF SEÇİMİ
          */
         if (requestCode == PHOTO_REQUEST_CODE_2 && resultCode == RESULT_OK) {
             mImageFile2 = null;

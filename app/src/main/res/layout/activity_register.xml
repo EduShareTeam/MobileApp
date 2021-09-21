@@ -89,7 +89,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_email_grey"
+                android:src="@drawable/ic_description"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"/>
 
@@ -120,7 +120,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_email_grey"
+                android:src="@drawable/ic_description"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"/>
 
@@ -152,7 +152,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_email_grey"
+                android:src="@drawable/ic_description"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"/>
 
