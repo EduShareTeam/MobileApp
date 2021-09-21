@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:text="CREAR PUBLICACIÓN"
+                android:text="RESİM EKLEYİN"
                 android:textColor="@color/colorWhite"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -48,7 +48,7 @@
                         android:id="@+id/imageViewPost1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/img"
+                        android:src="@drawable/ic_baseline_add_photo_alternate_24"
                         android:scaleType="centerCrop"/>
 
                 </androidx.cardview.widget.CardView>
@@ -65,26 +65,11 @@
                         android:id="@+id/imageViewPost2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/img"
+                        android:src="@drawable/ic_baseline_add_photo_alternate_24"
                         android:scaleType="centerCrop"/>
 
                 </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    app:cardBackgroundColor="@color/colorWhite"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    app:cardCornerRadius="10dp">
 
-                    <ImageView
-                        android:id="@+id/imageViewPost3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/img"
-                        android:scaleType="centerCrop"/>
-
-                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 
@@ -101,7 +86,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_videogame"
+                android:src="@drawable/ic_baseline_subtitles_24"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"/>
 
@@ -134,7 +119,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_monetization_on_black_24dp"
+                android:src="@drawable/ic_baseline_star_24"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"/>
 
@@ -235,7 +220,7 @@
                         android:id="@+id/imageViewPc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/icon_pc" />
+                        android:src="@drawable/ic_baseline_architecture_24" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -243,7 +228,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="PC"
+                    android:text="Architectures"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold" />
@@ -269,7 +254,7 @@
                         android:id="@+id/imageViewPS4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/icon_ps4" />
+                        android:src="@drawable/ic_baseline_menu_book_24" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -277,7 +262,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="PS4"
+                    android:text="litaratür"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold" />
@@ -304,7 +289,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="5dp"
-                        android:src="@drawable/icon_xbox" />
+                        android:src="@drawable/ic_baseline_music_note_24" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -312,7 +297,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="XBOX"
+                    android:text="Music"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold" />
@@ -338,7 +323,7 @@
                         android:id="@+id/imageViewNintendo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/icon_nintendo" />
+                        android:src="@drawable/ic_baseline_science_24" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -346,7 +331,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="NINTENDO"
+                    android:text="Science"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold" />
@@ -361,7 +346,7 @@
         android:id="@+id/btnPost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PUBLICAR"
+        android:text="Paylaş"
         android:background="@drawable/rounded_button"
         android:backgroundTint="@color/colorAccent"
         android:layout_gravity="bottom"
