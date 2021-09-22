@@ -1,13 +1,13 @@
 package com.fatihbaser.edusharedemo.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.fatihbaser.edusharedemo.databinding.ActivityRegisterBinding;
 import com.fatihbaser.edusharedemo.models.User;
@@ -16,11 +16,8 @@ import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -117,6 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
                     user.setUniversity(university);
                     user.setDepartment(department);
                     user.setBio(bio);
+                    user.setTimestamp(new Date().getTime());
                    /* Map<String, Object> map = new HashMap<>();
                     map.put("email", email);
                     map.put("isim ve soyisim", username);

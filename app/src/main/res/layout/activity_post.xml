@@ -220,7 +220,7 @@
                         android:id="@+id/imageViewPc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_baseline_architecture_24" />
+                        android:src="@drawable/ic_baseline_menu_book_24" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -289,7 +289,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="5dp"
-                        android:src="@drawable/ic_baseline_music_note_24" />
+                        android:src="@drawable/ic_baseline_menu_book_24" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -323,7 +323,7 @@
                         android:id="@+id/imageViewNintendo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_baseline_science_24" />
+                        android:src="@drawable/ic_baseline_menu_book_24" />
 
                 </androidx.cardview.widget.CardView>
 

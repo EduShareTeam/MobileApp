@@ -31,7 +31,8 @@ public class UsersProvider {
         map.put("university", user.getUniversity());
         map.put("department", user.getDepartment());
         map.put("bio", user.getBio());
-
+        map.put("image", user.getImageProfile());
+        map.put("timestamp", user.getTimestamp());
         return mCollection.document(user.getId()).update(map);
     }
 }
