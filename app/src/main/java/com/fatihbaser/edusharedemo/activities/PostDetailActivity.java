@@ -1,31 +1,50 @@
 package com.fatihbaser.edusharedemo.activities;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fatihbaser.edusharedemo.R;
+import com.fatihbaser.edusharedemo.adapter.CommentAdapter;
+import com.fatihbaser.edusharedemo.adapter.PostsAdapter;
 import com.fatihbaser.edusharedemo.adapter.SliderAdapter;
 import com.fatihbaser.edusharedemo.databinding.ActivityPostBinding;
 import com.fatihbaser.edusharedemo.databinding.ActivityPostDetailBinding;
+import com.fatihbaser.edusharedemo.models.Comment;
+import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.models.SliderItem;
+import com.fatihbaser.edusharedemo.providers.AuthProvider;
+import com.fatihbaser.edusharedemo.providers.CommentsProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -34,13 +53,15 @@ public class PostDetailActivity extends AppCompatActivity {
     SliderView mSliderView;
     SliderAdapter mSliderAdapter;
     List<SliderItem> mSliderItems = new ArrayList<>();
+    CommentAdapter mAdapter;
+    AuthProvider mAuthProvider;
     PostProvider mPostProvider;
-
+    CommentsProvider mCommentsProvider;
     UsersProvider mUsersProvider;
     String mExtraPostId;
-
     private ActivityPostDetailBinding binding;
     String mIdUser = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +69,25 @@ public class PostDetailActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         mSliderView = findViewById(R.id.imageSlider);
-        mPostProvider = new PostProvider();
-
-        mUsersProvider = new UsersProvider();
         mExtraPostId = getIntent().getStringExtra("id");
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PostDetailActivity.this);
+        binding.recyclerViewComments.setLayoutManager(linearLayoutManager);
+
+        //Providers
+        mPostProvider = new PostProvider();
+        mCommentsProvider = new CommentsProvider();
+        mUsersProvider = new UsersProvider();
+        mAuthProvider = new AuthProvider();
 
         getPost();
 
-
+        binding.fabComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialogComment();
+            }
+        });
 
         binding.circleImageBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,5 +200,88 @@ public class PostDetailActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void showDialogComment() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(PostDetailActivity.this);
+        alert.setTitle("¡YORUM!");
+        alert.setMessage("Yorumunuzu girin");
+
+        final EditText editText = new EditText(PostDetailActivity.this);
+        editText.setHint("Metin");
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(36, 0, 36, 36);
+        editText.setLayoutParams(params);
+        RelativeLayout container = new RelativeLayout(PostDetailActivity.this);
+        RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        );
+        container.setLayoutParams(relativeParams);
+        container.addView(editText);
+
+        alert.setView(container);
+
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String value = editText.getText().toString();
+                if (!value.isEmpty()) {
+                    createComment(value);
+                }
+                else {
+                    Toast.makeText(PostDetailActivity.this, "Yoruma girmelisiniz", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        alert.setNegativeButton("İptal", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        alert.show();
+    }
+
+    private void createComment(String value) {
+        Comment comment = new Comment();
+        comment.setComment(value);
+        comment.setIdPost(mExtraPostId);
+        comment.setIdUser(mAuthProvider.getUid());
+        comment.setTimestamp(new Date().getTime());
+        mCommentsProvider.create(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(PostDetailActivity.this, "Yorum doğru oluşturuldu", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(PostDetailActivity.this, "Yorum oluşturulamadı", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Query query = mCommentsProvider.getCommentsByPost(mExtraPostId);
+        FirestoreRecyclerOptions<Comment> options =
+                new FirestoreRecyclerOptions.Builder<Comment>()
+                        .setQuery(query, Comment.class)
+                        .build();
+        mAdapter = new CommentAdapter(options, PostDetailActivity.this);
+        binding.recyclerViewComments.setAdapter(mAdapter);
+        mAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAdapter.stopListening();
     }
 }
