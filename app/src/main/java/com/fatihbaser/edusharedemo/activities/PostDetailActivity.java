@@ -1,6 +1,7 @@
 package com.fatihbaser.edusharedemo.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,14 +31,19 @@ import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.models.SliderItem;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.CommentsProvider;
+import com.fatihbaser.edusharedemo.providers.LikesProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
+import com.fatihbaser.edusharedemo.utils.RelativeTime;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -58,6 +64,7 @@ public class PostDetailActivity extends AppCompatActivity {
     PostProvider mPostProvider;
     CommentsProvider mCommentsProvider;
     UsersProvider mUsersProvider;
+    LikesProvider mLikesProvider;
     String mExtraPostId;
     private ActivityPostDetailBinding binding;
     String mIdUser = "";
@@ -79,8 +86,8 @@ public class PostDetailActivity extends AppCompatActivity {
         mCommentsProvider = new CommentsProvider();
         mUsersProvider = new UsersProvider();
         mAuthProvider = new AuthProvider();
+        mLikesProvider = new LikesProvider();
 
-        getPost();
 
         binding.fabComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +107,23 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 goToShowProfile();
+            }
+        });
+        getPost();
+        getNumberLikes();
+    }
+
+    private void getNumberLikes() {
+        mLikesProvider.getLikesByPost(mExtraPostId).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                int numberLikes = queryDocumentSnapshots.size();
+                if (numberLikes == 1) {
+                    binding.textViewLikes.setText(numberLikes + " Beğendim");
+                }
+                else {
+                    binding.textViewLikes.setText(numberLikes + " Beğenmedim");
+                }
             }
         });
 
@@ -175,6 +199,11 @@ public class PostDetailActivity extends AppCompatActivity {
                     if (documentSnapshot.contains("idUser")) {
                         mIdUser = documentSnapshot.getString("idUser");
                         getUserInfo(mIdUser);
+                    }
+                    if (documentSnapshot.contains("timestamp")) {
+                        long timestamp = documentSnapshot.getLong("timestamp");
+                        String relativeTime = RelativeTime.getTimeAgo(timestamp, PostDetailActivity.this);
+                        binding.textViewRelativeTime.setText(relativeTime);
                     }
 
                     instanceSlider();

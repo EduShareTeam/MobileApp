@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/imageViewPostCard"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="225dp"
             android:scaleType="centerCrop"
             />
 
@@ -22,21 +22,72 @@
             android:id="@+id/textViewTitlePostCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Urun başlığı"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:text="Titulo del juego"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:textSize="16dp"
             android:maxLines="1"
             android:textColor="@color/colorDarkBlue"
             />
 
         <TextView
+            android:id="@+id/textViewUsernamePostCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre de usuario"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:textSize="12dp"
+            android:maxLines="1"
+            android:textStyle="italic"
+            android:textColor="@color/colorAccent"
+            />
+
+        <TextView
             android:id="@+id/textViewDescriptionPostCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Urun açıklaması..."
-            android:layout_margin="10dp" />
+            android:text="Descripcion del juego..."
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:maxLines="2"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/imageViewLike"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/icon_like_grey" />
+
+            <TextView
+                android:id="@+id/textViewLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|right"
+                android:text="0 BEĞENİ" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

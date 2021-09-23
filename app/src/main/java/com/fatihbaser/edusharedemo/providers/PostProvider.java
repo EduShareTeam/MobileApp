@@ -21,7 +21,8 @@ public class PostProvider {
     }
 
     public Query getAll() {
-        return mCollection.orderBy("title", Query.Direction.DESCENDING);
+        //TODO: SIRALAMADA SIKINTI VAR  , VİDEO 52
+        return mCollection.orderBy("timestamp", Query.Direction.DESCENDING);
     }
 
     public Query getPostByUser(String id) {
