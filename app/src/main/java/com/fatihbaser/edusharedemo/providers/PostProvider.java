@@ -3,6 +3,7 @@ package com.fatihbaser.edusharedemo.providers;
 import com.fatihbaser.edusharedemo.models.Post;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -27,4 +28,8 @@ public class PostProvider {
         return mCollection.whereEqualTo("idUser", id);
     }
 
+
+    public Task<DocumentSnapshot> getPostById(String id) {
+        return mCollection.document(id).get();
+    }
 }
