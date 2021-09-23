@@ -16,6 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EduSharedemo">
+        <activity android:name=".activities.FilterActivity"
+            android:parentActivityName=".activities.HomeActivity"/>
         <activity
             android:name=".activities.UserProfileActivity"
             android:parentActivityName=".activities.PostDetailActivity" />
