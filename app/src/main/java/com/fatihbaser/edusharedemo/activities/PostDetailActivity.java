@@ -4,19 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.adapter.SliderAdapter;
+import com.fatihbaser.edusharedemo.databinding.ActivityPostBinding;
+import com.fatihbaser.edusharedemo.databinding.ActivityPostDetailBinding;
 import com.fatihbaser.edusharedemo.models.SliderItem;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
+import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostDetailActivity extends AppCompatActivity {
     SliderView mSliderView;
@@ -24,14 +34,21 @@ public class PostDetailActivity extends AppCompatActivity {
     List<SliderItem> mSliderItems = new ArrayList<>();
     PostProvider mPostProvider;
 
+    UsersProvider mUsersProvider;
     String mExtraPostId;
+
+    private ActivityPostDetailBinding binding;
+    String mIdUser = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_detail);
+        binding = ActivityPostDetailBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
         mSliderView = findViewById(R.id.imageSlider);
         mPostProvider = new PostProvider();
 
+        mUsersProvider = new UsersProvider();
         mExtraPostId = getIntent().getStringExtra("id");
 
         getPost();
@@ -68,8 +85,56 @@ public class PostDetailActivity extends AppCompatActivity {
                         item.setImageUrl(image2);
                         mSliderItems.add(item);
                     }
+                    if (documentSnapshot.contains("title")) {
+                        String title = documentSnapshot.getString("title");
+                        binding.textViewTitle.setText(title.toUpperCase());
+                    }
+                    if (documentSnapshot.contains("description")) {
+                        String description = documentSnapshot.getString("description");
+                        binding.textViewDescription.setText(description);
+                    }
+                    if (documentSnapshot.contains("category")) {
+                        String category = documentSnapshot.getString("category");
+                        binding.textViewNameCategory.setText(category);
+
+                        if (category.equals("Elektronik ve mimarlık")) {
+                            binding.imageViewCategory.setImageResource(R.drawable.icon_ps4);
+                        }
+                        else if (category.equals("Dil ve Edebiyat")) {
+                            binding.imageViewCategory.setImageResource(R.drawable.icon_xbox);
+                        }
+                        else if (category.equals("Sanat")) {
+                            binding.imageViewCategory.setImageResource(R.drawable.icon_pc);
+                        }
+                        else if (category.equals("Fen Bilimleri")) {
+                            binding.imageViewCategory.setImageResource(R.drawable.icon_nintendo);
+                        }
+                    }
+                    if (documentSnapshot.contains("idUser")) {
+                        mIdUser = documentSnapshot.getString("idUser");
+                        getUserInfo(mIdUser);
+                    }
 
                     instanceSlider();
+                }
+            }
+        });
+    }
+
+    private void getUserInfo(String idUser) {
+        mUsersProvider.getUser(idUser).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    if (documentSnapshot.contains("username")) {
+                        String username = documentSnapshot.getString("username");
+                        binding.textViewUsername.setText(username);
+                    }
+
+                    if (documentSnapshot.contains("image")) {
+                        String imageProfile = documentSnapshot.getString("image");
+                        Picasso.with(PostDetailActivity.this).load(imageProfile).into(binding.circleImageProfile);
+                    }
                 }
             }
         });
