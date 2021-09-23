@@ -7,6 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 public class CommentsProvider {
+
     CollectionReference mCollection;
 
     public CommentsProvider() {
@@ -20,5 +21,4 @@ public class CommentsProvider {
     public Query getCommentsByPost(String idPost) {
         return mCollection.whereEqualTo("idPost", idPost);
     }
-
 }

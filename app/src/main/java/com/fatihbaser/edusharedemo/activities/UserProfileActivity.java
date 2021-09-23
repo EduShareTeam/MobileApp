@@ -1,31 +1,38 @@
 package com.fatihbaser.edusharedemo.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
 import com.fatihbaser.edusharedemo.R;
+import com.fatihbaser.edusharedemo.adapter.MyPostsAdapter;
 import com.fatihbaser.edusharedemo.databinding.ActivityPostDetailBinding;
 import com.fatihbaser.edusharedemo.databinding.ActivityUserProfileBinding;
+import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 public class UserProfileActivity extends AppCompatActivity {
-
-
-
+    private ActivityUserProfileBinding binding;
+    //Providers
     UsersProvider mUsersProvider;
     AuthProvider mAuthProvider;
     PostProvider mPostProvider;
-
     String mExtraIdUser;
-    private ActivityUserProfileBinding binding;
+    MyPostsAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,25 +40,59 @@ public class UserProfileActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-
-
         mUsersProvider = new UsersProvider();
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UserProfileActivity.this);
+        binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
+
         mExtraIdUser = getIntent().getStringExtra("idUser");
 
-        binding.circleImageBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
+        binding.circleImageBack.setOnClickListener(view1 -> finish());
 
         getUser();
         getPostNumber();
+        checkIfExistPost();
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Query query = mPostProvider.getPostByUser(mExtraIdUser);
+        FirestoreRecyclerOptions<Post> options =
+                new FirestoreRecyclerOptions.Builder<Post>()
+                        .setQuery(query, Post.class)
+                        .build();
+        mAdapter = new MyPostsAdapter(options, UserProfileActivity.this);
+        binding.recyclerViewMyPost.setAdapter(mAdapter);
+        mAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mAdapter.stopListening();
+    }
+
+    private void checkIfExistPost() {
+        mPostProvider.getPostByUser(mExtraIdUser).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                int numberPost = queryDocumentSnapshots.size();
+                if (numberPost > 0) {
+                    binding.textViewPostExist.setText("Publicaciones");
+                    binding.textViewPostExist.setTextColor(Color.RED);
+                }
+                else {
+                    binding.textViewPostExist.setText("No hay publicaciones");
+                    binding.textViewPostExist.setTextColor(Color.GRAY);
+                }
+            }
+        });
+    }
+
     private void getPostNumber() {
         mPostProvider.getPostByUser(mExtraIdUser).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -89,6 +130,4 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

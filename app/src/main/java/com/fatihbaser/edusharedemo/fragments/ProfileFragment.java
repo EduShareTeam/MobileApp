@@ -1,9 +1,12 @@
 package com.fatihbaser.edusharedemo.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +17,18 @@ import android.widget.TextView;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.activities.EditProfileActivity;
+import com.fatihbaser.edusharedemo.adapter.MyPostsAdapter;
 import com.fatihbaser.edusharedemo.databinding.FragmentProfileBinding;
+import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
@@ -27,13 +36,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
-    View mView;
-    LinearLayout mLinearLayoutEditProfile;
-
+    //Providers
     UsersProvider mUsersProvider;
     AuthProvider mAuthProvider;
     PostProvider mPostProvider;
 
+    MyPostsAdapter mAdapter;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -45,22 +53,56 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        mLinearLayoutEditProfile = view.findViewById(R.id.linearLayoutEditProfile);
-
-        mLinearLayoutEditProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToEditProfile();
-            }
-        });
-
         mUsersProvider = new UsersProvider();
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
+
+        binding.linearLayoutEditProfile.setOnClickListener(view1 -> goToEditProfile());
+
         getUser();
         getPostNumber();
+        checkIfExistPost();
+
         return view;
+    }
+
+    private void checkIfExistPost() {
+        mPostProvider.getPostByUser(mAuthProvider.getUid()).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                int numberPost = queryDocumentSnapshots.size();
+                if (numberPost > 0) {
+                    binding.textViewPostExist.setText("Yayınlar");
+                    binding.textViewPostExist.setTextColor(Color.RED);
+                }
+                else {
+                    binding.textViewPostExist.setText("Yayın yok");
+                    binding.textViewPostExist.setTextColor(Color.GRAY);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Query query = mPostProvider.getPostByUser(mAuthProvider.getUid());
+        FirestoreRecyclerOptions<Post> options =
+                new FirestoreRecyclerOptions.Builder<Post>()
+                        .setQuery(query, Post.class)
+                        .build();
+        mAdapter = new MyPostsAdapter(options, getContext());
+        binding.recyclerViewMyPost.setAdapter(mAdapter);
+        mAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mAdapter.stopListening();
     }
 
     private void goToEditProfile() {
