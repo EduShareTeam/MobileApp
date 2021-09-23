@@ -1,11 +1,14 @@
 package com.fatihbaser.edusharedemo.activities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.fatihbaser.edusharedemo.R;
@@ -46,10 +49,11 @@ public class UserProfileActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UserProfileActivity.this);
         binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mExtraIdUser = getIntent().getStringExtra("idUser");
-
-        binding.circleImageBack.setOnClickListener(view1 -> finish());
 
         getUser();
         getPostNumber();
@@ -129,5 +133,13 @@ public class UserProfileActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
     }
 }

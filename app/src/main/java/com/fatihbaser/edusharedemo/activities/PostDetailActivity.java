@@ -81,6 +81,10 @@ public class PostDetailActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PostDetailActivity.this);
         binding.recyclerViewComments.setLayoutManager(linearLayoutManager);
 
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //Providers
         mPostProvider = new PostProvider();
         mCommentsProvider = new CommentsProvider();
@@ -93,13 +97,6 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showDialogComment();
-            }
-        });
-
-        binding.circleImageBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
             }
         });
 

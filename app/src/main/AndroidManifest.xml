@@ -18,10 +18,10 @@
         android:theme="@style/Theme.EduSharedemo">
         <activity
             android:name=".activities.UserProfileActivity"
-            android:exported="true" />
+            android:parentActivityName=".activities.PostDetailActivity" />
         <activity
             android:name=".activities.PostDetailActivity"
-            android:exported="true" />
+            android:parentActivityName=".activities.HomeActivity" />
         <activity
             android:name=".activities.EditProfileActivity"
             android:exported="true" />
