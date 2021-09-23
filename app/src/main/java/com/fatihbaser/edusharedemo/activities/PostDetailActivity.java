@@ -2,12 +2,14 @@ package com.fatihbaser.edusharedemo.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.adapter.SliderAdapter;
@@ -52,6 +54,34 @@ public class PostDetailActivity extends AppCompatActivity {
         mExtraPostId = getIntent().getStringExtra("id");
 
         getPost();
+
+
+
+        binding.circleImageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        binding.btnShowProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToShowProfile();
+            }
+        });
+
+    }
+
+    private void goToShowProfile() {
+        if (!mIdUser.equals("")) {
+            Intent intent = new Intent(PostDetailActivity.this, UserProfileActivity.class);
+            intent.putExtra("idUser", mIdUser);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(this, "El id del usuario aun no se carga", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void instanceSlider() {
