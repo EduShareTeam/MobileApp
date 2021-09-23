@@ -6,27 +6,25 @@ public class User {
     private String id;
     private String email;
     private String username;
-
     private String university;
     private String department;
     private String bio;
-
-
-
+    private String imageProfile;
+    private long timestamp;
 
     public User() {
 
+    }
 
-
-        }
-        public User(String id, String email, String username, String university, String department, String bio) {
+    public User(String id, String email, String username, String university, String department, String bio, String imageProfile, long timestamp) {
         this.id = id;
         this.email = email;
         this.username = username;
-
         this.university = university;
         this.department = department;
         this.bio = bio;
+        this.imageProfile = imageProfile;
+        this.timestamp = timestamp;
     }
 
     public String getId() {
@@ -53,8 +51,6 @@ public class User {
         this.username = username;
     }
 
-
-
     public String getUniversity() {
         return university;
     }
@@ -77,5 +73,21 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public String getImageProfile() {
+        return imageProfile;
+    }
+
+    public void setImageProfile(String imageProfile) {
+        this.imageProfile = imageProfile;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

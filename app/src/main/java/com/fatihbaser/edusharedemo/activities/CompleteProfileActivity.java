@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,6 +80,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
         user.setUniversity(university);
         user.setDepartment(faculty);
         user.setBio(bio);
+        user.setTimestamp(new Date().getTime());
         mDialog.show();
         mUsersProvider.update(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
