@@ -56,6 +56,9 @@ public class UserProfileActivity extends AppCompatActivity {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mExtraIdUser = getIntent().getStringExtra("idUser");
+        if (mAuthProvider.getUid().equals(mExtraIdUser)) {
+            binding.fabChat.setEnabled(false);
+        }
 
         binding.fabChat.setOnClickListener(new View.OnClickListener() {
             @Override

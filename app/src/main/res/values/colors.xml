@@ -18,4 +18,10 @@
 
 
     <color name="colorDarkBlue">#090B17</color>
+
+
+
+    <color name="colorGrayLight">#F1EFEF</color>
+    <color name="colorBlue">#0851B6</color>
+    <color name="colorGreen">#24CD38</color>
 </resources>

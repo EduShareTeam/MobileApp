@@ -38,6 +38,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
@@ -262,7 +263,7 @@ public class PostActivity extends AppCompatActivity {
                                                 Post post = new Post();
                                                 post.setImage1(url);
                                                 post.setImage2(url2);
-                                                post.setTitle(mTitle);
+                                                post.setTitle(mTitle.toLowerCase());
                                                 post.setDescription(mDescription);
                                                 post.setCategory(mCategory);
                                                 post.setIdUser(mAuthProvider.getUid());
