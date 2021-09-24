@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -56,11 +57,23 @@ public class UserProfileActivity extends AppCompatActivity {
 
         mExtraIdUser = getIntent().getStringExtra("idUser");
 
+        binding.fabChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToChatActivity();
+            }
+        });
         getUser();
         getPostNumber();
         checkIfExistPost();
     }
 
+    private void goToChatActivity() {
+        Intent intent = new Intent(UserProfileActivity.this, ChatActivity.class);
+        intent.putExtra("idUser1", mAuthProvider.getUid());
+        intent.putExtra("idUser2", mExtraIdUser);
+        startActivity(intent);
+    }
 
     @Override
     public void onStart() {
