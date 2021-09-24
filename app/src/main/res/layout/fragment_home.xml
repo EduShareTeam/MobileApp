@@ -7,23 +7,31 @@
     tools:context=".fragments.HomeFragment"
     android:layout_marginBottom="50dp">
 
-    <com.mancj.materialsearchbar.MaterialSearchBar
-        style="@style/MaterialSearchBarLight"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:mt_hint="Arama metni"
-        app:mt_placeholder="Aramak"
-        app:mt_searchBarColor="@color/colorAccent"
-        app:mt_maxSuggestionsCount="10"
-        app:mt_placeholderColor="@color/colorWhite"
-        app:mt_textColor="@color/colorWhite"
-        app:mt_searchIconTint="@color/colorWhite"
-        app:mt_menuIconTint="@color/colorWhite"
-        app:mt_clearIconTint="@color/colorWhite"
-        app:mt_hintColor="@color/colorGray"
-        app:mt_backIconTint="@color/colorWhite"
-        app:mt_leftTextSelectorTint="@color/colorGray"
-        android:id="@+id/searchBar" />
+        android:orientation="vertical"
+        android:background="@color/colorAccent">
+
+        <com.mancj.materialsearchbar.MaterialSearchBar
+            style="@style/MaterialSearchBarLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mt_hint="Arama metni"
+            app:mt_placeholder="Aramak"
+            app:mt_searchBarColor="@color/colorAccent"
+            app:mt_maxSuggestionsCount="10"
+            app:mt_placeholderColor="@color/colorWhite"
+            app:mt_textColor="@color/colorWhite"
+            app:mt_searchIconTint="@color/colorWhite"
+            app:mt_menuIconTint="@color/colorWhite"
+            app:mt_clearIconTint="@color/colorWhite"
+            app:mt_hintColor="@color/colorGray"
+            app:mt_backIconTint="@color/colorWhite"
+            app:mt_leftTextSelectorTint="@color/colorGray"
+            android:id="@+id/searchBar" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
