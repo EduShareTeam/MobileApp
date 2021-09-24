@@ -1,35 +1,28 @@
 package com.fatihbaser.edusharedemo.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.adapter.CommentAdapter;
-import com.fatihbaser.edusharedemo.adapter.PostsAdapter;
 import com.fatihbaser.edusharedemo.adapter.SliderAdapter;
-import com.fatihbaser.edusharedemo.databinding.ActivityPostBinding;
 import com.fatihbaser.edusharedemo.databinding.ActivityPostDetailBinding;
 import com.fatihbaser.edusharedemo.models.Comment;
 import com.fatihbaser.edusharedemo.models.FCMBody;
 import com.fatihbaser.edusharedemo.models.FCMResponse;
-import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.models.SliderItem;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.CommentsProvider;
@@ -59,7 +52,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -91,10 +83,10 @@ public class PostDetailActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PostDetailActivity.this);
         binding.recyclerViewComments.setLayoutManager(linearLayoutManager);
-
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //TODO Alternative notification bar
+        //setSupportActionBar(binding.toolbar);
+        //getSupportActionBar().setTitle("");
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Providers
         mPostProvider = new PostProvider();

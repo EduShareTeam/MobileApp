@@ -49,9 +49,10 @@ public class UserProfileActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UserProfileActivity.this);
         binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //TODO Alternative notification bar
+        //setSupportActionBar(binding.toolbar);
+        //getSupportActionBar().setTitle("");
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mExtraIdUser = getIntent().getStringExtra("idUser");
 
