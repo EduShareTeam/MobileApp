@@ -15,13 +15,18 @@ import com.fatihbaser.edusharedemo.fragments.HomeFragment;
 import com.fatihbaser.edusharedemo.fragments.ProfileFragment;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.TokenProvider;
+import com.fatihbaser.edusharedemo.providers.UsersProvider;
+import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
+
     TokenProvider mTokenProvider;
     AuthProvider mAuthProvider;
+    UsersProvider mUsersProvider;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +34,32 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+
         mTokenProvider = new TokenProvider();
         mAuthProvider = new AuthProvider();
-        bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        mUsersProvider = new UsersProvider();
+
         openFragment(new HomeFragment());
         createToken();
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ViewedMessageHelper.updateOnline(true, HomeActivity.this);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ViewedMessageHelper.updateOnline(false, HomeActivity.this);
+    }
+
+   /* private void updateOnline(boolean status) {
+
+
+        mUsersProvider.updateOnline(mAuthProvider.getUid(),status);
+    }*/
     public void openFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);

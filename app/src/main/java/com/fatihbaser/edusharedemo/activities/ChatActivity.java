@@ -1,6 +1,7 @@
 package com.fatihbaser.edusharedemo.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,11 +26,16 @@ import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.ChatsProvider;
 import com.fatihbaser.edusharedemo.providers.MessagesProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
+import com.fatihbaser.edusharedemo.utils.RelativeTime;
+import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
@@ -40,7 +46,6 @@ import java.util.Date;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatActivity extends AppCompatActivity {
-
 
     String mExtraIdUser1;
     String mExtraIdUser2;
@@ -64,6 +69,10 @@ public class ChatActivity extends AppCompatActivity {
 
     View mActionBarView;
 
+    LinearLayoutManager mLinearLayoutManager;
+
+    ListenerRegistration mListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,16 +87,15 @@ public class ChatActivity extends AppCompatActivity {
         mImageViewSendMessage = findViewById(R.id.imageViewSendMessage);
         mRecyclerViewMessage = findViewById(R.id.recyclerViewMessage);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatActivity.this);
-        mRecyclerViewMessage.setLayoutManager(linearLayoutManager);
+        mLinearLayoutManager = new LinearLayoutManager(ChatActivity.this);
+        mLinearLayoutManager.setStackFromEnd(true);
+        mRecyclerViewMessage.setLayoutManager(mLinearLayoutManager);
 
         mExtraIdUser1 = getIntent().getStringExtra("idUser1");
         mExtraIdUser2 = getIntent().getStringExtra("idUser2");
         mExtraIdChat  = getIntent().getStringExtra("idChat");
 
         showCustomToolbar(R.layout.custom_chat_toolbar);
-        Log.d("ENTRO", "cONSOLA FUNCIONANDO");
-
 
         mImageViewSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,14 +103,40 @@ public class ChatActivity extends AppCompatActivity {
                 sendMessage();
             }
         });
-
         checkIfChatExist();
     }
-
 
     @Override
     public void onStart() {
         super.onStart();
+        if (mAdapter != null) {
+            mAdapter.startListening();
+        }
+        ViewedMessageHelper.updateOnline(true, ChatActivity.this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ViewedMessageHelper.updateOnline(false, ChatActivity.this);
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mAdapter.stopListening();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mListener != null) {
+            mListener.remove();
+        }
+    }
+
+    private void getMessageChat() {
         Query query = mMessagesProvider.getMessageByChat(mExtraIdChat);
         FirestoreRecyclerOptions<Message> options =
                 new FirestoreRecyclerOptions.Builder<Message>()
@@ -111,12 +145,19 @@ public class ChatActivity extends AppCompatActivity {
         mAdapter = new MessagesAdapter(options, ChatActivity.this);
         mRecyclerViewMessage.setAdapter(mAdapter);
         mAdapter.startListening();
-    }
+        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                updateViewed();
+                int numberMessage = mAdapter.getItemCount();
+                int lastMessagePosition = mLinearLayoutManager.findLastCompletelyVisibleItemPosition();
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        mAdapter.stopListening();
+                if (lastMessagePosition == -1 || (positionStart >= (numberMessage -1) && lastMessagePosition == (positionStart - 1))) {
+                    mRecyclerViewMessage.scrollToPosition(positionStart);
+                }
+            }
+        });
     }
 
     private void sendMessage() {
@@ -143,10 +184,9 @@ public class ChatActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         mEditTextMessage.setText("");
                         mAdapter.notifyDataSetChanged();
-                        Toast.makeText(ChatActivity.this, "Mesaj doğru bir şekilde oluşturuldu", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Toast.makeText(ChatActivity.this, "Mesaj oluşturulamadı", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChatActivity.this, "El mensaje no se pudo crear", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -187,13 +227,26 @@ public class ChatActivity extends AppCompatActivity {
         else {
             idUserInfo = mExtraIdUser1;
         }
-        mUsersProvider.getUser(idUserInfo).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
+        mListener = mUsersProvider.getUserRealtime(idUserInfo).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 if (documentSnapshot.exists()) {
                     if (documentSnapshot.contains("username")) {
                         String username = documentSnapshot.getString("username");
                         mTextViewUsername.setText(username);
+                    }
+                    if (documentSnapshot.contains("online")) {
+                        boolean online = documentSnapshot.getBoolean("online");
+                        if (online) {
+                            // TODO:bi alt satır açınca uygulama patlıyor
+                         //  mTextViewRelativeTime.setText("Online");
+                        }
+                        else if (documentSnapshot.contains("lastConnect")) {
+                            long lastConnect = documentSnapshot.getLong("lastConnect");
+                            String relativeTime = RelativeTime.getTimeAgo(lastConnect, ChatActivity.this);
+                            mTextViewRelativeTime.setText(relativeTime);
+                        }
                     }
                     if (documentSnapshot.contains("image")) {
                         String imageProfile = documentSnapshot.getString("image");
@@ -218,9 +271,32 @@ public class ChatActivity extends AppCompatActivity {
                 }
                 else {
                     mExtraIdChat = queryDocumentSnapshots.getDocuments().get(0).getId();
+                    getMessageChat();
+                    updateViewed();
                 }
             }
         });
+    }
+
+    private void updateViewed() {
+        String idSender = "";
+
+        if (mAuthProvider.getUid().equals(mExtraIdUser1)) {
+            idSender = mExtraIdUser2;
+        }
+        else {
+            idSender = mExtraIdUser1;
+        }
+
+        mMessagesProvider.getMessagesByChatAndSender(mExtraIdChat, idSender).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                    mMessagesProvider.updateViewed(document.getId(), true);
+                }
+            }
+        });
+
     }
 
     private void createChat() {
@@ -236,5 +312,8 @@ public class ChatActivity extends AppCompatActivity {
         ids.add(mExtraIdUser2);
         chat.setIds(ids);
         mChatsProvider.create(chat);
+        mExtraIdChat = chat.getId();
+        getMessageChat();
     }
+
 }

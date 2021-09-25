@@ -52,6 +52,9 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
         View view = binding.getRoot();
         setHasOptionsMenu(true);
 
+
+
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         binding.recyclerViewHome.setLayoutManager(linearLayoutManager);
         setHasOptionsMenu(true);

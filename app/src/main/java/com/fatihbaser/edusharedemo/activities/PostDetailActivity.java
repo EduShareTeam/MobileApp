@@ -32,6 +32,7 @@ import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.providers.TokenProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.RelativeTime;
+import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -290,10 +291,10 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     protected void onStart() {
         super.onStart();
+
         Query query = mCommentsProvider.getCommentsByPost(mExtraPostId);
         FirestoreRecyclerOptions<Comment> options =
                 new FirestoreRecyclerOptions.Builder<Comment>()
@@ -302,6 +303,7 @@ public class PostDetailActivity extends AppCompatActivity {
         mAdapter = new CommentAdapter(options, PostDetailActivity.this);
         binding.recyclerViewComments.setAdapter(mAdapter);
         mAdapter.startListening();
+        ViewedMessageHelper.updateOnline(true, PostDetailActivity.this);
     }
 
     @Override
@@ -310,6 +312,11 @@ public class PostDetailActivity extends AppCompatActivity {
         mAdapter.stopListening();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ViewedMessageHelper.updateOnline(false, PostDetailActivity.this);
+    }
     private void sendNotification(final String comment) {
         if (mIdUser == null) {
             return;

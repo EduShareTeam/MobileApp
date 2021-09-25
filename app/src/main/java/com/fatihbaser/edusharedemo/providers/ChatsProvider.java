@@ -7,7 +7,6 @@ import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 
-
 public class ChatsProvider {
 
     CollectionReference mCollection;
@@ -19,7 +18,6 @@ public class ChatsProvider {
     public void create(Chat chat) {
         mCollection.document(chat.getIdUser1() + chat.getIdUser2()).set(chat);
     }
-
 
     public Query getAll(String idUser) {
         return mCollection.whereArrayContains("ids", idUser);

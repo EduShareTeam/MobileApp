@@ -18,6 +18,7 @@ import com.fatihbaser.edusharedemo.databinding.ActivityMainBinding;
 import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
+import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
@@ -61,12 +62,16 @@ public class FilterActivity extends AppCompatActivity {
         mPostsAdapter = new PostsAdapter(options, FilterActivity.this, binding.textViewNumberFilter);
         binding.recyclerViewFilter.setAdapter(mPostsAdapter);
         mPostsAdapter.startListening();
+        ViewedMessageHelper.updateOnline(true, FilterActivity.this);
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
         mPostsAdapter.stopListening();
+        ViewedMessageHelper.updateOnline(true, FilterActivity.this);
+
     }
 
     @Override

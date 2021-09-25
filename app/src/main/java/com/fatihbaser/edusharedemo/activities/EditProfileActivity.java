@@ -23,6 +23,7 @@ import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.ImageProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.FileUtil;
+import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -329,5 +330,16 @@ public class EditProfileActivity extends AppCompatActivity {
             mPhotoFile = new File(mAbsolutePhotoPath);
             Picasso.with(EditProfileActivity.this).load(mPhotoPath).into(binding.circleImageProfile);
         }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        ViewedMessageHelper.updateOnline(true, EditProfileActivity.this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ViewedMessageHelper.updateOnline(false, EditProfileActivity.this);
     }
 }
