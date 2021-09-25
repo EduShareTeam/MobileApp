@@ -35,11 +35,11 @@ public class FilterActivity extends AppCompatActivity {
         binding = ActivityFilterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        //mToolbar = findViewById(R.id.toolbar);
+       mToolbar = findViewById(R.id.toolbar);
         //TODO Alternative notification bar
-        //setSupportActionBar(mToolbar);
-//        getSupportActionBar().setTitle("Filtre");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Filtre");
+       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         binding.recyclerViewFilter.setLayoutManager(new GridLayoutManager(FilterActivity.this, 2));
 

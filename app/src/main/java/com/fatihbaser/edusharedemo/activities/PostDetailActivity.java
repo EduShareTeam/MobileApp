@@ -84,9 +84,9 @@ public class PostDetailActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PostDetailActivity.this);
         binding.recyclerViewComments.setLayoutManager(linearLayoutManager);
         //TODO Alternative notification bar
-        //setSupportActionBar(binding.toolbar);
-        //getSupportActionBar().setTitle("");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Providers
         mPostProvider = new PostProvider();

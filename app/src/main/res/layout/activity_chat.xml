@@ -9,11 +9,13 @@
 
     <include layout="@layout/action_bar_toolbar" />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginBottom="65dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewMessage"
@@ -31,15 +33,17 @@
         android:layout_margin="10dp">
 
         <EditText
+            android:id="@+id/editTextMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Mesaj Yaz ..."
+            android:hint="Mensaje..."
             android:inputType="textMultiLine"
             android:layout_weight="1"
             android:background="@drawable/custom_edittext_chat"
             android:padding="10dp"/>
 
         <ImageView
+            android:id="@+id/imageViewSendMessage"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@mipmap/ic_send_padding"
