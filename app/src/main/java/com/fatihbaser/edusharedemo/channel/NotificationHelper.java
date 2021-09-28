@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 
@@ -24,6 +25,7 @@ public class NotificationHelper extends ContextWrapper {
     private static final String CHANNEL_ID = "com.fatihbaser.edusharedemo";
     private static final String CHANNEL_NAME = "EduSharedemo";
 
+
     private NotificationManager manager;
 
     public NotificationHelper(Context context) {
@@ -36,9 +38,9 @@ public class NotificationHelper extends ContextWrapper {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createChannels() {
         NotificationChannel notificationChannel = new NotificationChannel(
-          CHANNEL_ID,
-          CHANNEL_NAME,
-          NotificationManager.IMPORTANCE_HIGH
+                CHANNEL_ID,
+                CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_HIGH
         );
         notificationChannel.enableLights(true);
         notificationChannel.enableVibration(true);
@@ -64,23 +66,50 @@ public class NotificationHelper extends ContextWrapper {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(body).setBigContentTitle(title));
     }
 
-    public NotificationCompat.Builder getNotificationMessage(Message[] messages, String usernameSender, String usernameReceiver, String lastMessage) {
-        Person person1 = new Person.Builder()
-                                .setName(usernameReceiver)
-                                .setIcon(IconCompat.createWithResource(getApplicationContext(), R.mipmap.ic_launcher))
-                                .build();
+    public NotificationCompat.Builder getNotificationMessage(
+            Message[] messages,
+            String usernameSender,
+            String usernameReceiver,
+            String lastMessage,
+            Bitmap bitmapSender,
+            Bitmap bitmapReceiver,
+            NotificationCompat.Action action) {
 
-        Person person2 = new Person.Builder()
-                                .setName(usernameSender)
-                                .setIcon(IconCompat.createWithResource(getApplicationContext(), R.mipmap.ic_launcher))
-                                .build();
+        Person person1 = null;
+        if (bitmapReceiver == null) {
+            person1 = new Person.Builder()
+                    .setName(usernameReceiver)
+                    .setIcon(IconCompat.createWithResource(getApplicationContext(), R.drawable.ic_person_grey))
+                    .build();
+        }
+        else {
+            person1 = new Person.Builder()
+                    .setName(usernameReceiver)
+                    .setIcon(IconCompat.createWithBitmap(bitmapReceiver))
+                    .build();
+        }
+
+        Person person2 = null;
+
+        if (bitmapSender == null) {
+            person2 = new Person.Builder()
+                    .setName(usernameSender)
+                    .setIcon(IconCompat.createWithResource(getApplicationContext(), R.drawable.ic_person_grey))
+                    .build();
+        }
+        else {
+            person2 = new Person.Builder()
+                    .setName(usernameSender)
+                    .setIcon(IconCompat.createWithBitmap(bitmapSender))
+                    .build();
+        }
 
         NotificationCompat.MessagingStyle messagingStyle = new NotificationCompat.MessagingStyle(person1);
         NotificationCompat.MessagingStyle.Message message1 = new
-                                    NotificationCompat.MessagingStyle.Message(
+                NotificationCompat.MessagingStyle.Message(
                 lastMessage,
-                                            new Date().getTime(),
-                                            person1);
+                new Date().getTime(),
+                person1);
         messagingStyle.addMessage(message1);
 
         for (Message m: messages) {
@@ -94,6 +123,7 @@ public class NotificationHelper extends ContextWrapper {
 
         return new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setStyle(messagingStyle);
+                .setStyle(messagingStyle)
+                .addAction(action);
     }
 }

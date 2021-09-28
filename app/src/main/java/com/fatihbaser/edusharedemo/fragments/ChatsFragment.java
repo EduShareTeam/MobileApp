@@ -54,7 +54,7 @@ public class ChatsFragment extends Fragment {
         Query query = mChatsProvider.getAll(mAuthProvider.getUid());
         FirestoreRecyclerOptions<Chat> options =
                 new FirestoreRecyclerOptions.Builder<Chat>()
-                        .setQuery(query,  Chat.class)
+                        .setQuery(query, Chat.class)
                         .build();
         mAdapter = new ChatsAdapter(options, getContext());
         mRecyclerView.setAdapter(mAdapter);
@@ -66,4 +66,16 @@ public class ChatsFragment extends Fragment {
         super.onStop();
         mAdapter.stopListening();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mAdapter.getListener() != null) {
+            mAdapter.getListener().remove();
+        }
+        if (mAdapter.getListenerLastMessage() != null) {
+            mAdapter.getListenerLastMessage().remove();
+        }
+    }
+
 }
