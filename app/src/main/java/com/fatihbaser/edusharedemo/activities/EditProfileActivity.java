@@ -81,7 +81,17 @@ public class EditProfileActivity extends AppCompatActivity {
                 .setMessage("Biraz bekle")
                 .setCancelable(false).build();
         //TODO: Fotografi kaydettikten sonra profile fragmentine gecerken guncel resim gelmiyor
-        binding.btnEditProfile.setOnClickListener(view13 -> clickEditProfile());
+        binding.btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickEditProfile();
+                //Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+              //  startActivity(intent);
+            }
+        });
+
+
 
         binding.circleImageProfile.setOnClickListener(view12 -> selectOptionImage(1));
 
@@ -239,6 +249,8 @@ public class EditProfileActivity extends AppCompatActivity {
             mDialog.dismiss();
             if (task.isSuccessful()) {
                 Toast.makeText(EditProfileActivity.this, "Bilgiler doğru bir şekilde güncellendi", Toast.LENGTH_SHORT).show();
+
+
             }
             else {
                 Toast.makeText(EditProfileActivity.this, "Bilgiler güncellenemedi", Toast.LENGTH_SHORT).show();
