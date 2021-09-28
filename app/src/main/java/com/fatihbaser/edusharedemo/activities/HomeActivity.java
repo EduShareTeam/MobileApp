@@ -22,11 +22,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
-
     TokenProvider mTokenProvider;
     AuthProvider mAuthProvider;
     UsersProvider mUsersProvider;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +53,6 @@ public class HomeActivity extends AppCompatActivity {
         ViewedMessageHelper.updateOnline(false, HomeActivity.this);
     }
 
-   /* private void updateOnline(boolean status) {
-
-
-        mUsersProvider.updateOnline(mAuthProvider.getUid(),status);
-    }*/
     public void openFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);

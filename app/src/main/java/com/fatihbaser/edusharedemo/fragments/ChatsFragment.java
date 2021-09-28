@@ -20,11 +20,10 @@ import com.google.firebase.firestore.Query;
 
 
 public class ChatsFragment extends Fragment {
-
     ChatsAdapter mAdapter;
     RecyclerView mRecyclerView;
     View mView;
-
+    //Provider
     ChatsProvider mChatsProvider;
     AuthProvider mAuthProvider;
 
@@ -32,11 +31,9 @@ public class ChatsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_chats, container, false);
         mRecyclerView = mView.findViewById(R.id.recyclerViewChats);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

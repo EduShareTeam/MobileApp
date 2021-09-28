@@ -58,8 +58,7 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         final String chatId = document.getId();
         if (mAuthProvider.getUid().equals(chat.getIdUser1())) {
             getUserInfo(chat.getIdUser2(), holder);
-        }
-        else {
+        } else {
             getUserInfo(chat.getIdUser1(), holder);
         }
 
@@ -75,8 +74,7 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         String idSender = "";
         if (mAuthProvider.getUid().equals(chat.getIdUser1())) {
             idSender = chat.getIdUser2();
-        }
-        else {
+        } else {
             idSender = chat.getIdUser1();
         }
         getMessageNotRead(chatId, idSender, holder.textViewMessageNotRead, holder.frameLayoutMessageNotRead);
@@ -93,8 +91,7 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
                     if (size > 0) {
                         frameLayoutMessageNotRead.setVisibility(View.VISIBLE);
                         textViewMessageNotRead.setText(String.valueOf(size));
-                    }
-                    else {
+                    } else {
                         frameLayoutMessageNotRead.setVisibility(View.GONE);
                     }
                 }
@@ -143,8 +140,8 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
                         String username = documentSnapshot.getString("username");
                         holder.textViewUsername.setText(username.toUpperCase());
                     }
-                    if (documentSnapshot.contains("image_profile")) {
-                        String imageProfile = documentSnapshot.getString("image_profile");
+                    if (documentSnapshot.contains("image")) {
+                        String imageProfile = documentSnapshot.getString("image");
                         if (imageProfile != null) {
                             if (!imageProfile.isEmpty()) {
                                 Picasso.with(context).load(imageProfile).into(holder.circleImageChat);

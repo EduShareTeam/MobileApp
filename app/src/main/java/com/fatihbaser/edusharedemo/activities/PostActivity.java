@@ -45,6 +45,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
 
 public class PostActivity extends AppCompatActivity {
+    private ActivityPostBinding binding;
+    //Providers
     ImageProvider mImageProvider;
     PostProvider mPostProvider;
     AuthProvider mAuthProvider;
@@ -58,6 +60,7 @@ public class PostActivity extends AppCompatActivity {
     AlertDialog mDialog;
     AlertDialog.Builder mBuilderSelector;
     CharSequence options[];
+
     private final int GALLERY_REQUEST_CODE = 1;
     private final int GALLERY_REQUEST_CODE_2 = 2;
     private final int PHOTO_REQUEST_CODE = 3;
@@ -72,7 +75,6 @@ public class PostActivity extends AppCompatActivity {
     String mAbsolutePhotoPath2;
     String mPhotoPath2;
     File mPhotoFile2;
-    private ActivityPostBinding  binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,7 @@ public class PostActivity extends AppCompatActivity {
         binding = ActivityPostBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
         mImageProvider = new ImageProvider();
         mPostProvider = new PostProvider();
         mAuthProvider = new AuthProvider();
@@ -91,7 +94,7 @@ public class PostActivity extends AppCompatActivity {
 
         mBuilderSelector = new AlertDialog.Builder(this);
         mBuilderSelector.setTitle("Bir seçenek seçin");
-         options = new CharSequence[] {"Galeriden Resmi alın", "Fotograf çek "};
+        options = new CharSequence[]{"Galeriden Resmi alın", "Fotograf çek "};
 
         binding.circleImageBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,16 +165,13 @@ public class PostActivity extends AppCompatActivity {
                 if (i == 0) {
                     if (numberImage == 1) {
                         openGallery(GALLERY_REQUEST_CODE);
-                    }
-                    else if (numberImage == 2) {
+                    } else if (numberImage == 2) {
                         openGallery(GALLERY_REQUEST_CODE_2);
                     }
-                }
-                else if (i == 1){
+                } else if (i == 1) {
                     if (numberImage == 1) {
                         takePhoto(PHOTO_REQUEST_CODE);
-                    }
-                    else if (numberImage == 2) {
+                    } else if (numberImage == 2) {
                         takePhoto(PHOTO_REQUEST_CODE_2);
                     }
                 }
@@ -181,13 +181,12 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void takePhoto(int requestCode) {
-
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
             try {
                 photoFile = createPhotoFile(requestCode);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 Toast.makeText(this, "Dosyada bir hata oluştu " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
             if (photoFile != null) {
@@ -207,8 +206,7 @@ public class PostActivity extends AppCompatActivity {
         if (requestCode == PHOTO_REQUEST_CODE) {
             mPhotoPath = "file:" + photoFile.getAbsolutePath();
             mAbsolutePhotoPath = photoFile.getAbsolutePath();
-        }
-        else if (requestCode == PHOTO_REQUEST_CODE_2) {
+        } else if (requestCode == PHOTO_REQUEST_CODE_2) {
             mPhotoPath2 = "file:" + photoFile.getAbsolutePath();
             mAbsolutePhotoPath2 = photoFile.getAbsolutePath();
         }
@@ -220,24 +218,20 @@ public class PostActivity extends AppCompatActivity {
         mDescription = binding.textInputDescription.getText().toString();
         if (!mTitle.isEmpty() && !mDescription.isEmpty() && !mCategory.isEmpty()) {
             // GALERİDEN İKİ RESİM SEÇİYORUM
-            if (mImageFile != null && mImageFile2 != null ) {
+            if (mImageFile != null && mImageFile2 != null) {
                 saveImage(mImageFile, mImageFile2);
             }
             // KAMERANIN İKİ RESİMİNİ ÇEKİYORUM
             else if (mPhotoFile != null && mPhotoFile2 != null) {
                 saveImage(mPhotoFile, mPhotoFile2);
-            }
-            else if (mImageFile != null && mPhotoFile2 != null) {
+            } else if (mImageFile != null && mPhotoFile2 != null) {
                 saveImage(mImageFile, mPhotoFile2);
-            }
-            else if (mPhotoFile != null && mImageFile2 != null) {
+            } else if (mPhotoFile != null && mImageFile2 != null) {
                 saveImage(mPhotoFile, mImageFile2);
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Bir resim seçmelisiniz", Toast.LENGTH_SHORT).show();
             }
-        }
-        else {
+        } else {
             Toast.makeText(this, "Alanları doldurun lütfen", Toast.LENGTH_SHORT).show();
         }
     }
@@ -276,16 +270,14 @@ public class PostActivity extends AppCompatActivity {
                                                         if (taskSave.isSuccessful()) {
                                                             clearForm();
                                                             Toast.makeText(PostActivity.this, "Bilgiler doğru bir şekilde saklandı", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                        else {
+                                                        } else {
                                                             Toast.makeText(PostActivity.this, "Bilgiler saklanamadı", Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 });
                                             }
                                         });
-                                    }
-                                    else {
+                                    } else {
                                         mDialog.dismiss();
                                         Toast.makeText(PostActivity.this, "2 numaralı resim kaydedilemedi", Toast.LENGTH_SHORT).show();
                                     }
@@ -293,8 +285,7 @@ public class PostActivity extends AppCompatActivity {
                             });
                         }
                     });
-                }
-                else {
+                } else {
                     mDialog.dismiss();
                     Toast.makeText(PostActivity.this, "Görüntü kaydedilirken bir hata oluştu", Toast.LENGTH_LONG).show();
                 }
@@ -332,7 +323,7 @@ public class PostActivity extends AppCompatActivity {
                 mPhotoFile = null;
                 mImageFile = FileUtil.from(this, data.getData());
                 binding.imageViewPost1.setImageBitmap(BitmapFactory.decodeFile(mImageFile.getAbsolutePath()));
-            } catch(Exception e) {
+            } catch (Exception e) {
                 Log.d("ERROR", "Bir hata oluştu " + e.getMessage());
                 Toast.makeText(this, "Bir hata oluştu" + e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -342,7 +333,7 @@ public class PostActivity extends AppCompatActivity {
                 mPhotoFile2 = null;
                 mImageFile2 = FileUtil.from(this, data.getData());
                 binding.imageViewPost2.setImageBitmap(BitmapFactory.decodeFile(mImageFile2.getAbsolutePath()));
-            } catch(Exception e) {
+            } catch (Exception e) {
                 Log.d("ERROR", "Bir hata oluştu " + e.getMessage());
                 Toast.makeText(this, "Bir hata oluştu " + e.getMessage(), Toast.LENGTH_LONG).show();
             }

@@ -18,7 +18,7 @@
             android:id="@+id/circleImageChat"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/cover_image" />
+            android:src="@drawable/edu" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
                 android:id="@+id/textViewUsernameChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Titulo de la publicacion"
+                android:text="Yayının başlığı"
                 android:maxLines="1"
                 android:textColor="@color/colorBlack"
                 android:textSize="16dp" />
@@ -41,7 +41,7 @@
                 android:id="@+id/textViewLastMessageChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ultimo mensaje"
+                android:text="Son Mesaj"
                 android:maxLines="1"
                 android:textSize="14dp"
                 android:layout_marginTop="3dp"/>

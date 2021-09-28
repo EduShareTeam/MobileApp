@@ -27,7 +27,6 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
         mSliderItems = sliderItems;
     }
 
-
     @Override
     public SliderAdapterVH onCreateViewHolder(ViewGroup parent) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.slider_layout_item, null);
@@ -47,20 +46,16 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
 
     @Override
     public int getCount() {
-        //slider view count could be dynamic size
         return mSliderItems.size();
     }
 
     class SliderAdapterVH extends ViewHolder {
-
         View itemView;
         ImageView imageViewSlider;
-
 
         public SliderAdapterVH(View itemView) {
             super(itemView);
             imageViewSlider = itemView.findViewById(R.id.imageViewSlider);
-
             this.itemView = itemView;
         }
     }

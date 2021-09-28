@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     AuthProvider mAuthProvider;
-    //FirebaseFirestore mFirestore;
     UsersProvider mUsersProvider;
     private GoogleSignInClient mGoogleSignInClient;
+    AlertDialog mDialog;
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
-    AlertDialog mDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         mAuthProvider = new AuthProvider();
         mUsersProvider = new UsersProvider();
-        //mFirestore = FirebaseFirestore.getInstance();
 
         mDialog = new SpotsDialog.Builder()
                 .setContext(this)
@@ -85,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private void checkUserExist(final String id) {
@@ -138,17 +136,13 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
                 Log.w("ERROR", "Google sign in failed", e);
-                // ...
             }
         }
     }
@@ -164,12 +158,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
                  mDialog.dismiss();
-                    // If sign in fails, display a message to the user.
                     Log.w("ERROR", "signInWithCredential:failure", task.getException());
                     Toast.makeText(MainActivity.this, "google ile giriş yapılamadı", Toast.LENGTH_SHORT).show();
                 }
-
-                // ...
             }
         });
     }

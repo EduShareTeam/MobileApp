@@ -58,8 +58,7 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
         holder.textViewTitle.setText(post.getTitle().toUpperCase());
         if (post.getIdUser().equals(mAuthProvider.getUid())) {
             holder.imageViewDelete.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             holder.imageViewDelete.setVisibility(View.GONE);
         }
 
@@ -101,8 +100,7 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(context, "Yayın başarıyla kaldırıldı", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     Toast.makeText(context, "Gönderi silinemedi", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -134,7 +132,6 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
             viewHolder = view;
         }
     }
-
 
 
 }

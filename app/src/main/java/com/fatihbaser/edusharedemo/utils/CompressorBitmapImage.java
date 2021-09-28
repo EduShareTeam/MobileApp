@@ -14,7 +14,7 @@ import id.zelory.compressor.Compressor;
 public class CompressorBitmapImage {
 
     /*
-     * Metodo que permite comprimir imagenes y transformarlas a bitmap
+     * Görüntüleri sıkıştırmaya ve bitmap'e dönüştürmeye izin veren yöntem
      */
 
     public static byte[] getImage(Context ctx, String path, int width, int height) {

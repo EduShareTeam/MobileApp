@@ -35,8 +35,6 @@ public class TokenProvider {
                     Log.w(TAG, "Fetching FCM registration token failed", task.getException());
                     return;
                 }
-                // Get new FCM registration token
-                //String token = task.getResult();
                 Token token = new Token(task.getResult());
                 mCollection.document(idUser).set(token);
             }

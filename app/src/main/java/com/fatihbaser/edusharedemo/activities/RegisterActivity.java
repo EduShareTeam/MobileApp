@@ -26,12 +26,9 @@ import dmax.dialog.SpotsDialog;
 public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
-    //FirebaseAuth mAuth;
-   // FirebaseFirestore mFirestore;
     AuthProvider mAuthProvider;
     UsersProvider mUsersProvider;
     AlertDialog mDialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
-        //mAuth = FirebaseAuth.getInstance();
-       // mFirestore = FirebaseFirestore.getInstance();
         mAuthProvider = new AuthProvider();
         mUsersProvider = new UsersProvider();
 
@@ -71,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         String university = binding.uniname.getText().toString();
         String department = binding.department.getText().toString();
         String bio = binding.bio.getText().toString();
-        String password  = binding.textInputPassword.getText().toString();
+        String password = binding.textInputPassword.getText().toString();
         String confirmPassword = binding.textInputConfirmPassword.getText().toString();
 
 
@@ -80,20 +74,16 @@ public class RegisterActivity extends AppCompatActivity {
                 if (password.equals(confirmPassword)) {
                     if (password.length() >= 6) {
                         createUser(username, email, password, university, department, bio);
-                    }
-                    else {
+                    } else {
                         Toast.makeText(this, "Şifre en az 6 karakter olmalıdır", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(this, "Parolalar uyuşmuyor", Toast.LENGTH_SHORT).show();
                 }
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Tüm alanları girdiniz ancak e-posta geçerli değil", Toast.LENGTH_LONG).show();
             }
-        }
-        else {
+        } else {
             Toast.makeText(this, "Devam etmek için tüm alanları ekleyin", Toast.LENGTH_SHORT).show();
         }
     }
@@ -115,12 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
                     user.setDepartment(department);
                     user.setBio(bio);
                     user.setTimestamp(new Date().getTime());
-                   /* Map<String, Object> map = new HashMap<>();
-                    map.put("email", email);
-                    map.put("isim ve soyisim", username);
-                    map.put("Üniversite İsmi", university);
-                    map.put("Fakulte", department);
-                    map.put("Bio", bio);*/
+
                     mUsersProvider.create(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -129,14 +114,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(RegisterActivity.this, "Kullanıcı veritabanında saklanamadı", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
-                }
-                else {
+                } else {
                     mDialog.dismiss();
                     Toast.makeText(RegisterActivity.this, "Kullanıcı kaydedilemedi", Toast.LENGTH_SHORT).show();
                 }

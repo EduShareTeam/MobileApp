@@ -21,11 +21,8 @@ import com.fatihbaser.edusharedemo.models.Message;
 import java.util.Date;
 
 public class NotificationHelper extends ContextWrapper {
-
     private static final String CHANNEL_ID = "com.fatihbaser.edusharedemo";
     private static final String CHANNEL_NAME = "EduSharedemo";
-
-
     private NotificationManager manager;
 
     public NotificationHelper(Context context) {
@@ -81,8 +78,7 @@ public class NotificationHelper extends ContextWrapper {
                     .setName(usernameReceiver)
                     .setIcon(IconCompat.createWithResource(getApplicationContext(), R.drawable.ic_person_grey))
                     .build();
-        }
-        else {
+        } else {
             person1 = new Person.Builder()
                     .setName(usernameReceiver)
                     .setIcon(IconCompat.createWithBitmap(bitmapReceiver))
@@ -96,8 +92,7 @@ public class NotificationHelper extends ContextWrapper {
                     .setName(usernameSender)
                     .setIcon(IconCompat.createWithResource(getApplicationContext(), R.drawable.ic_person_grey))
                     .build();
-        }
-        else {
+        } else {
             person2 = new Person.Builder()
                     .setName(usernameSender)
                     .setIcon(IconCompat.createWithBitmap(bitmapSender))
@@ -112,7 +107,7 @@ public class NotificationHelper extends ContextWrapper {
                 person1);
         messagingStyle.addMessage(message1);
 
-        for (Message m: messages) {
+        for (Message m : messages) {
             NotificationCompat.MessagingStyle.Message message2 = new
                     NotificationCompat.MessagingStyle.Message(
                     m.getMessage(),

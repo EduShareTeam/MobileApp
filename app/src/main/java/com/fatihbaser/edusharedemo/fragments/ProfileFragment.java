@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.activities.EditProfileActivity;
+import com.fatihbaser.edusharedemo.activities.MainActivity;
 import com.fatihbaser.edusharedemo.adapter.MyPostsAdapter;
 import com.fatihbaser.edusharedemo.databinding.FragmentProfileBinding;
 import com.fatihbaser.edusharedemo.models.Post;
@@ -36,7 +37,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
-    //Providers
     UsersProvider mUsersProvider;
     AuthProvider mAuthProvider;
     PostProvider mPostProvider;
@@ -60,7 +60,19 @@ public class ProfileFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
 
-        binding.linearLayoutEditProfile.setOnClickListener(view1 -> goToEditProfile());
+        binding.linearLayoutEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuthProvider.logout();
+            }
+        });
+
+        binding.imageViewEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToEditProfile();
+            }
+        });
 
         getUser();
         getPostNumber();
@@ -134,6 +146,17 @@ public class ProfileFragment extends Fragment {
                         String username = documentSnapshot.getString("username");
                         binding.textViewUsername.setText(username);
                     }
+
+                    if (documentSnapshot.contains("department")) {
+                        String username = documentSnapshot.getString("department");
+                        binding.textViewDepartment.setText(username);
+                    }
+
+                    if (documentSnapshot.contains("university")) {
+                        String username = documentSnapshot.getString("university");
+                        binding.textViewUniversity.setText(username);
+                    }
+
                     if (documentSnapshot.contains("image")) {
                         String imageProfile = documentSnapshot.getString("image");
                         if (imageProfile != null) {

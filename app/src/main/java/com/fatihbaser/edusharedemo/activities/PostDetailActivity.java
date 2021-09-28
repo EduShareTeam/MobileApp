@@ -58,10 +58,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PostDetailActivity extends AppCompatActivity {
+    private ActivityPostDetailBinding binding;
     SliderView mSliderView;
     SliderAdapter mSliderAdapter;
     List<SliderItem> mSliderItems = new ArrayList<>();
     CommentAdapter mAdapter;
+    //Providers
     AuthProvider mAuthProvider;
     PostProvider mPostProvider;
     TokenProvider mTokenProvider;
@@ -69,8 +71,8 @@ public class PostDetailActivity extends AppCompatActivity {
     CommentsProvider mCommentsProvider;
     UsersProvider mUsersProvider;
     LikesProvider mLikesProvider;
+
     String mExtraPostId;
-    private ActivityPostDetailBinding binding;
     String mIdUser = "";
 
     @Override
@@ -84,7 +86,6 @@ public class PostDetailActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PostDetailActivity.this);
         binding.recyclerViewComments.setLayoutManager(linearLayoutManager);
-        //TODO Alternative notification bar
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -97,7 +98,6 @@ public class PostDetailActivity extends AppCompatActivity {
         mLikesProvider = new LikesProvider();
         mTokenProvider = new TokenProvider();
         mNotificationProvider = new NotificationProvider();
-
 
         binding.fabComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +137,7 @@ public class PostDetailActivity extends AppCompatActivity {
             intent.putExtra("idUser", mIdUser);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "El id del usuario aun no se carga", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Kullanıcı kimliği hala yüklenmedi", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -291,6 +291,7 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -317,6 +318,7 @@ public class PostDetailActivity extends AppCompatActivity {
         super.onPause();
         ViewedMessageHelper.updateOnline(false, PostDetailActivity.this);
     }
+
     private void sendNotification(final String comment) {
         if (mIdUser == null) {
             return;

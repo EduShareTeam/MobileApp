@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.adapter.MessagesAdapter;
+import com.fatihbaser.edusharedemo.databinding.ActivityChatBinding;
 import com.fatihbaser.edusharedemo.models.Chat;
 import com.fatihbaser.edusharedemo.models.FCMBody;
 import com.fatihbaser.edusharedemo.models.FCMResponse;
@@ -72,14 +73,10 @@ public class ChatActivity extends AppCompatActivity {
     NotificationProvider mNotificationProvider;
     TokenProvider mTokenProvider;
 
-    EditText mEditTextMessage;
-    ImageView mImageViewSendMessage;
-
     CircleImageView mCircleImageProfile;
     TextView mTextViewUsername;
     TextView mTextViewRelativeTime;
     ImageView mImageViewBack;
-    RecyclerView mRecyclerViewMessage;
 
     MessagesAdapter mAdapter;
 
@@ -94,12 +91,14 @@ public class ChatActivity extends AppCompatActivity {
     String mImageReceiver = "";
     String mImageSender = "";
 
-
+    private ActivityChatBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
-
+        binding = ActivityChatBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+        //Provider
         mChatsProvider = new ChatsProvider();
         mMessagesProvider = new MessagesProvider();
         mAuthProvider = new AuthProvider();
@@ -107,13 +106,9 @@ public class ChatActivity extends AppCompatActivity {
         mNotificationProvider = new NotificationProvider();
         mTokenProvider = new TokenProvider();
 
-        mEditTextMessage = findViewById(R.id.editTextMessage);
-        mImageViewSendMessage = findViewById(R.id.imageViewSendMessage);
-        mRecyclerViewMessage = findViewById(R.id.recyclerViewMessage);
-
         mLinearLayoutManager = new LinearLayoutManager(ChatActivity.this);
         mLinearLayoutManager.setStackFromEnd(true);
-        mRecyclerViewMessage.setLayoutManager(mLinearLayoutManager);
+        binding.recyclerViewMessage.setLayoutManager(mLinearLayoutManager);
 
         mExtraIdUser1 = getIntent().getStringExtra("idUser1");
         mExtraIdUser2 = getIntent().getStringExtra("idUser2");
@@ -122,7 +117,7 @@ public class ChatActivity extends AppCompatActivity {
         showCustomToolbar(R.layout.custom_chat_toolbar);
         getMyInfoUser();
 
-        mImageViewSendMessage.setOnClickListener(new View.OnClickListener() {
+        binding.imageViewSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendMessage();
@@ -146,7 +141,6 @@ public class ChatActivity extends AppCompatActivity {
         ViewedMessageHelper.updateOnline(false, ChatActivity.this);
     }
 
-
     @Override
     public void onStop() {
         super.onStop();
@@ -168,7 +162,7 @@ public class ChatActivity extends AppCompatActivity {
                         .setQuery(query, Message.class)
                         .build();
         mAdapter = new MessagesAdapter(options, ChatActivity.this);
-        mRecyclerViewMessage.setAdapter(mAdapter);
+        binding.recyclerViewMessage.setAdapter(mAdapter);
         mAdapter.startListening();
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -179,14 +173,14 @@ public class ChatActivity extends AppCompatActivity {
                 int lastMessagePosition = mLinearLayoutManager.findLastCompletelyVisibleItemPosition();
 
                 if (lastMessagePosition == -1 || (positionStart >= (numberMessage -1) && lastMessagePosition == (positionStart - 1))) {
-                    mRecyclerViewMessage.scrollToPosition(positionStart);
+                    binding.recyclerViewMessage.scrollToPosition(positionStart);
                 }
             }
         });
     }
 
     private void sendMessage() {
-        String textMessage = mEditTextMessage.getText().toString();
+        String textMessage = binding.editTextMessage.getText().toString();
         if (!textMessage.isEmpty()) {
             final Message message = new Message();
             message.setIdChat(mExtraIdChat);
@@ -207,7 +201,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        mEditTextMessage.setText("");
+                        binding.editTextMessage.setText("");
                         mAdapter.notifyDataSetChanged();
                         getToken(message);
                     }
@@ -240,9 +234,7 @@ public class ChatActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         getUserInfo();
-
     }
 
     private void getUserInfo() {
@@ -262,17 +254,6 @@ public class ChatActivity extends AppCompatActivity {
                         mUsernameChat = documentSnapshot.getString("username");
                         mTextViewUsername.setText(mUsernameChat);
                     }
-                   /* if (documentSnapshot.contains("online")) {
-                        boolean online = documentSnapshot.getBoolean("online");
-                        if (online) {
-                            mTextViewRelativeTime.setText("En linea");
-                        }
-                        else if (documentSnapshot.contains("lastConnect")) {
-                            long lastConnect = documentSnapshot.getLong("lastConnect");
-                            String relativeTime = RelativeTime.getTimeAgo(lastConnect, ChatActivity.this);
-                            mTextViewRelativeTime.setText(relativeTime);
-                        }
-                    }*/
                     if (documentSnapshot.contains("image")) {
                         mImageReceiver = documentSnapshot.getString("image");
                         if (mImageReceiver != null) {
@@ -364,7 +345,7 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(ChatActivity.this, "El token de notificaciones del usuario no existe", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatActivity.this, "Kullanıcı talepleri belirteci mevcut değil", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -399,7 +380,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendNotification(final String token, String messages, Message message) {
         final Map<String, String> data = new HashMap<>();
-        data.put("title", "NUEVO MENSAJE");
+        data.put("title", "YENİ MESAJ");
         data.put("body", message.getMessage());
         data.put("idNotification", String.valueOf(mIdNotificationChat));
         data.put("messages", messages);
@@ -445,11 +426,11 @@ public class ChatActivity extends AppCompatActivity {
                                 //Toast.makeText(ChatActivity.this, "La notificacion se envio correcatemente", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                Toast.makeText(ChatActivity.this, "La notificacion no se pudo enviar", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChatActivity.this, "Bildirim gönderilemedi", Toast.LENGTH_SHORT).show();
                             }
                         }
                         else {
-                            Toast.makeText(ChatActivity.this, "La notificacion no se pudo enviar", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChatActivity.this, "Bildirim gönderilemedi", Toast.LENGTH_SHORT).show();
                         }
                     }
 

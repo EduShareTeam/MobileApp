@@ -26,8 +26,6 @@ import dmax.dialog.SpotsDialog;
 
 public class CompleteProfileActivity extends AppCompatActivity {
     private ActivityCompleteProfileBinding binding;
-    //FirebaseAuth mAuth;
-    //FirebaseFirestore mFirestore;
     AuthProvider mAuthProvider;
     UsersProvider mUsersProvider;
     AlertDialog mDialog;
@@ -38,12 +36,9 @@ public class CompleteProfileActivity extends AppCompatActivity {
         binding = ActivityCompleteProfileBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
-
+        //Providers
         mAuthProvider = new AuthProvider();
         mUsersProvider = new UsersProvider();
-        //mAuth = FirebaseAuth.getInstance();
-        //mFirestore = FirebaseFirestore.getInstance();
 
         mDialog = new SpotsDialog.Builder()
                 .setContext(this)
@@ -56,7 +51,6 @@ public class CompleteProfileActivity extends AppCompatActivity {
                 register();
             }
         });
-
     }
 
     private void register() {

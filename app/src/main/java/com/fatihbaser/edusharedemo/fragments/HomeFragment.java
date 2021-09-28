@@ -52,9 +52,6 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
         View view = binding.getRoot();
         setHasOptionsMenu(true);
 
-
-
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         binding.recyclerViewHome.setLayoutManager(linearLayoutManager);
         setHasOptionsMenu(true);
@@ -131,6 +128,14 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
         Intent intent = new Intent(getContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPostsAdapter.getListener() != null) {
+            mPostsAdapter.getListener().remove();
+        }
     }
 
     @Override

@@ -41,10 +41,9 @@ public class MyFirebaseMessagingClient extends FirebaseMessagingService {
         String title = data.get("title");
         String body = data.get("body");
         if (title != null) {
-            if (title.equals("NUEVO MENSAJE")) {
+            if (title.equals("Yeni Mesaj")) {
                 showNotificationMessage(data);
-            }
-            else {
+            } else {
                 showNotification(title, body);
             }
         }
@@ -61,7 +60,7 @@ public class MyFirebaseMessagingClient extends FirebaseMessagingService {
     private void showNotificationMessage(Map<String, String> data) {
         final String imageSender = data.get("imageSender");
         final String imageReceiver = data.get("imageReceiver");
-        Log.d("ENTRO", "NUEVO MENSAJE");
+        Log.d("Gir", "YENİ MESAJ");
         getImageSender(data, imageSender, imageReceiver);
     }
 
@@ -141,7 +140,7 @@ public class MyFirebaseMessagingClient extends FirebaseMessagingService {
         intent.putExtra("imageReceiver", imageReceiver);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        RemoteInput remoteInput = new RemoteInput.Builder(NOTIFICATION_REPLY).setLabel("Tu mensaje...").build();
+        RemoteInput remoteInput = new RemoteInput.Builder(NOTIFICATION_REPLY).setLabel("Mesajin...").build();
 
         final NotificationCompat.Action action = new NotificationCompat.Action.Builder(
                 R.mipmap.ic_launcher,

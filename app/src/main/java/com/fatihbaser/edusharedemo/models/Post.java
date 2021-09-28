@@ -14,7 +14,6 @@ public class Post {
     private long timestamp;
 
     public Post() {
-
     }
 
     public Post(String id, String title, String description, String quality, String image1, String image2, String image3, String idUser, String category, long timestamp) {

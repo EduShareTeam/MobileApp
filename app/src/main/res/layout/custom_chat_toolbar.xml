@@ -35,11 +35,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:text="Hace un momento"
-        android:maxLines="1"
-        android:textSize="12dp"
+        android:layout_below="@+id/textViewUsername"
         android:layout_toRightOf="@+id/circleImageProfile"
-        android:layout_below="@+id/textViewUsername" />
+        android:maxLines="1"
+        android:text=""
+        android:textColor="@color/colorWhite"
+        android:textSize="12dp" />
 
 </RelativeLayout>

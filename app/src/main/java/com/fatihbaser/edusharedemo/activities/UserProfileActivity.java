@@ -38,6 +38,7 @@ public class UserProfileActivity extends AppCompatActivity {
     PostProvider mPostProvider;
     String mExtraIdUser;
     MyPostsAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +52,9 @@ public class UserProfileActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UserProfileActivity.this);
         binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
-        //TODO Alternative notification bar
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("");
-       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mExtraIdUser = getIntent().getStringExtra("idUser");
         if (mAuthProvider.getUid().equals(mExtraIdUser)) {
@@ -98,6 +98,7 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onStop();
         mAdapter.stopListening();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -112,8 +113,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 if (numberPost > 0) {
                     binding.textViewPostExist.setText("Publicaciones");
                     binding.textViewPostExist.setTextColor(Color.RED);
-                }
-                else {
+                } else {
                     binding.textViewPostExist.setText("No hay publicaciones");
                     binding.textViewPostExist.setTextColor(Color.GRAY);
                 }

@@ -40,6 +40,7 @@ import dmax.dialog.SpotsDialog;
 public class EditProfileActivity extends AppCompatActivity {
     private ActivityEditProfileBinding binding;
     AlertDialog.Builder mBuilderSelector;
+    AlertDialog mDialog;
     CharSequence options[];
     private final int GALLERY_REQUEST_CODE_PROFILE = 1;
     private final int PHOTO_REQUEST_CODE_PROFILE = 3;
@@ -56,7 +57,7 @@ public class EditProfileActivity extends AppCompatActivity {
     String mBio = "";
     String mImageProfile = "";
 
-    AlertDialog mDialog;
+    //Providers
     ImageProvider mImageProvider;
     UsersProvider mUsersProvider;
     AuthProvider mAuthProvider;
@@ -85,13 +86,8 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 clickEditProfile();
-                //Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-              //  startActivity(intent);
             }
         });
-
-
 
         binding.circleImageProfile.setOnClickListener(view12 -> selectOptionImage(1));
 
@@ -196,7 +192,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                     }
                                     else {
                                         mDialog.dismiss();
-                                        Toast.makeText(EditProfileActivity.this, "La imagen numero 2 no se pudo guardar", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(EditProfileActivity.this, "Resim kaydedilemedi", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -205,13 +201,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
                 else {
                     mDialog.dismiss();
-                    Toast.makeText(EditProfileActivity.this, "Hubo error al almacenar la imagen", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditProfileActivity.this, "Görüntü kaydedilirken bir hata oluştu", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
-
-
 
     private void saveImage(File image, final boolean isProfileImage) {
         mDialog.show();

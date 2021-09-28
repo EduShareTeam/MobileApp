@@ -33,9 +33,8 @@
                     android:id="@+id/imageViewCover"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:src="@drawable/edu"
-                    android:scaleType="centerCrop"
-                    android:alpha="0.8" />
+                    android:background="#FF5A00"
+                    android:scaleType="centerCrop"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/circleImageProfile"

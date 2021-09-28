@@ -30,14 +30,14 @@ public class FilterActivity extends AppCompatActivity {
     PostsAdapter mPostsAdapter;
     String mExtraCategory;
     Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityFilterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-       mToolbar = findViewById(R.id.toolbar);
-        //TODO Alternative notification bar
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Filtre");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
