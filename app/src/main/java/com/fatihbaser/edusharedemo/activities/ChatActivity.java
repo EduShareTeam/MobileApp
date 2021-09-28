@@ -236,18 +236,18 @@ public class ChatActivity extends AppCompatActivity {
                         String username = documentSnapshot.getString("username");
                         mTextViewUsername.setText(username);
                     }
-                    if (documentSnapshot.contains("online")) {
-                        boolean online = documentSnapshot.getBoolean("online");
-                        if (online) {
-                            // TODO:bi alt satır açınca uygulama patlıyor
-                         //  mTextViewRelativeTime.setText("Online");
-                        }
-                        else if (documentSnapshot.contains("lastConnect")) {
-                            long lastConnect = documentSnapshot.getLong("lastConnect");
-                            String relativeTime = RelativeTime.getTimeAgo(lastConnect, ChatActivity.this);
-                            mTextViewRelativeTime.setText(relativeTime);
-                        }
-                    }
+//                    if (documentSnapshot.contains("online")) {
+//                        boolean online = documentSnapshot.getBoolean("online");
+//                        if (online) {
+//                            // TODO:bi alt satır açınca uygulama patlıyor
+//                         //  mTextViewRelativeTime.setText("Online");
+//                        }
+//                        else if (documentSnapshot.contains("lastConnect")) {
+//                            long lastConnect = documentSnapshot.getLong("lastConnect");
+//                            String relativeTime = RelativeTime.getTimeAgo(lastConnect, ChatActivity.this);
+//                            //mTextViewRelativeTime.setText(relativeTime);
+//                        }
+//                    }
                     if (documentSnapshot.contains("image")) {
                         String imageProfile = documentSnapshot.getString("image");
                         if (imageProfile != null) {
