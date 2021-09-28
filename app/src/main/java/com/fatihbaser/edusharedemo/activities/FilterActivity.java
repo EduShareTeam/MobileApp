@@ -40,7 +40,7 @@ public class FilterActivity extends AppCompatActivity {
         //TODO Alternative notification bar
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Filtre");
-       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         binding.recyclerViewFilter.setLayoutManager(new GridLayoutManager(FilterActivity.this, 2));
 
