@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -64,7 +66,18 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
 
         if (post.getImage1() != null) {
             if (!post.getImage1().isEmpty()) {
-                Picasso.with(context).load(post.getImage1()).into(holder.circleImagePost);
+                Picasso.with(context).load(post.getImage1()).into(holder.circleImagePost, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.bar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        holder.circleImagePost.setImageResource(R.drawable.ic_baseline_error_24);
+                        holder.bar.setVisibility(View.INVISIBLE);
+                    }
+                });
             }
         }
         holder.viewHolder.setOnClickListener(new View.OnClickListener() {
@@ -123,12 +136,14 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
         ImageView imageViewDelete;
         View viewHolder;
 
+        ProgressBar bar;
         public ViewHolder(View view) {
             super(view);
             textViewTitle = view.findViewById(R.id.textViewTitleMyPost);
             textViewRelativeTime = view.findViewById(R.id.textViewRelativeTimeMyPost);
             circleImagePost = view.findViewById(R.id.circleImageMyPost);
             imageViewDelete = view.findViewById(R.id.imageViewDeleteMyPost);
+            bar = view.findViewById(R.id.postLoading);
             viewHolder = view;
         }
     }

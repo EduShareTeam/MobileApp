@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -60,7 +62,18 @@ public class CommentAdapter extends FirestoreRecyclerAdapter<Comment, CommentAda
                         String imageProfile = documentSnapshot.getString("image");
                         if (imageProfile != null) {
                             if (!imageProfile.isEmpty()) {
-                                Picasso.with(context).load(imageProfile).into(holder.circleImageComment);
+                                Picasso.with(context).load(imageProfile).into(holder.circleImageComment, new Callback() {
+                                    @Override
+                                    public void onSuccess() {
+                                        holder.bar.setVisibility(View.GONE);
+                                    }
+
+                                    @Override
+                                    public void onError() {
+                                        holder.circleImageComment.setImageResource(R.drawable.ic_baseline_error_24);
+                                        holder.bar.setVisibility(View.INVISIBLE);
+                                    }
+                                });
                             }
                         }
                     }
@@ -81,11 +94,13 @@ public class CommentAdapter extends FirestoreRecyclerAdapter<Comment, CommentAda
         TextView textViewComment;
         CircleImageView circleImageComment;
         View viewHolder;
+        ProgressBar bar;
 
         public ViewHolder(View view) {
             super(view);
             textViewUsername = view.findViewById(R.id.textViewUsername);
             textViewComment = view.findViewById(R.id.textViewComment);
+            bar = view.findViewById(R.id.postLoading);
             circleImageComment = view.findViewById(R.id.circleImageComment);
             viewHolder = view;
         }
