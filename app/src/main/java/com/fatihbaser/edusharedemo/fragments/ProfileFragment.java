@@ -76,7 +76,7 @@ public class ProfileFragment extends Fragment {
 
         getUser();
         getPostNumber();
-        checkIfExistPost();
+        //checkIfExistPost();
 
         return view;
     }

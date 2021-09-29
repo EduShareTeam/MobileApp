@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EduSharedemo">
         <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.ChatActivity"
             android:exported="true" />
         <activity
@@ -77,10 +80,10 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
-        <receiver android:name=".receivers.MessageReceiver"
+        <receiver
+            android:name=".receivers.MessageReceiver"
             android:enabled="true"
-            android:exported="false"/>
-
+            android:exported="false" />
     </application>
 
 </manifest>

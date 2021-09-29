@@ -106,12 +106,14 @@ public class RegisterActivity extends AppCompatActivity {
                     user.setBio(bio);
                     user.setTimestamp(new Date().getTime());
 
+
+
                     mUsersProvider.create(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             mDialog.dismiss();
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                                Intent intent = new Intent(RegisterActivity.this, ProfileActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                             } else {

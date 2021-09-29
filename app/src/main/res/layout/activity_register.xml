@@ -260,7 +260,7 @@
         android:layout_margin="20dp"
         android:background="@drawable/rounded_button"
         android:backgroundTint="@color/colorAccent"
-        android:text="Register"
+        android:text="Devam et"
         android:textColor="@color/colorWhite" />
 
 
