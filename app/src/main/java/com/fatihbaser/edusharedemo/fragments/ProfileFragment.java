@@ -78,27 +78,7 @@ public class ProfileFragment extends Fragment {
         });
 
         getUser();
-        getPostNumber();
-        //checkIfExistPost();
-
         return view;
-    }
-
-    private void checkIfExistPost() {
-        mPostProvider.getPostByUser(mAuthProvider.getUid()).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                int numberPost = queryDocumentSnapshots.size();
-                if (numberPost > 0) {
-                    binding.textViewPostExist.setText("Yayınlar");
-                    binding.textViewPostExist.setTextColor(Color.RED);
-                }
-                else {
-                    binding.textViewPostExist.setText("Yayın yok");
-                    binding.textViewPostExist.setTextColor(Color.GRAY);
-                }
-            }
-        });
     }
 
     @Override
@@ -125,15 +105,6 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
-    private void getPostNumber() {
-        mPostProvider.getPostByUser(mAuthProvider.getUid()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int numberPost = queryDocumentSnapshots.size();
-                binding.textViewPostNumber.setText(String.valueOf(numberPost));
-            }
-        });
-    }
 
     private void getUser() {
         mUsersProvider.getUser(mAuthProvider.getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

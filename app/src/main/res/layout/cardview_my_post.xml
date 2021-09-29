@@ -47,10 +47,17 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/imageViewEditMyPost"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_clear_24" />
+
+        <ImageView
             android:id="@+id/imageViewDeleteMyPost"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_baseline_clear_24" />
+
 
     </LinearLayout>
 </FrameLayout>
