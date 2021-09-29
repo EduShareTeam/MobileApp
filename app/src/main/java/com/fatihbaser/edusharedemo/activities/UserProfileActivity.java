@@ -18,6 +18,7 @@ import com.fatihbaser.edusharedemo.databinding.ActivityPostDetailBinding;
 import com.fatihbaser.edusharedemo.databinding.ActivityUserProfileBinding;
 import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
+import com.fatihbaser.edusharedemo.providers.ImageProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
@@ -30,6 +31,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+
 public class UserProfileActivity extends AppCompatActivity {
     private ActivityUserProfileBinding binding;
     //Providers
@@ -39,6 +42,9 @@ public class UserProfileActivity extends AppCompatActivity {
     String mExtraIdUser;
     MyPostsAdapter mAdapter;
 
+    File imageFile1;
+
+    ImageProvider mImageProvider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +52,7 @@ public class UserProfileActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        mImageProvider = new ImageProvider();
         mUsersProvider = new UsersProvider();
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
@@ -55,6 +62,8 @@ public class UserProfileActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        imageFile1= new File("https://github.com/Fatih-Baser/KotlinMovies/blob/master/images/a.jpeg");
 
         mExtraIdUser = getIntent().getStringExtra("idUser");
         if (mAuthProvider.getUid().equals(mExtraIdUser)) {
@@ -166,6 +175,9 @@ public class UserProfileActivity extends AppCompatActivity {
                             if (!imageProfile.isEmpty()) {
                                 Picasso.with(UserProfileActivity.this).load(imageProfile).into(binding.circleImageProfile);
                             }
+                        }
+                        else {
+                            mImageProvider.save(UserProfileActivity.this, imageFile1);
                         }
                     }
 

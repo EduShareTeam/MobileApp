@@ -64,6 +64,9 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mAuthProvider.logout();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 
@@ -76,7 +79,7 @@ public class ProfileFragment extends Fragment {
 
         getUser();
         getPostNumber();
-        checkIfExistPost();
+        //checkIfExistPost();
 
         return view;
     }
