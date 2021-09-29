@@ -5,7 +5,7 @@ public class Post {
     private String id;
     private String title;
     private String description;
-    private String quality;
+    private Double quality;
     private String image1;
     private String image2;
     private String image3;
@@ -16,7 +16,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(String id, String title, String description, String quality, String image1, String image2, String image3, String idUser, String category, long timestamp) {
+    public Post(String id, String title, String description, Double quality, String image1, String image2, String image3, String idUser, String category, long timestamp) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -53,11 +53,11 @@ public class Post {
         this.description = description;
     }
 
-    public String getQuality() {
+    public Double getQuality() {
         return quality;
     }
 
-    public void setQuality(String quality) {
+    public void setQuality(Double quality) {
         this.quality = quality;
     }
 

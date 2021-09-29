@@ -68,7 +68,6 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
         getUser();
-        getPostNumber();
         checkIfExistPost();
     }
 
@@ -117,16 +116,6 @@ public class UserProfileActivity extends AppCompatActivity {
                     binding.textViewPostExist.setText("No hay publicaciones");
                     binding.textViewPostExist.setTextColor(Color.GRAY);
                 }
-            }
-        });
-    }
-
-    private void getPostNumber() {
-        mPostProvider.getPostByUser(mExtraIdUser).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int numberPost = queryDocumentSnapshots.size();
-                binding.textViewPostNumber.setText(String.valueOf(numberPost));
             }
         });
     }

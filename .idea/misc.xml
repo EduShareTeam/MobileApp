@@ -20,6 +20,7 @@
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.29907407407407405" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/drawable/ic_baseline_subtitles_24.xml" value="0.29907407407407405" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/drawable/ic_chat.xml" value="0.29907407407407405" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/drawable/shape_view_layout_editext.xml" value="0.384375" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/drawable/shape_view_linear_layout.xml" value="0.29907407407407405" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/action_bar_toolbar.xml" value="0.24270833333333333" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_chat.xml" value="0.17882472137791286" />
@@ -39,13 +40,14 @@
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_chats.xml" value="0.13125" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_filters.xml" value="0.13125" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_home.xml" value="0.2477355072463768" />
-        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/layout_shape.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/shape_linear_layout.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/menu/main_menu.xml" value="0.1" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduSharedemo/app/src/main/res/layout/activity_home.xml" value="0.16394927536231885" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduSharedemo/app/src/main/res/layout/activity_main.xml" value="0.16983695652173914" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduSharedemo/app/src/main/res/layout/activity_register.xml" value="0.4" />
+        <entry key="..\:/Users/yusuf/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.36822916666666666" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.24256410256410257" />
         <entry key="app/src/main/res/drawable/ic_arrow_left.xml" value="0.26481481481481484" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_a_photo_24.xml" value="0.26481481481481484" />

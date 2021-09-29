@@ -1,10 +1,5 @@
 package com.fatihbaser.edusharedemo.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,33 +10,37 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.databinding.ActivityPostBinding;
-import com.fatihbaser.edusharedemo.databinding.ActivityRegisterBinding;
 import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
+import com.fatihbaser.edusharedemo.providers.ImageProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.utils.FileUtil;
-import com.fatihbaser.edusharedemo.utils.ImageProvider;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
 
 public class PostActivity extends AppCompatActivity {
@@ -56,6 +55,8 @@ public class PostActivity extends AppCompatActivity {
 
     String mCategory = "";
     String mTitle = "";
+    float mQuality = 0;
+    String mSpinnerCategories = "";
     String mDescription = "";
     AlertDialog mDialog;
     AlertDialog.Builder mBuilderSelector;
@@ -75,6 +76,11 @@ public class PostActivity extends AppCompatActivity {
     String mAbsolutePhotoPath2;
     String mPhotoPath2;
     File mPhotoFile2;
+
+    //Spınner
+    ValueEventListener valueEventListener;
+    ArrayAdapter<String> arrayAdapter;
+    ArrayList<String> spinnerDataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,37 +130,11 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-        binding.imageViewPc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCategory = "Elektronik ve mimarlık";
-                binding.textViewCategory.setText(mCategory);
-            }
-        });
-
-        binding.imageViewPS4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCategory = "Dil ve Edebiyat";
-                binding.textViewCategory.setText(mCategory);
-            }
-        });
-
-        binding.imageViewXbox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCategory = "Sanat";
-                binding.textViewCategory.setText(mCategory);
-            }
-        });
-
-        binding.imageViewNintendo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCategory = "Fen Bilimleri";
-                binding.textViewCategory.setText(mCategory);
-            }
-        });
+        spinnerDataList = new ArrayList<>();
+        arrayAdapter = new ArrayAdapter<String>(PostActivity.this,
+                android.R.layout.simple_spinner_dropdown_item,spinnerDataList);
+        binding.spinnerProductCategory.setAdapter(arrayAdapter);
+        retrieveData();
     }
 
     private void selectOptionImage(final int numberImage) {
@@ -216,7 +196,9 @@ public class PostActivity extends AppCompatActivity {
     private void clickPost() {
         mTitle = binding.textInputVideoGame.getText().toString();
         mDescription = binding.textInputDescription.getText().toString();
-        if (!mTitle.isEmpty() && !mDescription.isEmpty() && !mCategory.isEmpty()) {
+        mQuality = binding.ratingBarProductQualityUpload.getRating();
+        mSpinnerCategories = binding.spinnerProductCategory.getSelectedItem().toString();
+        if (!mTitle.isEmpty() && !mDescription.isEmpty()) {
             // GALERİDEN İKİ RESİM SEÇİYORUM
             if (mImageFile != null && mImageFile2 != null) {
                 saveImage(mImageFile, mImageFile2);
@@ -260,7 +242,8 @@ public class PostActivity extends AppCompatActivity {
                                                 post.setImage2(url2);
                                                 post.setTitle(mTitle.toLowerCase());
                                                 post.setDescription(mDescription);
-                                                post.setCategory(mCategory);
+                                                post.setCategory(mSpinnerCategories);
+                                                post.setQuality((double) mQuality);
                                                 post.setIdUser(mAuthProvider.getUid());
                                                 post.setTimestamp(new Date().getTime());
                                                 mPostProvider.save(post).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -292,16 +275,31 @@ public class PostActivity extends AppCompatActivity {
             }
         });
     }
+    private void retrieveData() {
+        DatabaseReference databaseReference = mPostProvider.getCategoryForSpinner();
+        valueEventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot item :snapshot.getChildren()){
+                    spinnerDataList.add(item.child("name").getValue().toString());
+                }
+                arrayAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 
     private void clearForm() {
         binding.textInputVideoGame.setText("");
         binding.textInputDescription.setText("");
-        binding.textViewCategory.setText("KATEGORİ");
+
         binding.imageViewPost1.setImageResource(R.drawable.img);
         binding.imageViewPost2.setImageResource(R.drawable.img);
         mTitle = "";
         mDescription = "";
-        mCategory = "";
+        mSpinnerCategories = "";
         mImageFile = null;
         mImageFile2 = null;
     }
