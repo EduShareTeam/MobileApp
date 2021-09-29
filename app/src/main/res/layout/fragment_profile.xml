@@ -44,6 +44,13 @@
                     app:civ_border_color="@color/colorWhite"
                     app:civ_border_width="5dp"
                     app:civ_circle_background_color="@color/colorGray" />
+                <ProgressBar
+                    android:id="@+id/postLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    >
+                </ProgressBar>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

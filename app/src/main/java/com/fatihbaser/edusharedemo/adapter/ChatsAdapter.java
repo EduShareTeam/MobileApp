@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -144,7 +146,18 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
                         String imageProfile = documentSnapshot.getString("image");
                         if (imageProfile != null) {
                             if (!imageProfile.isEmpty()) {
-                                Picasso.with(context).load(imageProfile).into(holder.circleImageChat);
+                                Picasso.with(context).load(imageProfile).into(holder.circleImageChat, new Callback() {
+                                    @Override
+                                    public void onSuccess() {
+                                        holder.bar.setVisibility(View.GONE);
+                                    }
+
+                                    @Override
+                                    public void onError() {
+                                        holder.circleImageChat.setImageResource(R.drawable.ic_baseline_error_24);
+                                        holder.bar.setVisibility(View.INVISIBLE);
+                                    }
+                                });
                             }
                         }
                     }
@@ -168,6 +181,7 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         FrameLayout frameLayoutMessageNotRead;
         View viewHolder;
 
+        ProgressBar bar;
         public ViewHolder(View view) {
             super(view);
             textViewUsername = view.findViewById(R.id.textViewUsernameChat);
@@ -175,7 +189,9 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
             textViewMessageNotRead = view.findViewById(R.id.textViewMessageNotRead);
             circleImageChat = view.findViewById(R.id.circleImageChat);
             frameLayoutMessageNotRead = view.findViewById(R.id.frameLayoutMessageNotRead);
+            bar = view.findViewById(R.id.postLoading);
             viewHolder = view;
+
         }
     }
 

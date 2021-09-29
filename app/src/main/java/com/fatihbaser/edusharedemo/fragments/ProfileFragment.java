@@ -31,6 +31,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -135,7 +136,18 @@ public class ProfileFragment extends Fragment {
                         String imageProfile = documentSnapshot.getString("image");
                         if (imageProfile != null) {
                             if (!imageProfile.isEmpty()) {
-                                Picasso.with(getContext()).load(imageProfile).into(binding.circleImageProfile);
+                                Picasso.with(getContext()).load(imageProfile).into(binding.circleImageProfile, new Callback() {
+                                    @Override
+                                    public void onSuccess() {
+                                       binding.postLoading.setVisibility(View.GONE);
+                                    }
+
+                                    @Override
+                                    public void onError() {
+                                        binding.circleImageProfile.setImageResource(R.drawable.ic_baseline_error_24);
+                                        binding.postLoading.setVisibility(View.INVISIBLE);
+                                    }
+                                });
                             }
                         }
                     }

@@ -222,7 +222,18 @@ public class PostDetailActivity extends AppCompatActivity {
 
                     if (documentSnapshot.contains("image")) {
                         String imageProfile = documentSnapshot.getString("image");
-                        Picasso.with(PostDetailActivity.this).load(imageProfile).into(binding.circleImageProfile);
+                        Picasso.with(PostDetailActivity.this).load(imageProfile).into(binding.circleImageProfile, new com.squareup.picasso.Callback() {
+                            @Override
+                            public void onSuccess() {
+                                binding.postLoading.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onError() {
+                                binding.circleImageProfile.setImageResource(R.drawable.ic_baseline_error_24);
+                                binding.postLoading.setVisibility(View.INVISIBLE);
+                            }
+                        });
                     }
                 }
             }

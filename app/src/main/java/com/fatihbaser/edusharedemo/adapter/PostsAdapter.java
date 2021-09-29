@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
@@ -72,7 +74,18 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
         holder.textViewDescription.setText(post.getDescription());
         if (post.getImage1() != null) {
             if (!post.getImage1().isEmpty()) {
-                Picasso.with(context).load(post.getImage1()).into(holder.imageViewPost);
+                Picasso.with(context).load(post.getImage1()).into(holder.imageViewPost, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.bar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        holder.imageViewPost.setImageResource(R.drawable.ic_baseline_error_24);
+                        holder.bar.setVisibility(View.INVISIBLE);
+                    }
+                });
             }
         }
         holder.viewHolder.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +194,7 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
         ImageView imageViewPost;
         ImageView imageViewLike;
         View viewHolder;
+        ProgressBar bar;
 
         public ViewHolder(View view) {
             super(view);
@@ -190,6 +204,7 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
             textViewLikes = view.findViewById(R.id.textViewLikes);
             imageViewPost = view.findViewById(R.id.imageViewPostCard);
             imageViewLike = view.findViewById(R.id.imageViewLike);
+            bar = view.findViewById(R.id.postLoading);
             viewHolder = view;
         }
     }

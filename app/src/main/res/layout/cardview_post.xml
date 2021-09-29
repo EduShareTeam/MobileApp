@@ -15,8 +15,26 @@
             android:id="@+id/imageViewPostCard"
             android:layout_width="match_parent"
             android:layout_height="225dp"
-            android:scaleType="centerCrop"
-            />
+            android:scaleType="centerCrop">
+
+
+
+        </ImageView>
+
+        <ProgressBar
+            android:id="@+id/postLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+
+            >
+        </ProgressBar>
+
+
+
+
+
+
 
         <TextView
             android:id="@+id/textViewTitlePostCard"
