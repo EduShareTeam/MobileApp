@@ -133,10 +133,10 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
                 int numberDocuments = queryDocumentSnapshots.size();
                 if (numberDocuments > 0) {
                     String idLike = queryDocumentSnapshots.getDocuments().get(0).getId();
-                    holder.imageViewLike.setImageResource(R.drawable.icon_like_grey);
+                    holder.imageViewLike.setImageResource(R.drawable.heart);
                     mLikesProvider.delete(idLike);
                 } else {
-                    holder.imageViewLike.setImageResource(R.drawable.icon_like_blue);
+                    holder.imageViewLike.setImageResource(R.drawable.heartdolu);
                     mLikesProvider.create(like);
                 }
             }
@@ -150,9 +150,9 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 int numberDocuments = queryDocumentSnapshots.size();
                 if (numberDocuments > 0) {
-                    holder.imageViewLike.setImageResource(R.drawable.icon_like_blue);
+                    holder.imageViewLike.setImageResource(R.drawable.heartdolu);
                 } else {
-                    holder.imageViewLike.setImageResource(R.drawable.icon_like_grey);
+                    holder.imageViewLike.setImageResource(R.drawable.heart);
                 }
             }
         });
