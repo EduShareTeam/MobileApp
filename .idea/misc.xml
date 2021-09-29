@@ -39,7 +39,7 @@
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_chats.xml" value="0.13125" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_filters.xml" value="0.13125" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_home.xml" value="0.2477355072463768" />
-        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/layout_shape.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/shape_linear_layout.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/menu/main_menu.xml" value="0.1" />
@@ -83,5 +83,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2557291666666667" />
+      </ProjectState>
+    </option>
   </component>
 </project>

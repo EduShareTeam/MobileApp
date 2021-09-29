@@ -145,6 +145,21 @@ public class UserProfileActivity extends AppCompatActivity {
                         String username = documentSnapshot.getString("username");
                         binding.textViewUsername.setText(username);
                     }
+
+                    if (documentSnapshot.contains("university")) {
+                        String university = documentSnapshot.getString("university");
+                        binding.textViewUniversity.setText(university);
+                    }
+
+                    if (documentSnapshot.contains("department")) {
+                        String department = documentSnapshot.getString("department");
+                        binding.textViewDepartment.setText(department);
+                    }
+
+                    if (documentSnapshot.contains("bio")) {
+                        String bio = documentSnapshot.getString("bio");
+                        binding.textViewBio.setText(bio);
+                    }
                     if (documentSnapshot.contains("image")) {
                         String imageProfile = documentSnapshot.getString("image");
                         if (imageProfile != null) {
