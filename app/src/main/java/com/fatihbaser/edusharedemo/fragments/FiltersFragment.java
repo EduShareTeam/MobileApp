@@ -25,31 +25,61 @@ public class FiltersFragment extends Fragment {
         binding = FragmentFiltersBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        binding.cardViewPs4.setOnClickListener(new View.OnClickListener() {
+        binding.fenbilimleri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Elektronik ve mimarlık");
+                goToFilterActivity("Fen Bilimleri");
             }
         });
 
-        binding.cardViewXBOX.setOnClickListener(new View.OnClickListener() {
+        binding.eItimbilimleri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToFilterActivity("Egitim bilimleri");
+            }
+        });
+
+        binding.dilveedebiyat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToFilterActivity("Dil ve Edebiyat");
             }
         });
 
-        binding.cardViewNINTENDO.setOnClickListener(new View.OnClickListener() {
+        binding.yabancDiller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Sanat");
+                goToFilterActivity("Yabanci diller");
             }
         });
-
-        binding.cardViewPC.setOnClickListener(new View.OnClickListener() {
+        binding.mimarlK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Fen Bilimleri");
+                goToFilterActivity("Mimarlik");
+            }
+        });
+        binding.teknolojivemuhendislkik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToFilterActivity("Teknoloji ve Muhendislik");
+            }
+        });
+        binding.guzelsanatlar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToFilterActivity("Guzel Sanatlar");
+            }
+        });
+        binding.iktisat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToFilterActivity("Iktisadi bilimler");
+            }
+        });
+        binding.sporbilimleri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToFilterActivity("Spor bilimleri");
             }
         });
 
