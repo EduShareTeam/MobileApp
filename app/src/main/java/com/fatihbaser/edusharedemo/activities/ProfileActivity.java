@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -96,6 +97,20 @@ public class ProfileActivity extends AppCompatActivity {
         binding.circleImageBack.setOnClickListener(view1 -> finish());
 
         getUser();
+    }
+
+    @Override
+    public void onBackPressed() {
+        myAlert(ProfileActivity.this);
+    }
+
+    public void myAlert(Context context){
+        new AlertDialog.Builder(context).setIcon(R.drawable.edu).setTitle("Exist ?").setMessage("Lütfen Fotograf Ekleyin ").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        }).show();
     }
 
     private void getUser() {

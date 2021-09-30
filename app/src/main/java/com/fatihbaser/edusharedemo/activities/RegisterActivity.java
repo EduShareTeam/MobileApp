@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.databinding.ActivityRegisterBinding;
 import com.fatihbaser.edusharedemo.models.User;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
@@ -105,6 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
                     user.setDepartment(department);
                     user.setBio(bio);
                     user.setTimestamp(new Date().getTime());
+                   //user.setImageProfile("https://firebasestorage.googleapis.com/v0/b/edusharebeta.appspot.com/o/Wed%20Sep%2029%2013%3A37%3A52%20GMT%2B03%3A00%202021.jpg?alt=media&token=a2801814-4590-421a-8325-9a42551b60d9");
 
 
 
