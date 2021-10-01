@@ -86,9 +86,11 @@ public class FiltersFragment extends Fragment {
         return view;
     }
 
-    private void goToFilterActivity(String category) {
+   private void goToFilterActivity(String category) {
         Intent intent = new Intent(getContext(), FilterActivity.class);
         intent.putExtra("category", category);
         startActivity(intent);
     }
+
+
 }

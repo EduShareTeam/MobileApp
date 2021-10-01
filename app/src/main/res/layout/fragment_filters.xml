@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+ <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,365 +15,403 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/fenbilimleri"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            app:cardElevation="2dp"
-            >
+            android:orientation="horizontal">
 
-            <LinearLayout
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/fenbilimleri"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="170dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp"
                 >
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/icon_ps4"
-                    android:background="@color/colorDarkBlue"
-                    android:layout_gravity="center_vertical"
-
-                    android:padding="7dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:textSize="20dp"
-                    android:text="Fen Bilimleri" />
+                    android:layout_marginRight="20dp"
+                    >
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/fen"
+                        android:background="@color/colorAccent" />
 
-        </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="Fen bilimleri" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/eğitimbilimleri"
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/eItimbilimleri"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/egitim"
+                        android:background="@color/colorAccent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="Egitim bilimleri" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            app:cardElevation="2dp"
-            >
+            android:orientation="horizontal">
 
-            <LinearLayout
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/dilveedebiyat"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="170dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp"
                 >
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/icon_xbox"
-                    android:background="@color/colorGray"
-                    android:layout_gravity="center_vertical"
-                    android:padding="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:textSize="20dp"
-                    android:text="Egitim bilimleri" />
+                    android:layout_marginRight="20dp"
+                    >
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/literature"
+                        android:background="@color/colorAccent" />
 
-        </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="Dil ve Edebiyat" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/dilveedebiyat"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/yabancDiller"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/dil"
+                        android:background="@color/colorAccent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="Yabanci diller" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            app:cardElevation="2dp"
-            >
+            android:orientation="horizontal">
 
-            <LinearLayout
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/mimarlK"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="170dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp"
                 >
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/icon_nintendo"
-                    android:background="@color/colorAccent"
-                    android:layout_gravity="center_vertical"
-                    android:padding="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:textSize="20dp"
-                    android:text="Dil ve Edebiyat" />
+                    android:layout_marginRight="20dp"
+                    >
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/arc"
+                        android:background="@color/colorAccent" />
 
-        </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="Mimarlik" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/yabancıdiller"
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/teknolojivemuhendislkik"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/tek"
+                        android:background="@color/colorAccent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="Teknoloji ve Muhendislik" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            app:cardElevation="2dp"
-            >
+            android:orientation="horizontal">
 
-            <LinearLayout
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/guzelsanatlar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="170dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp"
                 >
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/icon_pc"
-                    android:background="@color/colorDarkBlue"
-                    android:layout_gravity="center_vertical"
-                    android:padding="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:textSize="20dp"
-                    android:text="Yabancı Diller" />
+                    android:layout_marginRight="20dp"
+                    >
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/art"
+                        android:background="@color/colorAccent" />
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/mimarlık"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="Guzel Sanatlar" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/iktisat"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/economic"
+                        android:background="@color/colorAccent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="Iktisadi bilimler" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            app:cardElevation="2dp"
-            >
+            android:orientation="horizontal">
 
-            <LinearLayout
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sporbilimleri"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="170dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp"
                 >
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/icon_ps4"
-                    android:background="@color/colorDarkBlue"
-                    android:layout_gravity="center_vertical"
-
-                    android:padding="7dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:textSize="20dp"
-                    android:text="Mimarlık" />
+                    android:layout_marginRight="20dp"
+                    >
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/sports"
+                        android:background="@color/colorAccent" />
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/teknolojivemuhendislkik"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            app:cardElevation="2dp"
-            >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="Spor bilimleri" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                >
+                </LinearLayout>
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/icon_ps4"
-                    android:background="@color/colorDarkBlue"
-                    android:layout_gravity="center_vertical"
+            </androidx.cardview.widget.CardView>
 
-                    android:padding="7dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:textSize="20dp"
-                    android:text="Teknoloji ve Muhendislik" />
 
-            </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/guzelsanatlar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            app:cardElevation="2dp"
-            >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                >
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/icon_ps4"
-                    android:background="@color/colorDarkBlue"
-                    android:layout_gravity="center_vertical"
-
-                    android:padding="7dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:textSize="20dp"
-                    android:text="Güzel sanatlar" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/iktisat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            app:cardElevation="2dp"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                >
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/icon_ps4"
-                    android:background="@color/colorDarkBlue"
-                    android:layout_gravity="center_vertical"
-
-                    android:padding="7dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:textSize="20dp"
-                    android:text="İktisad bilimleri" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/sporbilimleri"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            app:cardElevation="2dp"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                >
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/icon_ps4"
-                    android:background="@color/colorDarkBlue"
-                    android:layout_gravity="center_vertical"
-
-                    android:padding="7dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:textSize="20dp"
-                    android:text="Spor Bilimleri" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
 
 
@@ -379,3 +421,4 @@
     </LinearLayout>
 
 </FrameLayout>
+</androidx.core.widget.NestedScrollView>
