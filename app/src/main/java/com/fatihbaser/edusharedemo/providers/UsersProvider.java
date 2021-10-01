@@ -31,7 +31,7 @@ public class UsersProvider {
         return mCollection.document(user.getId()).set(user);
     }
 
-    public Task<Void> update(User user) {
+    public Task<Void> updateProfile(User user) {
         Map<String, Object> map = new HashMap<>();
         map.put("username", user.getUsername());
         map.put("university", user.getUniversity());

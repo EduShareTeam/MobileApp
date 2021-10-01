@@ -1,8 +1,7 @@
 package com.fatihbaser.edusharedemo.models;
 
 public class User {
-
-
+    //TODO: imageProfile null geliyor firebase. Bunu kullanmiyoruz hicbir yerde
     private String id;
     private String email;
     private String username;

@@ -15,12 +15,8 @@ import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import dmax.dialog.SpotsDialog;
 
@@ -76,7 +72,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
         user.setBio(bio);
         user.setTimestamp(new Date().getTime());
         mDialog.show();
-        mUsersProvider.update(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mUsersProvider.updateProfile(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 mDialog.dismiss();

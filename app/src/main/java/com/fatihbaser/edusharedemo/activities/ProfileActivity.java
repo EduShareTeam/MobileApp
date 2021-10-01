@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.fatihbaser.edusharedemo.R;
-import com.fatihbaser.edusharedemo.databinding.ActivityEditProfileBinding;
 import com.fatihbaser.edusharedemo.databinding.ActivityProfileBinding;
 import com.fatihbaser.edusharedemo.models.User;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
@@ -256,7 +255,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (mDialog.isShowing()) {
             mDialog.show();
         }
-        mUsersProvider.update(user).addOnCompleteListener(task -> {
+        mUsersProvider.updateProfile(user).addOnCompleteListener(task -> {
             mDialog.dismiss();
             if (task.isSuccessful()) {
 

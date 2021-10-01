@@ -27,7 +27,6 @@ import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
@@ -56,7 +55,7 @@ public class EditProfileActivity extends AppCompatActivity {
     String mDepartment = "";
     String mBio = "";
     String mImageProfile = "";
-
+    String mImage;
     //Providers
     ImageProvider mImageProvider;
     UsersProvider mUsersProvider;
@@ -76,6 +75,14 @@ public class EditProfileActivity extends AppCompatActivity {
         mImageProvider = new ImageProvider();
         mUsersProvider = new UsersProvider();
         mAuthProvider = new AuthProvider();
+
+        mUsersProvider.getUser(mAuthProvider.getUid()).addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()){
+                if (documentSnapshot.contains("image")) {
+                    mImage = documentSnapshot.getString("image");
+                }
+            }
+        });
 
         mDialog = new SpotsDialog.Builder()
                 .setContext(this)
@@ -134,11 +141,11 @@ public class EditProfileActivity extends AppCompatActivity {
         mBio = binding.textInputBio.getText().toString();
         if (!mUsername.isEmpty() && !mUniversity.isEmpty()&& !mDepartment.isEmpty()&& !mBio.isEmpty()) {
             if (mImageFile != null) {
-                saveImageCoverAndProfile(mImageFile);
+                saveImageFirebaseStorage(mImageFile);
             }
             //KAMERANIN İKİ RESİMİNİ ÇEKİYORUM
             else if (mPhotoFile != null) {
-                saveImageCoverAndProfile(mPhotoFile);
+                saveImageFirebaseStorage(mPhotoFile);
             }
             else if (mPhotoFile != null) {
                 saveImage(mPhotoFile, true);
@@ -153,6 +160,8 @@ public class EditProfileActivity extends AppCompatActivity {
                 user.setDepartment(mDepartment);
                 user.setBio(mBio);
                 user.setId(mAuthProvider.getUid());
+                //TODO: Image degistirmeden update yaparsak image kayboluyor. Firebaseden string degerini burada gsotermemiz gerekiyor
+                user.setImageProfile(mImage);
                 updateInfo(user);
             }
         }
@@ -161,7 +170,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void saveImageCoverAndProfile(File imageFile1) {
+    private void saveImageFirebaseStorage(File imageFile1) {
         mDialog.show();
         mImageProvider.save(EditProfileActivity.this, imageFile1).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -171,31 +180,14 @@ public class EditProfileActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             final String urlProfile = uri.toString();
-
-                            mImageProvider.save(EditProfileActivity.this, imageFile1).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> taskImage2) {
-                                    if (taskImage2.isSuccessful()) {
-                                        mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                            @Override
-                                            public void onSuccess(Uri uri2) {
-                                                User user = new User();
-                                                user.setImageProfile(urlProfile);
-                                                user.setUsername(mUsername);
-                                                user.setUniversity(mUniversity);
-                                                user.setDepartment(mDepartment);
-                                                user.setBio(mBio);
-                                                user.setId(mAuthProvider.getUid());
-                                                updateInfo(user);
-                                            }
-                                        });
-                                    }
-                                    else {
-                                        mDialog.dismiss();
-                                        Toast.makeText(EditProfileActivity.this, "Resim kaydedilemedi", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                            User user = new User();
+                            user.setImageProfile(urlProfile);
+                            user.setUsername(mUsername);
+                            user.setUniversity(mUniversity);
+                            user.setDepartment(mDepartment);
+                            user.setBio(mBio);
+                            user.setId(mAuthProvider.getUid());
+                            updateInfo(user);
                         }
                     });
                 }
@@ -218,14 +210,14 @@ public class EditProfileActivity extends AppCompatActivity {
                     user.setUniversity(mUniversity);
                     user.setDepartment(mDepartment);
                     user.setBio(mBio);
+                    user.setId(mAuthProvider.getUid());
+                    updateInfo(user);
                     if (isProfileImage) {
                         user.setImageProfile(url);
                     }
                     else {
                         user.setImageProfile(mImageProfile);
                     }
-                    user.setId(mAuthProvider.getUid());
-                    updateInfo(user);
                 });
             }
             else {
@@ -239,12 +231,10 @@ public class EditProfileActivity extends AppCompatActivity {
         if (mDialog.isShowing()) {
             mDialog.show();
         }
-        mUsersProvider.update(user).addOnCompleteListener(task -> {
+        mUsersProvider.updateProfile(user).addOnCompleteListener(task -> {
             mDialog.dismiss();
             if (task.isSuccessful()) {
                 Toast.makeText(EditProfileActivity.this, "Bilgiler doğru bir şekilde güncellendi", Toast.LENGTH_SHORT).show();
-
-
             }
             else {
                 Toast.makeText(EditProfileActivity.this, "Bilgiler güncellenemedi", Toast.LENGTH_SHORT).show();

@@ -40,6 +40,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import dmax.dialog.SpotsDialog;
 
@@ -269,10 +270,12 @@ public class PostActivity extends AppCompatActivity {
                                         mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                             @Override
                                             public void onSuccess(Uri uri2) {
-                                                String url2 = uri2.toString();
+                                                String uuid = UUID.randomUUID().toString();
+                                                final String url2 = uri2.toString();
                                                 Post post = new Post();
                                                 post.setImage1(url);
                                                 post.setImage2(url2);
+                                                post.setId(uuid);
                                                 post.setTitle(mTitle.toLowerCase());
                                                 post.setDescription(mDescription);
                                                 post.setCategory(mSpinnerCategories);

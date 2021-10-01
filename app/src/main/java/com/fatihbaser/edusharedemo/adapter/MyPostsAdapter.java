@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatihbaser.edusharedemo.R;
+import com.fatihbaser.edusharedemo.activities.EditPostActivity;
 import com.fatihbaser.edusharedemo.activities.PostDetailActivity;
 import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
@@ -90,6 +91,14 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
         });
 
         holder.imageViewDelete.setOnClickListener(view -> showConfirmDelete(postId));
+        holder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(context, EditPostActivity.class);
+                intent.putExtra("id",postId);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void showConfirmDelete(final String postId) {
@@ -134,6 +143,7 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
         TextView textViewRelativeTime;
         CircleImageView circleImagePost;
         ImageView imageViewDelete;
+        ImageView imageViewEdit;
         View viewHolder;
 
         ProgressBar bar;
@@ -143,6 +153,7 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
             textViewRelativeTime = view.findViewById(R.id.textViewRelativeTimeMyPost);
             circleImagePost = view.findViewById(R.id.circleImageMyPost);
             imageViewDelete = view.findViewById(R.id.imageViewDeleteMyPost);
+            imageViewEdit = view.findViewById(R.id.imageViewEditMyPost);
             bar = view.findViewById(R.id.postLoading);
             viewHolder = view;
         }

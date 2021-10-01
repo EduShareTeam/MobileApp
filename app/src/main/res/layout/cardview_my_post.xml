@@ -80,13 +80,16 @@
             android:id="@+id/imageViewEditMyPost"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_clear_24" />
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:tint="@color/colorAccent" />
 
         <ImageView
             android:id="@+id/imageViewDeleteMyPost"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_clear_24" />
+            android:src="@drawable/ic_baseline_delete_24"
+            app:tint="@color/colorAccent" />
 
 
     </LinearLayout>

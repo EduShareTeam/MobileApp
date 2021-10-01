@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EduSharedemo">
         <activity
+            android:name=".activities.EditPostActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.ProfileActivity"
             android:exported="true" />
         <activity

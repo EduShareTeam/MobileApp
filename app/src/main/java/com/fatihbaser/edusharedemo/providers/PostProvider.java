@@ -1,6 +1,9 @@
 package com.fatihbaser.edusharedemo.providers;
 
+import androidx.annotation.NonNull;
+
 import com.fatihbaser.edusharedemo.models.Post;
+import com.fatihbaser.edusharedemo.models.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -8,6 +11,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class PostProvider {
@@ -42,6 +48,17 @@ public class PostProvider {
         return mCollection.whereEqualTo("idUser", id);
     }
 
+    public Task<Void> updatePost(@NonNull Post post) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("category", post.getCategory());
+        map.put("description", post.getDescription());
+        map.put("image1", post.getImage1());
+        map.put("image2", post.getImage2());
+        map.put("quality", post.getQuality());
+        map.put("title", post.getTitle());
+        map.put("timestamp", post.getTimestamp());
+        return mCollection.document(post.getId()).update(map);
+    }
 
     public Task<DocumentSnapshot> getPostById(String id) {
         return mCollection.document(id).get();
