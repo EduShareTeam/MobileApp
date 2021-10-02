@@ -71,7 +71,7 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
         }
 
         holder.textViewTitle.setText(post.getTitle().toUpperCase());
-        holder.textViewDescription.setText(post.getDescription());
+        holder.textViewCategory.setText(post.getCategory());
         if (post.getImage1() != null) {
             if (!post.getImage1().isEmpty()) {
                 Picasso.with(context).load(post.getImage1()).into(holder.imageViewPost, new Callback() {
@@ -188,7 +188,7 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle;
-        TextView textViewDescription;
+        TextView textViewCategory;
         TextView textViewUsername;
         TextView textViewLikes;
         ImageView imageViewPost;
@@ -199,7 +199,7 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
         public ViewHolder(View view) {
             super(view);
             textViewTitle = view.findViewById(R.id.textViewTitlePostCard);
-            textViewDescription = view.findViewById(R.id.textViewDescriptionPostCard);
+            textViewCategory = view.findViewById(R.id.textViewCategory);
             textViewUsername = view.findViewById(R.id.textViewUsernamePostCard);
             textViewLikes = view.findViewById(R.id.textViewLikes);
             imageViewPost = view.findViewById(R.id.imageViewPostCard);
