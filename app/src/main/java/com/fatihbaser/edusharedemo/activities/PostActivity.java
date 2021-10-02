@@ -287,8 +287,12 @@ public class PostActivity extends AppCompatActivity {
                                                     public void onComplete(@NonNull Task<Void> taskSave) {
                                                         mDialog.dismiss();
                                                         if (taskSave.isSuccessful()) {
-                                                            clearForm();
+                                                           // clearForm();
                                                             Toast.makeText(PostActivity.this, "Bilgiler doğru bir şekilde saklandı", Toast.LENGTH_SHORT).show();
+                                                            Intent intent = new Intent(PostActivity.this, HomeActivity.class);
+                                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                            startActivity(intent);
+
                                                         } else {
                                                             Toast.makeText(PostActivity.this, "Bilgiler saklanamadı", Toast.LENGTH_SHORT).show();
                                                         }
