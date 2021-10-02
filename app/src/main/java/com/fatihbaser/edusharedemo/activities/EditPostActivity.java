@@ -260,6 +260,7 @@ public class EditPostActivity extends AppCompatActivity {
                 //Toast.makeText(this, "Bir resim seçmelisiniz", Toast.LENGTH_SHORT).show();
                 Post post = new Post();
                 post.setTitle(mTitle);
+                //TODO ikinci resim olayini coz
                 post.setImage1(mImage1);
                 post.setImage2(mImage2);
                 post.setDescription(mDescription);
