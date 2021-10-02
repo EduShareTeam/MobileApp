@@ -91,4 +91,6 @@ public class FiltersFragment extends Fragment {
         intent.putExtra("category", category);
         startActivity(intent);
     }
+
+
 }

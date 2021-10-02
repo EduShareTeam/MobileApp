@@ -116,6 +116,10 @@ public class ProfileFragment extends Fragment {
                         String email = documentSnapshot.getString("email");
                         binding.textViewEmail.setText(email);
                     }
+                    if (documentSnapshot.contains("bio")) {
+                        String bio = documentSnapshot.getString("bio");
+                        binding.textViewBio.setText(bio);
+                    }
 
                     if (documentSnapshot.contains("username")) {
                         String username = documentSnapshot.getString("username");
@@ -123,13 +127,13 @@ public class ProfileFragment extends Fragment {
                     }
 
                     if (documentSnapshot.contains("department")) {
-                        String username = documentSnapshot.getString("department");
-                        binding.textViewDepartment.setText(username);
+                        String department = documentSnapshot.getString("department");
+                        binding.textViewDepartment.setText(department);
                     }
 
                     if (documentSnapshot.contains("university")) {
-                        String username = documentSnapshot.getString("university");
-                        binding.textViewUniversity.setText(username);
+                        String university = documentSnapshot.getString("university");
+                        binding.textViewUniversity.setText(university);
                     }
 
                     if (documentSnapshot.contains("image")) {

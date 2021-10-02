@@ -260,7 +260,6 @@ public class EditPostActivity extends AppCompatActivity {
                 //Toast.makeText(this, "Bir resim seçmelisiniz", Toast.LENGTH_SHORT).show();
                 Post post = new Post();
                 post.setTitle(mTitle);
-                //TODO ikinci resim olayini coz
                 post.setImage1(mImage1);
                 post.setImage2(mImage2);
                 post.setDescription(mDescription);
@@ -334,9 +333,9 @@ public class EditPostActivity extends AppCompatActivity {
                     post.setDescription(mDescription);
                     post.setCategory(mSpinnerCategories);
                     post.setQuality((double) mQuality);
-                    //post.setId(mExtraPostId);
+                    post.setId(mExtraPostId);
                     post.setTimestamp(new Date().getTime());
-                   // updatePost(post);
+                    updatePost(post);
                     if (isProfileImage) {
                         post.setImage1(url);
                         post.setImage2(mImage2);

@@ -170,7 +170,7 @@
 
     </LinearLayout>
 
-
+<!---->
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
@@ -183,6 +183,7 @@
         android:layout_margin="20dp"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageViewProfile"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/edu"
