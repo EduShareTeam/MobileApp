@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatihbaser.edusharedemo.R;
+import com.fatihbaser.edusharedemo.activities.FilterActivity;
 import com.fatihbaser.edusharedemo.activities.MainActivity;
 import com.fatihbaser.edusharedemo.activities.PostActivity;
 import com.fatihbaser.edusharedemo.adapter.PostsAdapter;
@@ -53,7 +55,7 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
         setHasOptionsMenu(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        binding.recyclerViewHome.setLayoutManager(linearLayoutManager);
+        binding.recyclerViewHome.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         setHasOptionsMenu(true);
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();

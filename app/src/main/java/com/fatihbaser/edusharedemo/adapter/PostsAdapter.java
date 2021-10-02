@@ -108,7 +108,7 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
             }
         });
 
-        getUserInfo(post.getIdUser(), holder);
+       // getUserInfo(post.getIdUser(), holder);
         getNumberLikesByPost(postId, holder);
         checkIfExistLike(postId, mAuthProvider.getUid(), holder);
     }
@@ -120,7 +120,7 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 if (queryDocumentSnapshots != null) {
                     int numberLikes = queryDocumentSnapshots.size();
-                    holder.textViewLikes.setText(String.valueOf(numberLikes) + " Begendim");
+                    holder.textViewLikes.setText(String.valueOf(numberLikes) + " BEĞENİ");
                 }
             }
         });
@@ -159,20 +159,20 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
 
     }
 
-    private void getUserInfo(String idUser, final ViewHolder holder) {
+   /* private void getUserInfo(String idUser, final ViewHolder holder) {
         mUsersProvider.getUser(idUser).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     if (documentSnapshot.contains("username")) {
                         String username = documentSnapshot.getString("username");
-                        holder.textViewUsername.setText("BY: " + username.toUpperCase());
+                        //holder.textViewUsername.setText("BY: " + username.toUpperCase());
                     }
                 }
             }
         });
 
-    }
+    }*/
 
     public ListenerRegistration getListener() {
         return mListener;
@@ -200,7 +200,7 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
             super(view);
             textViewTitle = view.findViewById(R.id.textViewTitlePostCard);
             textViewCategory = view.findViewById(R.id.textViewCategory);
-            textViewUsername = view.findViewById(R.id.textViewUsernamePostCard);
+            //textViewUsername = view.findViewById(R.id.textViewUsernamePostCard);
             textViewLikes = view.findViewById(R.id.textViewLikes);
             imageViewPost = view.findViewById(R.id.imageViewPostCard);
             imageViewLike = view.findViewById(R.id.imageViewLike);

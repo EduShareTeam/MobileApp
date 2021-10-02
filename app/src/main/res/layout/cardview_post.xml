@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:orientation="vertical" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,95 +51,108 @@
 
 
 
-        <TextView
-            android:id="@+id/textViewTitlePostCard"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Titulo del juego"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:textSize="16dp"
-            android:maxLines="1"
-            android:textColor="@color/colorDarkBlue"
-            />
 
-        <TextView
-            android:id="@+id/textViewUsernamePostCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre de usuario"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:textSize="12dp"
-            android:maxLines="1"
-            android:textStyle="italic"
-            android:textColor="@color/colorAccent"
-            />
+            android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            app:cardBackgroundColor="@color/colorAccent"
-            app:cardCornerRadius="15dp">
+            <TextView
+                android:id="@+id/textViewTitlePostCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Titulo del juego"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:textSize="14dp"
+                android:maxLines="1"
+                android:textColor="@color/colorDarkBlue"
+                />
+
+            <!-- <TextView
+                android:id="@+id/textViewUsernamePostCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre de usuario"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:textSize="12dp"
+                android:maxLines="1"
+                android:textStyle="italic"
+                android:textColor="@color/colorAccent"
+                />  -->
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardCornerRadius="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/textViewCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="PS4"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGray"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp">
 
+                <ImageView
+                    android:id="@+id/imageViewLike"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/heart" />
 
                 <TextView
-                    android:id="@+id/textViewCategory"
+                    android:id="@+id/textViewLikes"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="PS4"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|right"
+                    android:text="0 BEĞENİ" />
 
             </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGray"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp">
-
-            <ImageView
-                android:id="@+id/imageViewLike"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/heart" />
-
-            <TextView
-                android:id="@+id/textViewLikes"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|right"
-                android:text="0 BEĞENİ" />
 
         </LinearLayout>
+
 
     </LinearLayout>
 
