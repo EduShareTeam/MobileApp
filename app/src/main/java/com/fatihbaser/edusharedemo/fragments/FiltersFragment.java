@@ -28,7 +28,7 @@ public class FiltersFragment extends Fragment {
         binding.fenbilimleri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Fen Bilimleri");
+                goToFilterActivity("Fen bilimleri");
             }
         });
 
