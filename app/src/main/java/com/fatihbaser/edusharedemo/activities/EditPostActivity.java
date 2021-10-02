@@ -333,9 +333,9 @@ public class EditPostActivity extends AppCompatActivity {
                     post.setDescription(mDescription);
                     post.setCategory(mSpinnerCategories);
                     post.setQuality((double) mQuality);
-                    post.setId(mExtraPostId);
+                    //post.setId(mExtraPostId);
                     post.setTimestamp(new Date().getTime());
-                    updatePost(post);
+                   // updatePost(post);
                     if (isProfileImage) {
                         post.setImage1(url);
                         post.setImage2(mImage2);
