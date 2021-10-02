@@ -55,6 +55,9 @@ public class EditPostActivity extends AppCompatActivity {
     File mImageFile;
     File mImageFile2;
 
+    String mImageview1 = "";
+    String mImageview2 = "";
+
     String mImage1;
     String mImage2;
     //Providers
@@ -237,11 +240,23 @@ public class EditPostActivity extends AppCompatActivity {
                 saveImageAndEdit(mPhotoFile, mPhotoFile2);
                 // DIGER DURUMLAR
             } else if (mImageFile != null && mPhotoFile2 != null) {
-                saveImage(mImageFile, true);
+                saveImageAndEdit(mPhotoFile, mPhotoFile2);
             } else if (mPhotoFile != null && mImageFile2 != null) {
-                saveImage(mPhotoFile, true);
+                saveImageAndEdit(mPhotoFile, mPhotoFile2);
 
-            } else {
+            }
+            else if (mPhotoFile != null) {
+                saveImage(mPhotoFile, true);
+            }
+            else if (mPhotoFile2 != null) {
+                saveImage(mPhotoFile2, false);
+            }
+            else if (mImageFile != null) {
+                saveImage(mImageFile, true);
+            }
+            else if (mImageFile2 != null) {
+                saveImage(mImageFile2, false);
+            }else {
                 //Toast.makeText(this, "Bir resim seçmelisiniz", Toast.LENGTH_SHORT).show();
                 Post post = new Post();
                 post.setTitle(mTitle);
@@ -323,10 +338,14 @@ public class EditPostActivity extends AppCompatActivity {
                     updatePost(post);
                     if (isProfileImage) {
                         post.setImage1(url);
+                        post.setImage2(mImage2);
                     }
                     else {
-                        post.setImage1("");
+                        post.setImage2(url);
+                        post.setImage1(mImage1);
                     }
+                    post.setId(mExtraPostId);
+                    updatePost(post);
                 });
             }
             else {
