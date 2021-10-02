@@ -68,9 +68,6 @@ public class PostActivity extends AppCompatActivity {
     private final int PHOTO_REQUEST_CODE = 3;
     private final int PHOTO_REQUEST_CODE_2 = 4;
 
-
-
-
     // FOTO 1
     String mAbsolutePhotoPath;
     String mPhotoPath;
@@ -86,14 +83,14 @@ public class PostActivity extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     ArrayList<String> spinnerDataList;
 
-    String uuid ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPostBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        uuid = UUID.randomUUID().toString();
+
         mImageProvider = new ImageProvider();
         mPostProvider = new PostProvider();
         mAuthProvider = new AuthProvider();
@@ -247,71 +244,12 @@ public class PostActivity extends AppCompatActivity {
                 saveImage(mImageFile, mPhotoFile2);
             } else if (mPhotoFile != null && mImageFile2 != null) {
                 saveImage(mPhotoFile, mImageFile2);
-            }
-            else if (mPhotoFile != null) {
-                savetekImage(mPhotoFile, true);
-            }
-            else if (mPhotoFile2 != null) {
-                savetekImage(mPhotoFile2, false);
-            }
-            else if (mImageFile != null) {
-                savetekImage(mImageFile, true);
-            }
-            else if (mImageFile2 != null) {
-                savetekImage(mImageFile2, false);
-            }
-
-            else {
+            } else {
                 Toast.makeText(this, "Bir resim seçmelisiniz", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(this, "Alanları doldurun lütfen", Toast.LENGTH_SHORT).show();
         }
-    }
-    private void savetekImage(File image, final boolean isProfileImage) {
-        mDialog.show();
-        mImageProvider.save(PostActivity.this, image).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
-                    final String url = uri.toString();
-                    Post post = new Post();
-                    post.setIdUser(mAuthProvider.getUid());
-
-                    post.setTitle(mTitle);
-                    post.setDescription(mDescription);
-                    post.setCategory(mSpinnerCategories);
-                    post.setQuality((double) mQuality);
-                    post.setId(uuid);
-
-                    post.setTimestamp(new Date().getTime());
-                    if (isProfileImage) {
-                        post.setImage1(url);
-                        post.setImage2("resim yok");
-                    }
-                    else {
-                        post.setImage2(url);
-                        post.setImage1("resim yok");
-                    }
-                    mPostProvider.save(post).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> taskSave) {
-                            mDialog.dismiss();
-                            if (taskSave.isSuccessful()) {
-                                clearForm();
-                                Toast.makeText(PostActivity.this, "Bilgiler doğru bir şekilde saklandı", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(PostActivity.this, "Bilgiler saklanamadı", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-                });
-            }
-            else {
-                mDialog.dismiss();
-                Toast.makeText(PostActivity.this, "Görüntü kaydedilirken bir hata oluştu", Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     private void saveImage(File imageFile1, final File imageFile2) {
@@ -332,7 +270,7 @@ public class PostActivity extends AppCompatActivity {
                                         mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                             @Override
                                             public void onSuccess(Uri uri2) {
-
+                                                String uuid = UUID.randomUUID().toString();
                                                 final String url2 = uri2.toString();
                                                 Post post = new Post();
                                                 post.setImage1(url);
@@ -344,7 +282,6 @@ public class PostActivity extends AppCompatActivity {
                                                 post.setQuality((double) mQuality);
                                                 post.setIdUser(mAuthProvider.getUid());
                                                 post.setTimestamp(new Date().getTime());
-
                                                 mPostProvider.save(post).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> taskSave) {
