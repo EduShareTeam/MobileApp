@@ -88,7 +88,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 .setContext(this)
                 .setMessage("Biraz bekle")
                 .setCancelable(false).build();
-        //TODO: Fotografi kaydettikten sonra profile fragmentine gecerken guncel resim gelmiyor
         binding.btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -17,7 +17,7 @@ public class FiltersFragment extends Fragment {
     public FiltersFragment() {
         // Required empty public constructor
     }
-
+    //TODO: DINAMIK YAPP
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,6 +91,4 @@ public class FiltersFragment extends Fragment {
         intent.putExtra("category", category);
         startActivity(intent);
     }
-
-
 }
