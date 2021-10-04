@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.databinding.ActivityCompleteProfileBinding;
 import com.fatihbaser.edusharedemo.models.User;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
@@ -105,18 +107,19 @@ public class CompleteProfileActivity extends AppCompatActivity {
         });
     }
 
-//  private void register() {
-//        String username = binding.textInputUsername.getText().toString();
-//        String university = binding.textInputUniversity.getText().toString();
-//        String faculty = binding.textInputFaculty.getText().toString();
-//        String bio = binding.textInputBio.getText().toString();
-//        if (!username.isEmpty()&&!university.isEmpty()&&!faculty.isEmpty()&&!bio.isEmpty()) {
-//            completeUser(username,university,faculty,bio,);
-//        }
-//        else {
-//            Toast.makeText(this, "Devam etmek için tüm alanları ekleyin", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        myAlert(CompleteProfileActivity.this);
+    }
+
+    public void myAlert(Context context){
+        new AlertDialog.Builder(context).setIcon(R.drawable.edu).setTitle("Cikis ?").setMessage("Lütfen kayit kismini tamamlayiniz...").setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        }).show();
+    }
 
     private void completeUser(File imageFile1) {
         mDialog.show();

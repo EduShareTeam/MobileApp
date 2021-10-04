@@ -42,7 +42,7 @@
             android:id="@+id/editTextMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Mensaje..."
+            android:hint="Mesaj yaz..."
             android:inputType="textMultiLine"
             android:layout_weight="1"
             android:background="@drawable/custom_edittext_chat"
@@ -52,7 +52,7 @@
             android:id="@+id/imageViewSendMessage"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@mipmap/ic_send_padding"
+            android:src="@drawable/ic_send"
             android:layout_marginLeft="10dp"
             />
 

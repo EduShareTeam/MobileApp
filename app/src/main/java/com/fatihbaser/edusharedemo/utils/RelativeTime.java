@@ -40,7 +40,7 @@ public class RelativeTime extends Application {
         } else if (diff < 48 * HOUR_MILLIS) {
             return "Dün";
         } else {
-            return  diff / DAY_MILLIS + " gün önceki mesaj";
+            return  diff / DAY_MILLIS + " gün önce";
         }
     }
 

@@ -51,7 +51,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_marginLeft="20dp"
@@ -68,12 +68,11 @@
 
             <TextView
                 android:id="@+id/textViewRelativeTimeMyPost"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0 dakika önce"
                 android:maxLines="1"
-                android:textSize="14dp"
-                android:layout_marginTop="3dp"/>
+                android:textSize="10dp"/>
         </LinearLayout>
 
         <ImageView

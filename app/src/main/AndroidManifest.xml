@@ -19,24 +19,31 @@
         android:theme="@style/Theme.EduSharedemo">
         <activity
             android:name=".activities.EditPostActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".activities.ProfileActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".activities.ChatActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".activities.FilterActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".activities.HomeActivity" />
         <activity
             android:name=".activities.UserProfileActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".activities.PostDetailActivity" />
         <activity
             android:name=".activities.PostDetailActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".activities.HomeActivity" />
         <activity
             android:name=".activities.EditProfileActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
 
         <provider
@@ -51,18 +58,23 @@
 
         <activity
             android:name=".activities.PostActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".activities.CompleteProfileActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".activities.HomeActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".activities.RegisterActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
