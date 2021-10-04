@@ -93,7 +93,14 @@ public class CompleteProfileActivity extends AppCompatActivity {
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                completeUser(mImageFile);
+
+                if (mImageFile != null ) {
+                    completeUser(mImageFile);
+                }
+                else if (mPhotoFile != null ) {
+                    completeUser(mPhotoFile);
+                }
+
             }
         });
     }

@@ -11,7 +11,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/edu"
+            android:layout_gravity="top|center"
+            android:layout_marginTop="40dp"
+            app:civ_border_color="#eeeeee"
+            app:civ_circle_background_color="@color/colorWhite"
+            app:civ_border_width="5dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
