@@ -11,10 +11,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.fatihbaser.edusharedemo.R;
-import com.fatihbaser.edusharedemo.databinding.ActivityMainBinding;
+import com.fatihbaser.edusharedemo.databinding.ActivityFilterBinding;
+import com.fatihbaser.edusharedemo.databinding.ActivityIntroBinding;
 import com.fatihbaser.edusharedemo.models.User;
-import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
+import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -25,13 +26,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import dmax.dialog.SpotsDialog;
 
-public class MainActivity extends AppCompatActivity {
-
-    private ActivityMainBinding binding;
+public class IntroActivity extends AppCompatActivity {
+    private ActivityIntroBinding binding;
     AuthProvider mAuthProvider;
     UsersProvider mUsersProvider;
     private GoogleSignInClient mGoogleSignInClient;
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityIntroBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -62,25 +61,25 @@ public class MainActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-//        binding.btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                signInWithGoogle();
-//            }
-//        });
-
-
-        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
+        binding.btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                signInWithGoogle();
             }
         });
 
-        binding.textViewRegister.setOnClickListener(new View.OnClickListener() {
+        binding.createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(IntroActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.loginAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     mDialog.dismiss();
-                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(IntroActivity.this, HomeActivity.class);
                     startActivity(intent);
                 }
                 else {
@@ -103,13 +102,13 @@ public class MainActivity extends AppCompatActivity {
                     mUsersProvider.create(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                           mDialog.dismiss();
+                            mDialog.dismiss();
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(MainActivity.this, CompleteProfileActivity.class);
+                                Intent intent = new Intent(IntroActivity.this, CompleteProfileActivity.class);
                                 startActivity(intent);
                             }
                             else {
-                                Toast.makeText(MainActivity.this, "Kullanıcı bilgileri saklanamadı", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(IntroActivity.this, "Kullanıcı bilgileri saklanamadı", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -122,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (mAuthProvider.getUserSession() != null) {
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            Intent intent = new Intent(IntroActivity.this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
@@ -157,29 +156,9 @@ public class MainActivity extends AppCompatActivity {
                     checkUserExist(id);
                 }
                 else {
-                 mDialog.dismiss();
+                    mDialog.dismiss();
                     Log.w("ERROR", "signInWithCredential:failure", task.getException());
-                    Toast.makeText(MainActivity.this, "google ile giriş yapılamadı", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private void login() {
-        String email = binding.textInputEmail.getText().toString();
-        String password = binding.textInputPassword.getText().toString();
-      mDialog.show();
-        mAuthProvider.login(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-               mDialog.dismiss();
-                if (task.isSuccessful()) {
-                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }
-                else {
-                    Toast.makeText(MainActivity.this, "Girdiğiniz e-posta veya şifre doğru değil", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IntroActivity.this, "google ile giriş yapılamadı", Toast.LENGTH_SHORT).show();
                 }
             }
         });

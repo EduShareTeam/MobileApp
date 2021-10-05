@@ -52,7 +52,7 @@ public class FiltersFragment extends Fragment {
                 goToFilterActivity("Yabanci diller");
             }
         });
-        binding.mimarlK.setOnClickListener(new View.OnClickListener() {
+        binding.mimarliK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToFilterActivity("Mimarlik");

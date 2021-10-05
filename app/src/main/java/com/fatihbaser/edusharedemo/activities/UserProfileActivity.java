@@ -57,6 +57,12 @@ public class UserProfileActivity extends AppCompatActivity {
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
 
+
+        mExtraIdUser = getIntent().getStringExtra("idUser");
+        if (mAuthProvider.getUid().equals(mExtraIdUser)) {
+            binding.fabChat.setVisibility(View.INVISIBLE);
+        }
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UserProfileActivity.this);
         binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
         setSupportActionBar(binding.toolbar);
@@ -64,11 +70,6 @@ public class UserProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         imageFile1= new File("https://github.com/Fatih-Baser/KotlinMovies/blob/master/images/a.jpeg");
-
-        mExtraIdUser = getIntent().getStringExtra("idUser");
-        if (mAuthProvider.getUid().equals(mExtraIdUser)) {
-            binding.fabChat.setEnabled(false);
-        }
 
         binding.fabChat.setOnClickListener(new View.OnClickListener() {
             @Override

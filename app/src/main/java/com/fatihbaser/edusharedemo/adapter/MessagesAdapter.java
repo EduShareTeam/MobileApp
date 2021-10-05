@@ -56,7 +56,7 @@ public class MessagesAdapter extends FirestoreRecyclerAdapter<Message, MessagesA
             holder.linearLayoutMessage.setBackground(context.getResources().getDrawable(R.drawable.rounded_linear_layout));
             holder.imageViewViewed.setVisibility(View.VISIBLE);
             holder.textViewMessage.setTextColor(Color.WHITE);
-            holder.textViewDate.setTextColor(Color.LTGRAY);
+            holder.textViewDate.setTextColor(Color.WHITE);
         } else {
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -69,7 +69,7 @@ public class MessagesAdapter extends FirestoreRecyclerAdapter<Message, MessagesA
             holder.linearLayoutMessage.setBackground(context.getResources().getDrawable(R.drawable.rounded_linear_layout_grey));
             holder.imageViewViewed.setVisibility(View.GONE);
             holder.textViewMessage.setTextColor(Color.DKGRAY);
-            holder.textViewDate.setTextColor(Color.LTGRAY);
+            holder.textViewDate.setTextColor(Color.WHITE);
         }
 
         if (message.isViewed()) {

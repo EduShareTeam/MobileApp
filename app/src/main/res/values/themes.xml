@@ -1,6 +1,6 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Base application theme. -->
-    <style name="Theme.EduSharedemo" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.EduSharedemo" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -18,5 +18,10 @@
     <style name="ToolbarName" parent="ThemeOverlay.AppCompat.ActionBar" >
         <item name="colorControlNormal">@color/colorWhite</item>
         <item name="titleTextColor">@color/colorWhite</item>
+    </style>
+
+    <style name="roundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
     </style>
 </resources>

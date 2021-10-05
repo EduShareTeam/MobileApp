@@ -1,4 +1,5 @@
 package com.fatihbaser.edusharedemo.activities;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,9 +55,6 @@ public class EditPostActivity extends AppCompatActivity {
 
     File mImageFile;
     File mImageFile2;
-
-    String mImageview1 = "";
-    String mImageview2 = "";
 
     String mImage1;
     String mImage2;
@@ -142,8 +140,8 @@ public class EditPostActivity extends AppCompatActivity {
         mPostProvider.getPostById(mExtraPostId).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()){
-                    if (documentSnapshot.contains("image1") && documentSnapshot.contains("image2")){
+                if (documentSnapshot.exists()) {
+                    if (documentSnapshot.contains("image1") && documentSnapshot.contains("image2")) {
                         mImage1 = documentSnapshot.getString("image1");
                         mImage2 = documentSnapshot.getString("image2");
                     }
@@ -169,8 +167,17 @@ public class EditPostActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot item : snapshot.getChildren()) {
                     spinnerDataList.add(item.child("name").getValue().toString());
+                    mPostProvider.getPostById(mExtraPostId).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.contains("category")) {
+                                 String category = documentSnapshot.getString("category");
+                                 spinnerDataList.set(0,category);
+                                 arrayAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
                 }
-                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -213,7 +220,7 @@ public class EditPostActivity extends AppCompatActivity {
                     //TODO: Spinerdan kaydedilen degeri cekme--
 //                    if (documentSnapshot.contains("category")) {
 //                        String category = documentSnapshot.getString("category");
-//                        binding.spinnerProductCategory.r
+//                        binding.spinnerProductCategory.setSelection();
 //                    }
 
                     if (documentSnapshot.contains("quality")) {
@@ -244,19 +251,15 @@ public class EditPostActivity extends AppCompatActivity {
             } else if (mPhotoFile != null && mImageFile2 != null) {
                 saveImageAndEdit(mPhotoFile, mPhotoFile2);
 
-            }
-            else if (mPhotoFile != null) {
+            } else if (mPhotoFile != null) {
                 saveImage(mPhotoFile, true);
-            }
-            else if (mPhotoFile2 != null) {
+            } else if (mPhotoFile2 != null) {
                 saveImage(mPhotoFile2, false);
-            }
-            else if (mImageFile != null) {
+            } else if (mImageFile != null) {
                 saveImage(mImageFile, true);
-            }
-            else if (mImageFile2 != null) {
+            } else if (mImageFile2 != null) {
                 saveImage(mImageFile2, false);
-            }else {
+            } else {
                 //Toast.makeText(this, "Bir resim seçmelisiniz", Toast.LENGTH_SHORT).show();
                 Post post = new Post();
                 post.setTitle(mTitle);
@@ -339,16 +342,14 @@ public class EditPostActivity extends AppCompatActivity {
                     if (isProfileImage) {
                         post.setImage1(url);
                         post.setImage2(mImage2);
-                    }
-                    else {
+                    } else {
                         post.setImage2(url);
                         post.setImage1(mImage1);
                     }
                     post.setId(mExtraPostId);
                     updatePost(post);
                 });
-            }
-            else {
+            } else {
                 mDialog.dismiss();
                 Toast.makeText(EditPostActivity.this, "Görüntü kaydedilirken bir hata oluştu", Toast.LENGTH_LONG).show();
             }

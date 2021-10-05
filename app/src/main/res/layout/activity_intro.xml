@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#031239"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activities.IntroActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:src="@drawable/intro"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/createAccount"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape_view_button_layout"
+        android:backgroundTint="#FFFFFF"
+        android:text="Hesap Olustur"/>
+
+    <Button
+        android:id="@+id/loginAccount"
+        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_view_button_layout"
+        android:backgroundTint="#FFFFFF"
+        android:text="Giris Yap"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:textColor="@color/white"
+        android:text="Google ile hizli erisim icin "/>
+
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btnLoginGoogle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp" />
+
+
+</LinearLayout>

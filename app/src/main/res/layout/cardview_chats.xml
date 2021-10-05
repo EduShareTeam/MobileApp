@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginRight="25dp"
     android:layout_marginLeft="25dp"
-    >
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="25dp"
+    android:layout_marginBottom="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="60dp"
@@ -58,17 +56,17 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="15dp">
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textViewUsernameChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yayının başlığı"
                 android:maxLines="1"
+                android:text="Yayının başlığı"
                 android:textColor="@color/colorBlack"
                 android:textSize="16dp" />
 
@@ -76,36 +74,35 @@
                 android:id="@+id/textViewLastMessageChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Son Mesaj"
-                android:maxLines="1"
-                android:textSize="14dp"
+                android:layout_marginTop="3dp"
                 android:layout_marginBottom="3dp"
-                android:layout_marginTop="3dp"/>
+                android:maxLines="1"
+                android:text="Son Mesaj"
+                android:textSize="14dp" />
 
         </LinearLayout>
 
         <FrameLayout
             android:id="@+id/frameLayoutMessageNotRead"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            >
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <View
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:background="@drawable/circular_view" />
 
             <TextView
                 android:id="@+id/textViewMessageNotRead"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="0"
-                android:textColor="@color/colorWhite"
-                android:layout_gravity="center"/>
+                android:textColor="@color/colorWhite" />
 
         </FrameLayout>
-
 
     </LinearLayout>
 

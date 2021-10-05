@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.activities.EditProfileActivity;
+import com.fatihbaser.edusharedemo.activities.IntroActivity;
 import com.fatihbaser.edusharedemo.activities.MainActivity;
 import com.fatihbaser.edusharedemo.adapter.MyPostsAdapter;
 import com.fatihbaser.edusharedemo.databinding.FragmentProfileBinding;
@@ -65,7 +66,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mAuthProvider.logout();
-                Intent intent = new Intent(getContext(), MainActivity.class);
+                Intent intent = new Intent(getContext(), IntroActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }

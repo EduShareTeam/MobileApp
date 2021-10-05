@@ -12,50 +12,60 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/message_background"
         android:layout_marginTop="55dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/chatback" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="65dp"
         android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_marginBottom="65dp">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewMessage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="bottom"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/editTextMessage"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mesaj yaz..."
-            android:inputType="textMultiLine"
-            android:layout_weight="1"
+            android:layout_marginEnd="1dp"
             android:background="@drawable/custom_edittext_chat"
-            android:padding="10dp"/>
+            android:hint="Mesaj yaz..."
+            android:textColor="@color/white"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:textColorHint="@color/white" />
 
-        <ImageView
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/imageViewSendMessage"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/ic_send"
-            android:layout_marginLeft="10dp"
-            />
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            app:cardCornerRadius="360dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp"
+            android:layout_gravity="right">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_send" />
+
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

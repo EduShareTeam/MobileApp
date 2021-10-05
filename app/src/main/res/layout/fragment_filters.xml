@@ -1,424 +1,761 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
- <FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.FiltersFragment"
-    android:layout_marginBottom="65dp">
+    tools:context=".fragments.FiltersFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="54dp"
         android:orientation="vertical">
+
+
         <LinearLayout
+            android:id="@+id/fenbilimleri"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_view_linear_layout_categories"
             android:orientation="horizontal">
 
-
             <androidx.cardview.widget.CardView
-                android:id="@+id/fenbilimleri"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardElevation="2dp"
-                >
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="21dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    >
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/fen"
-                        android:background="@color/colorAccent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="20dp"
-                        android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:text="Fen bilimleri" />
-
-                </LinearLayout>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/fen"
+                    app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             </androidx.cardview.widget.CardView>
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/eItimbilimleri"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_weight="1"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    >
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/egitim"
-                        android:background="@color/colorAccent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="20dp"
-                        android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:text="Egitim bilimleri" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/dilveedebiyat"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    >
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/literature"
-                        android:background="@color/colorAccent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="20dp"
-                        android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:text="Dil ve Edebiyat" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/yabancDiller"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    >
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/dil"
-                        android:background="@color/colorAccent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="20dp"
-                        android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:text="Yabanci diller" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
+                android:gravity="center"
+                android:text="Fen bilimleri"
+                android:textColor="#031239"
+                android:textSize="18dp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/eItimbilimleri"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_view_linear_layout_categories"
             android:orientation="horizontal">
 
-
             <androidx.cardview.widget.CardView
-                android:id="@+id/mimarlK"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardElevation="2dp"
-                >
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="21dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    >
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/arc"
-                        android:background="@color/colorAccent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="20dp"
-                        android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:text="Mimarlik" />
-
-                </LinearLayout>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/egitim"
+                    app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             </androidx.cardview.widget.CardView>
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/teknolojivemuhendislkik"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_weight="1"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    >
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/tek"
-                        android:background="@color/colorAccent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="20dp"
-                        android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:text="Teknoloji ve Muhendislik" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
+                android:gravity="center"
+                android:text="Egitim bilimleri"
+                android:textColor="#031239"
+                android:textSize="18dp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/dilveedebiyat"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_view_linear_layout_categories"
             android:orientation="horizontal">
 
-
             <androidx.cardview.widget.CardView
-                android:id="@+id/guzelsanatlar"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardElevation="2dp"
-                >
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="21dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    >
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/art"
-                        android:background="@color/colorAccent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="20dp"
-                        android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:text="Guzel Sanatlar" />
-
-                </LinearLayout>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/literature"
+                    app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             </androidx.cardview.widget.CardView>
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/iktisat"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_weight="1"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    >
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/economic"
-                        android:background="@color/colorAccent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="20dp"
-                        android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:text="Iktisadi bilimler" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
+                android:gravity="center"
+                android:text="Dil ve Edebiyat"
+                android:textColor="#031239"
+                android:textSize="18dp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/yabancDiller"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_view_linear_layout_categories"
             android:orientation="horizontal">
 
-
             <androidx.cardview.widget.CardView
-                android:id="@+id/sporbilimleri"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardElevation="2dp"
-                >
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="21dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    >
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/sports"
-                        android:background="@color/colorAccent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="20dp"
-                        android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:text="Spor bilimleri" />
-
-                </LinearLayout>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/dil"
+                    app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             </androidx.cardview.widget.CardView>
 
-
-
-
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="Yabanci diller"
+                android:textColor="#031239"
+                android:textSize="18dp" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/mimarliK"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_view_linear_layout_categories"
+            android:orientation="horizontal">
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="21dp">
 
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/arc"
+                    app:shapeAppearanceOverlay="@style/roundedImageView" />
 
+            </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="Mimarlik"
+                android:textColor="#031239"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/teknolojivemuhendislkik"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_view_linear_layout_categories"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="21dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/tek"
+                    app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="Teknoloji ve Muhendislik"
+                android:textColor="#031239"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/guzelsanatlar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_view_linear_layout_categories"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="21dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/art"
+                    app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="Guzel Sanatlar"
+                android:textColor="#031239"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/iktisat"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/shape_view_linear_layout_categories"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="21dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:src="@drawable/economic"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="Iktisadi bilimler"
+            android:textColor="#031239"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
-</FrameLayout>
+        <LinearLayout
+            android:id="@+id/sporbilimleri"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_view_linear_layout_categories"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="21dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/sports"
+                    app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="Spor bilimleri"
+                android:textColor="#031239"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <!--    <LinearLayout-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent"-->
+        <!--        android:orientation="vertical">-->
+
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:id="@+id/fenbilimleri"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="80dp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                app:cardCornerRadius="15dp"-->
+        <!--                android:backgroundTint="#80031239"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginRight="10dp"-->
+        <!--                android:layout_marginTop="10dp"-->
+        <!--                app:cardElevation="2dp"-->
+        <!--                >-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:gravity="center_vertical"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginTop="10dp"-->
+        <!--                    android:layout_marginRight="20dp"-->
+        <!--                    >-->
+
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        app:shapeAppearanceOverlay="@style/roundedImageView"-->
+        <!--                        android:layout_width="50dp"-->
+        <!--                        android:layout_height="50dp"-->
+        <!--                        android:background="@color/white"-->
+        <!--                        android:src="@drawable/fen" />-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:textSize="18dp"-->
+        <!--                        android:textColor="#031239"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:layout_marginLeft="10dp"-->
+        <!--                        android:text="Fen bilimleri" />-->
+
+        <!--                </LinearLayout>-->
+
+        <!--            </androidx.cardview.widget.CardView>-->
+
+
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:id="@+id/eItimbilimleri"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="80dp"-->
+        <!--                app:cardCornerRadius="15dp"-->
+        <!--                android:backgroundTint="#80031239"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginRight="10dp"-->
+        <!--                android:layout_marginTop="10dp"-->
+        <!--                app:cardElevation="2dp"-->
+        <!--                >-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:gravity="center_vertical"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginRight="20dp"-->
+        <!--                    >-->
+
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        app:shapeAppearanceOverlay="@style/roundedImageView"-->
+        <!--                        android:layout_width="50dp"-->
+        <!--                        android:layout_height="50dp"-->
+        <!--                        android:background="@color/white"-->
+        <!--                        android:src="@drawable/egitim" />-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:textSize="18dp"-->
+        <!--                        android:textColor="#031239"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:layout_marginLeft="10dp"-->
+        <!--                        android:text="Egitim bilimleri" />-->
+
+        <!--                </LinearLayout>-->
+
+        <!--            </androidx.cardview.widget.CardView>-->
+
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:id="@+id/dilveedebiyat"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="80dp"-->
+        <!--                app:cardCornerRadius="15dp"-->
+        <!--                android:backgroundTint="#80031239"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginRight="10dp"-->
+        <!--                android:layout_marginTop="10dp"-->
+        <!--                app:cardElevation="2dp"-->
+        <!--                >-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:gravity="center_vertical"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginRight="20dp"-->
+        <!--                    >-->
+
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        app:shapeAppearanceOverlay="@style/roundedImageView"-->
+        <!--                        android:layout_width="50dp"-->
+        <!--                        android:layout_height="50dp"-->
+        <!--                        android:background="@color/white"-->
+        <!--                        android:src="@drawable/literature" />-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:textSize="18dp"-->
+        <!--                        android:textColor="#031239"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:layout_marginLeft="10dp"-->
+        <!--                        android:text="Dil ve Edebiyat" />-->
+
+        <!--                </LinearLayout>-->
+
+        <!--            </androidx.cardview.widget.CardView>-->
+
+
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:id="@+id/yabancDiller"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="80dp"-->
+        <!--                app:cardCornerRadius="15dp"-->
+        <!--                android:backgroundTint="#80031239"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginRight="10dp"-->
+        <!--                android:layout_marginTop="10dp"-->
+        <!--                app:cardElevation="2dp"-->
+        <!--                >-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:gravity="center_vertical"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginRight="20dp"-->
+        <!--                    >-->
+
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        app:shapeAppearanceOverlay="@style/roundedImageView"-->
+        <!--                        android:layout_width="50dp"-->
+        <!--                        android:layout_height="50dp"-->
+        <!--                        android:background="@color/white"-->
+        <!--                        android:src="@drawable/dil"/>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:textSize="18dp"-->
+        <!--                        android:textColor="#031239"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:layout_marginLeft="10dp"-->
+        <!--                        android:text="Yabanci diller" />-->
+
+        <!--                </LinearLayout>-->
+
+        <!--            </androidx.cardview.widget.CardView>-->
+
+
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:id="@+id/mimarlK"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="80dp"-->
+        <!--                app:cardCornerRadius="15dp"-->
+        <!--                android:backgroundTint="#80031239"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginRight="10dp"-->
+        <!--                android:layout_marginTop="10dp"-->
+        <!--                app:cardElevation="2dp"-->
+        <!--                >-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:gravity="center_vertical"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginRight="20dp"-->
+        <!--                    >-->
+
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        app:shapeAppearanceOverlay="@style/roundedImageView"-->
+        <!--                        android:layout_width="50dp"-->
+        <!--                        android:layout_height="50dp"-->
+        <!--                        android:background="@color/white"-->
+        <!--                        android:src="@drawable/arc"/>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:textSize="18dp"-->
+        <!--                        android:textColor="#031239"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:layout_marginLeft="10dp"-->
+        <!--                        android:text="Mimarlik" />-->
+
+        <!--                </LinearLayout>-->
+
+        <!--            </androidx.cardview.widget.CardView>-->
+
+
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:id="@+id/teknolojivemuhendislkik"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="80dp"-->
+        <!--                app:cardCornerRadius="15dp"-->
+        <!--                android:backgroundTint="#80031239"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginRight="10dp"-->
+        <!--                android:layout_marginTop="10dp"-->
+        <!--                app:cardElevation="2dp"-->
+        <!--                >-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:gravity="center_vertical"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginRight="20dp"-->
+        <!--                    >-->
+
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        app:shapeAppearanceOverlay="@style/roundedImageView"-->
+        <!--                        android:layout_width="50dp"-->
+        <!--                        android:layout_height="50dp"-->
+        <!--                        android:background="@color/white"-->
+        <!--                        android:src="@drawable/tek"/>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:textSize="18dp"-->
+        <!--                        android:textColor="#031239"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:layout_marginLeft="10dp"-->
+        <!--                        android:text="Teknoloji ve Muhendislik" />-->
+
+        <!--                </LinearLayout>-->
+
+        <!--            </androidx.cardview.widget.CardView>-->
+
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:id="@+id/guzelsanatlar"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="80dp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:backgroundTint="#80031239"-->
+        <!--                app:cardCornerRadius="15dp"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginRight="10dp"-->
+        <!--                android:layout_marginTop="10dp"-->
+        <!--                app:cardElevation="2dp"-->
+        <!--                >-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:gravity="center_vertical"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginRight="20dp"-->
+        <!--                    >-->
+
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        app:shapeAppearanceOverlay="@style/roundedImageView"-->
+        <!--                        android:layout_width="50dp"-->
+        <!--                        android:layout_height="50dp"-->
+        <!--                        android:background="@color/white"-->
+        <!--                        android:src="@drawable/art"/>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:textSize="18dp"-->
+        <!--                        android:textColor="#031239"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:layout_marginLeft="10dp"-->
+        <!--                        android:text="Guzel Sanatlar" />-->
+
+        <!--                </LinearLayout>-->
+
+        <!--            </androidx.cardview.widget.CardView>-->
+
+
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:id="@+id/iktisat"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="80dp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:backgroundTint="#80031239"-->
+        <!--                app:cardCornerRadius="15dp"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginRight="10dp"-->
+        <!--                android:layout_marginTop="10dp"-->
+        <!--                app:cardElevation="2dp"-->
+        <!--                >-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:gravity="center_vertical"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginRight="20dp"-->
+        <!--                    >-->
+
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        app:shapeAppearanceOverlay="@style/roundedImageView"-->
+        <!--                        android:layout_width="50dp"-->
+        <!--                        android:layout_height="50dp"-->
+        <!--                        android:background="@color/white"-->
+        <!--                        android:src="@drawable/economic"/>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:textSize="18dp"-->
+        <!--                        android:textColor="#031239"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:layout_marginLeft="10dp"-->
+        <!--                        android:text="Iktisadi bilimler" />-->
+
+        <!--                </LinearLayout>-->
+
+        <!--            </androidx.cardview.widget.CardView>-->
+
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:id="@+id/sporbilimleri"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="80dp"-->
+        <!--                android:backgroundTint="#80031239"-->
+        <!--                android:layout_weight="1"-->
+        <!--                app:cardCornerRadius="15dp"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginRight="10dp"-->
+        <!--                android:layout_marginTop="10dp"-->
+        <!--                app:cardElevation="2dp"-->
+        <!--                >-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:gravity="center_vertical"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginRight="20dp"-->
+        <!--                    >-->
+
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        app:shapeAppearanceOverlay="@style/roundedImageView"-->
+        <!--                        android:layout_width="50dp"-->
+        <!--                        android:layout_height="50dp"-->
+        <!--                        android:background="@color/white"-->
+        <!--                        android:src="@drawable/sports"/>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:textSize="18dp"-->
+        <!--                        android:textColor="#031239"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:layout_marginLeft="10dp"-->
+        <!--                        android:text="Spor bilimleri" />-->
+
+        <!--                </LinearLayout>-->
+
+        <!--            </androidx.cardview.widget.CardView>-->
+
+
+        <!--    </LinearLayout>-->
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>

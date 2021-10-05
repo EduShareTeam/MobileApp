@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.activities.FilterActivity;
+import com.fatihbaser.edusharedemo.activities.IntroActivity;
 import com.fatihbaser.edusharedemo.activities.MainActivity;
 import com.fatihbaser.edusharedemo.activities.PostActivity;
 import com.fatihbaser.edusharedemo.adapter.PostsAdapter;
@@ -127,7 +128,7 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
 
     private void logout() {
         mAuthProvider.logout();
-        Intent intent = new Intent(getContext(), MainActivity.class);
+        Intent intent = new Intent(getContext(), IntroActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
