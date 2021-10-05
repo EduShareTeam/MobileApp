@@ -29,7 +29,6 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="7dp"
                 android:layout_marginBottom="3dp"
-                android:src="@drawable/edu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

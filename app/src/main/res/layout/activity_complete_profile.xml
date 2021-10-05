@@ -183,7 +183,6 @@
         android:src="@drawable/photo"
         android:layout_gravity="top|center"
         android:layout_marginTop="140dp"
-        android:scaleType="centerCrop"
         app:civ_border_color="#eeeeee"
         app:civ_circle_background_color="@color/colorWhite"
         app:civ_border_width="5dp"/>

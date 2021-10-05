@@ -83,7 +83,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_baseline_school_24"
+                android:src="@drawable/ic_baseline_apartment_24"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"/>
 
@@ -115,7 +115,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_baseline_palette_24"
+                android:src="@drawable/ic_baseline_school_24"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"/>
 
@@ -147,7 +147,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_baseline_info_24"
+                android:src="@drawable/ic_description"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"/>
 

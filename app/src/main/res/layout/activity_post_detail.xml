@@ -130,7 +130,6 @@
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="8dp"
-                            android:src="@drawable/edu"
                             app:civ_border_color="@color/colorGray"
                             app:civ_border_width="2dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -167,7 +166,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
-                            android:text="Isim ve Soyisim"
+                            android:text="Kullanici ismi"
                             android:textColor="@color/colorBlack" />
                     </LinearLayout>
 
@@ -214,15 +213,14 @@
                     <ImageView
                         android:id="@+id/imageViewCategory"
                         android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/icon_ps4" />
+                        android:layout_height="28dp" />
 
                     <TextView
                         android:id="@+id/textViewNameCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="PS4"
+                        android:text=""
                         android:textColor="@color/colorWhite"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -258,7 +256,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="25dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum" />
+                android:text="" />
 
             <View
                 android:layout_width="match_parent"

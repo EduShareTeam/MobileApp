@@ -26,10 +26,6 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.ProfileActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activities.ChatActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
