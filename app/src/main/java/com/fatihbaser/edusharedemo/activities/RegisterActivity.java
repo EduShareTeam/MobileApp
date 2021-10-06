@@ -101,12 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
                 register();
             }
         });
-        binding.circleImageBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
     }
 
     private void register() {

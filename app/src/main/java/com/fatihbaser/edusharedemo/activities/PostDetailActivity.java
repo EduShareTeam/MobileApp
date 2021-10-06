@@ -85,6 +85,8 @@ public class PostDetailActivity extends AppCompatActivity {
         mSliderView = findViewById(R.id.imageSlider);
         mExtraPostId = getIntent().getStringExtra("id");
 
+        //mExtraIdUser = getIntent().getStringExtra("idUser");
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PostDetailActivity.this);
         binding.recyclerViewComments.setLayoutManager(linearLayoutManager);
         setSupportActionBar(binding.toolbar);
@@ -115,6 +117,20 @@ public class PostDetailActivity extends AppCompatActivity {
         });
         getPost();
         getNumberLikes();
+
+        binding.chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                    goToChatActivity();
+
+
+
+
+            }
+        });
+
     }
 
     private void getNumberLikes() {
@@ -140,6 +156,18 @@ public class PostDetailActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Kullanıcı kimliği hala yüklenmedi", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    private void goToChatActivity() {
+
+        if (mAuthProvider.getUid().equals(mIdUser)) {
+            binding.chat.setVisibility(View.INVISIBLE);
+        }
+        Intent intent = new Intent(PostDetailActivity.this, ChatActivity.class);
+        intent.putExtra("idUser1", mAuthProvider.getUid());
+        intent.putExtra("idUser2", mIdUser);
+        startActivity(intent);
     }
 
     private void instanceSlider() {
