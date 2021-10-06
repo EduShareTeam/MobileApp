@@ -8,6 +8,7 @@ public class User {
     private String university;
     private String department;
     private String bio;
+    private String image;
     private String imageProfile;
     private long timestamp;
     private long lastConnection;
@@ -16,7 +17,7 @@ public class User {
 
     }
 
-    public User(String id, String email, String username, String university, String department, String bio, String imageProfile, long timestamp, long lastConnection, boolean online) {
+    public User(String id, String email, String username, String university, String department, String bio, String imageProfile, long timestamp, long lastConnection, boolean online,String image) {
         this.id = id;
         this.email = email;
         this.username = username;
@@ -27,6 +28,14 @@ public class User {
         this.timestamp = timestamp;
         this.lastConnection = lastConnection;
         this.online = online;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public long getLastConnection() {

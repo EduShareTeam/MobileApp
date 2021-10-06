@@ -6,6 +6,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -46,5 +47,13 @@ public class UsersProvider {
         map.put("online", status);
         map.put("lastConnect", new Date().getTime());
         return mCollection.document(idUser).update(map);
+    }
+
+    public Query getUserByTitle(String title) {
+        return mCollection.orderBy("username").startAt(title).endAt(title+'\uf8ff');
+    }
+
+    public Query getAll() {
+        return mCollection.orderBy("timestamp", Query.Direction.DESCENDING);
     }
 }

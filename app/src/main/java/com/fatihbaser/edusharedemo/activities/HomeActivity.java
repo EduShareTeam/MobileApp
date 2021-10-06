@@ -13,6 +13,7 @@ import com.fatihbaser.edusharedemo.fragments.ChatsFragment;
 import com.fatihbaser.edusharedemo.fragments.FiltersFragment;
 import com.fatihbaser.edusharedemo.fragments.HomeFragment;
 import com.fatihbaser.edusharedemo.fragments.ProfileFragment;
+import com.fatihbaser.edusharedemo.fragments.UsersFragment;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.TokenProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
@@ -67,7 +68,14 @@ public class HomeActivity extends AppCompatActivity {
                     if (item.getItemId() == R.id.itemHome) {
                         // FRAGMENT HOME
                         openFragment(new HomeFragment());
-                    } else if (item.getItemId() == R.id.itemChats) {
+                    }else if (item.getItemId() == R.id.itemUsers) {
+                        // FRAGMENT CHATS
+                        openFragment(new UsersFragment());
+
+                    }
+
+
+                    else if (item.getItemId() == R.id.itemChats) {
                         // FRAGMENT CHATS
                         openFragment(new ChatsFragment());
 

@@ -4,6 +4,10 @@
         android:id="@+id/itemHome"
         android:icon="@drawable/ic_home"
         android:title="Ana Sayfa" />
+    <item
+        android:id="@+id/itemUsers"
+        android:icon="@drawable/ic_person"
+        android:title="Users" />
 
     <item
         android:id="@+id/itemFilters"
