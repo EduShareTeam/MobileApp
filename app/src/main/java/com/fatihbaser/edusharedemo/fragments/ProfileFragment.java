@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -59,8 +60,9 @@ public class ProfileFragment extends Fragment {
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+//        binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
+        binding.recyclerViewMyPost.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         binding.linearLayoutEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override

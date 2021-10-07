@@ -4,15 +4,16 @@
         android:id="@+id/itemHome"
         android:icon="@drawable/ic_home"
         android:title="Ana Sayfa" />
-    <item
-        android:id="@+id/itemUsers"
-        android:icon="@drawable/ic_person"
-        android:title="Users" />
 
     <item
         android:id="@+id/itemFilters"
         android:icon="@drawable/ic_filter"
         android:title="Kategoriler" />
+
+    <item
+        android:id="@+id/itemUsers"
+        android:icon="@drawable/ic_baseline_stars_24"
+        android:title="Mentoring" />
 
     <item
         android:id="@+id/itemChats"

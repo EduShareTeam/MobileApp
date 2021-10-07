@@ -2,36 +2,24 @@ package com.fatihbaser.edusharedemo.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.widget.PopupMenu;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 import com.fatihbaser.edusharedemo.R;
-import com.fatihbaser.edusharedemo.activities.FilterActivity;
 import com.fatihbaser.edusharedemo.activities.IntroActivity;
-import com.fatihbaser.edusharedemo.activities.MainActivity;
 import com.fatihbaser.edusharedemo.activities.PostActivity;
 import com.fatihbaser.edusharedemo.adapter.PostsAdapter;
 import com.fatihbaser.edusharedemo.databinding.FragmentHomeBinding;
-import com.fatihbaser.edusharedemo.databinding.FragmentProfileBinding;
 import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.Query;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
@@ -53,11 +41,11 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        setHasOptionsMenu(true);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        setHasOptionsMenu(true);
         binding.recyclerViewHome.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         setHasOptionsMenu(true);
+
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
 

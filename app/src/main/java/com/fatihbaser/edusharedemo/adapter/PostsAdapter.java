@@ -174,9 +174,7 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
 
     }*/
 
-    public ListenerRegistration getListener() {
-        return mListener;
-    }
+    public ListenerRegistration getListener() { return mListener; }
 
     @NonNull
     @Override
@@ -189,7 +187,6 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle;
         TextView textViewCategory;
-        TextView textViewUsername;
         TextView textViewLikes;
         ImageView imageViewPost;
         ImageView imageViewLike;
@@ -200,7 +197,6 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
             super(view);
             textViewTitle = view.findViewById(R.id.textViewTitlePostCard);
             textViewCategory = view.findViewById(R.id.textViewCategory);
-            //textViewUsername = view.findViewById(R.id.textViewUsernamePostCard);
             textViewLikes = view.findViewById(R.id.textViewLikes);
             imageViewPost = view.findViewById(R.id.imageViewPostCard);
             imageViewLike = view.findViewById(R.id.imageViewLike);

@@ -17,15 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.fatihbaser.edusharedemo.R;
-import com.fatihbaser.edusharedemo.adapter.CommentAdapter;
 import com.fatihbaser.edusharedemo.adapter.SliderAdapter;
 import com.fatihbaser.edusharedemo.databinding.ActivityPostDetailBinding;
-import com.fatihbaser.edusharedemo.models.Comment;
 import com.fatihbaser.edusharedemo.models.FCMBody;
 import com.fatihbaser.edusharedemo.models.FCMResponse;
 import com.fatihbaser.edusharedemo.models.SliderItem;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
-import com.fatihbaser.edusharedemo.providers.CommentsProvider;
 import com.fatihbaser.edusharedemo.providers.LikesProvider;
 import com.fatihbaser.edusharedemo.providers.NotificationProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
@@ -62,13 +59,11 @@ public class PostDetailActivity extends AppCompatActivity {
     SliderView mSliderView;
     SliderAdapter mSliderAdapter;
     List<SliderItem> mSliderItems = new ArrayList<>();
-    CommentAdapter mAdapter;
     //Providers
     AuthProvider mAuthProvider;
     PostProvider mPostProvider;
     TokenProvider mTokenProvider;
     NotificationProvider mNotificationProvider;
-    CommentsProvider mCommentsProvider;
     UsersProvider mUsersProvider;
     LikesProvider mLikesProvider;
 
@@ -85,29 +80,23 @@ public class PostDetailActivity extends AppCompatActivity {
         mSliderView = findViewById(R.id.imageSlider);
         mExtraPostId = getIntent().getStringExtra("id");
 
-        //mExtraIdUser = getIntent().getStringExtra("idUser");
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PostDetailActivity.this);
-        binding.recyclerViewComments.setLayoutManager(linearLayoutManager);
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Providers
         mPostProvider = new PostProvider();
-        mCommentsProvider = new CommentsProvider();
         mUsersProvider = new UsersProvider();
         mAuthProvider = new AuthProvider();
         mLikesProvider = new LikesProvider();
         mTokenProvider = new TokenProvider();
         mNotificationProvider = new NotificationProvider();
 
-        binding.fabComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialogComment();
-            }
-        });
+        if (mAuthProvider.getUid().equals(mIdUser)) {
+            binding.chat.setVisibility(View.INVISIBLE);
+        }
 
         binding.btnShowProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,12 +111,7 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                     goToChatActivity();
-
-
-
-
             }
         });
 
@@ -161,9 +145,6 @@ public class PostDetailActivity extends AppCompatActivity {
 
     private void goToChatActivity() {
 
-        if (mAuthProvider.getUid().equals(mIdUser)) {
-            binding.chat.setVisibility(View.INVISIBLE);
-        }
         Intent intent = new Intent(PostDetailActivity.this, ChatActivity.class);
         intent.putExtra("idUser1", mAuthProvider.getUid());
         intent.putExtra("idUser2", mIdUser);
@@ -284,88 +265,15 @@ public class PostDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void showDialogComment() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(PostDetailActivity.this);
-        alert.setTitle("¡YORUM!");
-        alert.setMessage("Yorumunuzu girin");
-
-        final EditText editText = new EditText(PostDetailActivity.this);
-        editText.setHint("Metin");
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(36, 0, 36, 36);
-        editText.setLayoutParams(params);
-        RelativeLayout container = new RelativeLayout(PostDetailActivity.this);
-        RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-        );
-        container.setLayoutParams(relativeParams);
-        container.addView(editText);
-
-        alert.setView(container);
-
-        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String value = editText.getText().toString();
-                if (!value.isEmpty()) {
-                    createComment(value);
-                } else {
-                    Toast.makeText(PostDetailActivity.this, "Yoruma girmelisiniz", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        alert.setNegativeButton("İptal", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-            }
-        });
-        alert.show();
-    }
-
-    private void createComment(final String value) {
-        Comment comment = new Comment();
-        comment.setComment(value);
-        comment.setIdPost(mExtraPostId);
-        comment.setIdUser(mAuthProvider.getUid());
-        comment.setTimestamp(new Date().getTime());
-        mCommentsProvider.create(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    sendNotification(value);
-                    Toast.makeText(PostDetailActivity.this, "Yorum doğru oluşturuldu", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(PostDetailActivity.this, "Yorum oluşturulamadı", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        Query query = mCommentsProvider.getCommentsByPost(mExtraPostId);
-        FirestoreRecyclerOptions<Comment> options =
-                new FirestoreRecyclerOptions.Builder<Comment>()
-                        .setQuery(query, Comment.class)
-                        .build();
-        mAdapter = new CommentAdapter(options, PostDetailActivity.this);
-        binding.recyclerViewComments.setAdapter(mAdapter);
-        mAdapter.startListening();
-        ViewedMessageHelper.updateOnline(true, PostDetailActivity.this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mAdapter.stopListening();
     }
 
     @Override
@@ -374,44 +282,4 @@ public class PostDetailActivity extends AppCompatActivity {
         ViewedMessageHelper.updateOnline(false, PostDetailActivity.this);
     }
 
-    private void sendNotification(final String comment) {
-        if (mIdUser == null) {
-            return;
-        }
-        mTokenProvider.getToken(mIdUser).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    if (documentSnapshot.contains("token")) {
-                        String token = documentSnapshot.getString("token");
-                        Map<String, String> data = new HashMap<>();
-                        data.put("title", "YENİ YORUM");
-                        data.put("body", comment);
-                        FCMBody body = new FCMBody(token, "high", "4500s", data);
-                        mNotificationProvider.sendNotification(body).enqueue(new Callback<FCMResponse>() {
-                            @Override
-                            public void onResponse(Call<FCMResponse> call, Response<FCMResponse> response) {
-                                if (response.body() != null) {
-                                    if (response.body().getSuccess() == 1) {
-                                        Toast.makeText(PostDetailActivity.this, "Bildirim doğru gönderildi", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(PostDetailActivity.this, "Bildirim gönderilemedi", Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    Toast.makeText(PostDetailActivity.this, "Bildirim gönderilemedi", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<FCMResponse> call, Throwable t) {
-
-                            }
-                        });
-                    }
-                } else {
-                    Toast.makeText(PostDetailActivity.this, "Kullanıcı talepleri belirteci mevcut değil", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 }

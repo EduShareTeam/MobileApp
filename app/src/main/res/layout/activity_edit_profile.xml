@@ -17,7 +17,7 @@
         android:id="@+id/imageViewCover"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="#FF5A00"
+        android:background="#fa914e"
         android:scaleType="centerCrop"
 
         app:layout_collapseMode="parallax"

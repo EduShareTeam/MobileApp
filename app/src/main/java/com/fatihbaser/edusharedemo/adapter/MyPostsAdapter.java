@@ -147,7 +147,7 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle;
         TextView textViewRelativeTime;
-        CircleImageView circleImagePost;
+        ImageView circleImagePost;
         ImageView imageViewDelete;
         ImageView imageViewEdit;
         View viewHolder;

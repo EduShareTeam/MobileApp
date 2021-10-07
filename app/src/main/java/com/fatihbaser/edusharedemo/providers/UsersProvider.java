@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class UsersProvider {
 
-    private CollectionReference mCollection;
+    CollectionReference mCollection;
 
     public UsersProvider() {
         mCollection = FirebaseFirestore.getInstance().collection("Users");
@@ -49,8 +49,8 @@ public class UsersProvider {
         return mCollection.document(idUser).update(map);
     }
 
-    public Query getUserByTitle(String title) {
-        return mCollection.orderBy("username").startAt(title).endAt(title+'\uf8ff');
+    public Query getUserByUsername(String username) {
+        return mCollection.orderBy("username").startAt(username).endAt(username+'\uf8ff');
     }
 
     public Query getAll() {
