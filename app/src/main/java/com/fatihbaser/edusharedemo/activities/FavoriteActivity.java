@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.fatihbaser.edusharedemo.R;
+import com.fatihbaser.edusharedemo.adapter.FavoriAdapter;
 import com.fatihbaser.edusharedemo.adapter.PostsAdapter;
 import com.fatihbaser.edusharedemo.databinding.ActivityCompleteProfileBinding;
 import com.fatihbaser.edusharedemo.databinding.ActivityFavoriBinding;
@@ -25,7 +26,7 @@ public class FavoriteActivity extends AppCompatActivity {
     LikesProvider mLikerProvider;
     PostProvider mPostProvider;
     AuthProvider mAuthProvider;
-    PostsAdapter mPostsAdapter;
+    FavoriAdapter mPostsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +46,12 @@ public class FavoriteActivity extends AppCompatActivity {
 
 
     private void getAllPost() {
-        Query query = mPostProvider.getAll();
-        FirestoreRecyclerOptions<Post> options =
-                new FirestoreRecyclerOptions.Builder<Post>()
-                        .setQuery(query, Post.class)
+        Query query = mLikerProvider.getAll();
+        FirestoreRecyclerOptions<Like> options =
+                new FirestoreRecyclerOptions.Builder<Like>()
+                        .setQuery(query, Like.class)
                         .build();
-        mPostsAdapter = new PostsAdapter(options, FavoriteActivity.this);
+        mPostsAdapter = new FavoriAdapter(options, FavoriteActivity.this);
         mPostsAdapter.notifyDataSetChanged();
         binding.recyclerViewLikes.setAdapter(mPostsAdapter);
         mPostsAdapter.startListening();
