@@ -14,10 +14,13 @@ import java.util.Map;
 
 public class UsersProvider {
 
-    CollectionReference mCollection;
+    private CollectionReference mCollection;
+    private CollectionReference mmCollection;
 
     public UsersProvider() {
         mCollection = FirebaseFirestore.getInstance().collection("Users");
+        mmCollection = FirebaseFirestore.getInstance().collection("Users");
+
     }
 
     public Task<DocumentSnapshot> getUser(String id) {

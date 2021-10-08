@@ -380,7 +380,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendNotification(final String token, String messages, Message message) {
         final Map<String, String> data = new HashMap<>();
-        data.put("title", "YENİ MESAJ");
+        data.put("title", "NUEVO MENSAJE");
         data.put("body", message.getMessage());
         data.put("idNotification", String.valueOf(mIdNotificationChat));
         data.put("messages", messages);
@@ -426,11 +426,11 @@ public class ChatActivity extends AppCompatActivity {
                                 //Toast.makeText(ChatActivity.this, "La notificacion se envio correcatemente", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                Toast.makeText(ChatActivity.this, "Bildirim gönderilemedi", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChatActivity.this, "La notificacion no se pudo enviar", Toast.LENGTH_SHORT).show();
                             }
                         }
                         else {
-                            Toast.makeText(ChatActivity.this, "Bildirim gönderilemedi", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChatActivity.this, "La notificacion no se pudo enviar", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -443,6 +443,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
     }
+
 
     private void getMyInfoUser() {
         mUsersProvider.getUser(mAuthProvider.getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

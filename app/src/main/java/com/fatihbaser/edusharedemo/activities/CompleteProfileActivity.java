@@ -57,7 +57,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
     File mPhotoFile;
     File mImageFile;
 
-    String mUsername = "";
+    String username = "";
     String mUniversity = "";
     String mDepartment = "";
     String mBio = "";
@@ -123,7 +123,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
 
     private void completeUser(File imageFile1) {
         mDialog.show();
-        mUsername = binding.textInputUsername.getText().toString();
+        username = binding.textInputUsername.getText().toString();
         mUniversity = binding.textInputUniversity.getText().toString();
         mDepartment = binding.textInputFaculty.getText().toString();
         mBio = binding.textInputBio.getText().toString();
@@ -139,7 +139,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
                             String id = mAuthProvider.getUid();
                             user.setId(id);
                             user.setImageProfile(urlProfile);
-                            user.setUsername(mUsername);
+                            user.setUsername(username);
                             user.setUniversity(mUniversity);
                             user.setDepartment(mDepartment);
                             user.setBio(mBio);
