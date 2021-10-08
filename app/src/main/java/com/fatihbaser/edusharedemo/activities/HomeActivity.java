@@ -74,7 +74,6 @@ public class HomeActivity extends AppCompatActivity {
 
                     }
 
-
                     else if (item.getItemId() == R.id.itemChats) {
                         // FRAGMENT CHATS
                         openFragment(new ChatsFragment());

@@ -60,9 +60,9 @@ public class ProfileFragment extends Fragment {
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
 
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//        binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
-        binding.recyclerViewMyPost.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
+        //binding.recyclerViewMyPost.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         binding.linearLayoutEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override

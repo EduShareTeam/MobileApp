@@ -217,12 +217,6 @@ public class EditPostActivity extends AppCompatActivity {
                         String description = documentSnapshot.getString("description");
                         binding.textInputDescription.setText(description);
                     }
-                    //TODO: Spinerdan kaydedilen degeri cekme--
-//                    if (documentSnapshot.contains("category")) {
-//                        String category = documentSnapshot.getString("category");
-//                        binding.spinnerProductCategory.setSelection();
-//                    }
-
                     if (documentSnapshot.contains("quality")) {
                         Long quality = documentSnapshot.getLong("quality");
                         binding.ratingBarProductQualityUpload.setRating(quality);
@@ -275,7 +269,6 @@ public class EditPostActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Alanları doldurun lütfen", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void saveImageAndEdit(File imageFile1, final File imageFile2) {

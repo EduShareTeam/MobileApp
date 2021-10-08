@@ -202,12 +202,11 @@
                 android:textSize="18dp"
                 android:textStyle="italic" />
 
-            <!--TODO: Margin left yerine recyclerview itemlerini ortada siralayacak bir yontem bul                -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewMyPost"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_height="match_parent"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
         </LinearLayout>

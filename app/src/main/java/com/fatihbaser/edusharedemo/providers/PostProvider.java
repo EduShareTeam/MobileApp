@@ -3,7 +3,6 @@ package com.fatihbaser.edusharedemo.providers;
 import androidx.annotation.NonNull;
 
 import com.fatihbaser.edusharedemo.models.Post;
-import com.fatihbaser.edusharedemo.models.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

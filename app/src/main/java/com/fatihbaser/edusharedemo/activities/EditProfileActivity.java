@@ -159,7 +159,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 user.setDepartment(mDepartment);
                 user.setBio(mBio);
                 user.setId(mAuthProvider.getUid());
-                //TODO: Image degistirmeden update yaparsak image kayboluyor. Firebaseden string degerini burada gsotermemiz gerekiyor
                 user.setImageProfile(mImage);
                 updateInfo(user);
             }

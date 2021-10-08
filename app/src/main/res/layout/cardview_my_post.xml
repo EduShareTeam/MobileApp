@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="260dp"
     android:layout_height="290dp"
-    android:layout_margin="10dp"
     android:layout_gravity="center_horizontal"
+    android:layout_margin="10dp"
     app:cardCornerRadius="20dp"
     app:circularflow_defaultRadius="2dp">
 
@@ -51,14 +51,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#5EFF9900"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
                 android:layout_margin="10dp"
+                android:layout_weight="5"
                 android:orientation="vertical">
 
                 <TextView
@@ -109,98 +108,3 @@
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-    <!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="wrap_content"-->
-    <!--    android:layout_marginTop="10dp"-->
-    <!--    android:layout_marginBottom="10dp"-->
-    <!--    android:layout_marginRight="25dp"-->
-    <!--    android:layout_marginLeft="25dp">-->
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:gravity="center_vertical">-->
-    <!--        &lt;!&ndash;TODO: Resim yuklenirken eski resim gozukuyor. Bunun yerine loading screen eklenebilir&ndash;&gt;-->
-    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--            android:layout_width="38dp"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_marginLeft="7dp"-->
-    <!--            android:gravity="center"-->
-    <!--            android:orientation="vertical">-->
-
-    <!--            <de.hdodenhof.circleimageview.CircleImageView-->
-    <!--                android:id="@+id/circleImageMyPost"-->
-    <!--                android:layout_width="32dp"-->
-
-    <!--                android:layout_height="29dp"-->
-    <!--                android:layout_marginEnd="6dp"-->
-    <!--                android:layout_marginBottom="1dp"-->
-    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--            <ProgressBar-->
-    <!--                android:id="@+id/postLoading"-->
-    <!--                android:layout_width="33dp"-->
-
-    <!--                android:layout_height="31dp"-->
-
-    <!--                android:layout_marginEnd="5dp"-->
-    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--            </ProgressBar>-->
-    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:orientation="vertical"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:layout_marginLeft="20dp"-->
-    <!--            android:layout_marginRight="15dp">-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/textViewTitleMyPost"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="Yayın başlığı"-->
-    <!--                android:maxLines="1"-->
-    <!--                android:textColor="@color/colorBlack"-->
-    <!--                android:textSize="16dp" />-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/textViewRelativeTimeMyPost"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="0 dakika önce"-->
-    <!--                android:maxLines="1"-->
-    <!--                android:textSize="10dp"/>-->
-    <!--        </LinearLayout>-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/imageViewEditMyPost"-->
-    <!--            android:layout_width="30dp"-->
-    <!--            android:layout_height="30dp"-->
-    <!--            android:layout_marginRight="10dp"-->
-    <!--            android:src="@drawable/ic_baseline_edit_24"-->
-    <!--            app:tint="@color/colorAccent" />-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/imageViewDeleteMyPost"-->
-    <!--            android:layout_width="30dp"-->
-    <!--            android:layout_height="30dp"-->
-    <!--            android:src="@drawable/ic_baseline_delete_24"-->
-    <!--            app:tint="@color/colorAccent" />-->
-
-
-    <!--    </LinearLayout>-->
-    <!--</FrameLayout>-->

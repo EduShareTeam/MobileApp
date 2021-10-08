@@ -25,7 +25,6 @@ public class RelativeTime extends Application {
             return null;
         }
 
-        // TODO: localize
         final long diff = now - time;
         if (diff < MINUTE_MILLIS) {
             return "Az Önce";
@@ -61,7 +60,6 @@ public class RelativeTime extends Application {
             return dateString;
         }
 
-        // TODO: localize
         final long diff = now - time;
         if (diff < 24 * HOUR_MILLIS) {
             String dateString = formatter.format(new Date(time));
