@@ -38,5 +38,9 @@ public class LikesProvider {
     public Task<Void> delete(String id) {
         return mCollection.document(id).delete();
     }
-
+    public Query getAll() {
+        return mCollection.orderBy("timestamp", Query.Direction.DESCENDING);
+    }
 }
+
+

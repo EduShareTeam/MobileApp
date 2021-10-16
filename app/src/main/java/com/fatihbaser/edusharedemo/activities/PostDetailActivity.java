@@ -68,6 +68,7 @@ public class PostDetailActivity extends AppCompatActivity {
     LikesProvider mLikesProvider;
 
     String mExtraPostId;
+    String mExtratitle;
     String mIdUser = "";
 
 
@@ -78,8 +79,10 @@ public class PostDetailActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         mSliderView = findViewById(R.id.imageSlider);
-        mExtraPostId = getIntent().getStringExtra("id");
 
+
+        mExtraPostId = getIntent().getStringExtra("id");
+        mExtratitle= getIntent().getStringExtra("title");
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PostDetailActivity.this);
         setSupportActionBar(binding.toolbar);
@@ -105,8 +108,8 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
         getPost();
-        getNumberLikes();
-
+       // getNumberLikes();
+        mExtratitle= getIntent().getStringExtra("title");
         binding.chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +120,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
     }
 
-    private void getNumberLikes() {
+  /*  private void getNumberLikes() {
         mLikesProvider.getLikesByPost(mExtraPostId).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -130,7 +133,7 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
     private void goToShowProfile() {
         if (!mIdUser.equals("")) {
@@ -185,6 +188,8 @@ public class PostDetailActivity extends AppCompatActivity {
                     if (documentSnapshot.contains("title")) {
                         String title = documentSnapshot.getString("title");
                         binding.textViewTitle.setText(title.toUpperCase());
+                        mExtratitle=title;
+
                     }
                     if (documentSnapshot.contains("description")) {
                         String description = documentSnapshot.getString("description");
