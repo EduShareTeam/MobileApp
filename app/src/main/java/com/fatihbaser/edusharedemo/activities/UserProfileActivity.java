@@ -120,10 +120,10 @@ public class UserProfileActivity extends AppCompatActivity {
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 int numberPost = queryDocumentSnapshots.size();
                 if (numberPost > 0) {
-                    binding.textViewPostExist.setText("Publicaciones");
+                    binding.textViewPostExist.setText("Ürünler");
                     binding.textViewPostExist.setTextColor(Color.RED);
                 } else {
-                    binding.textViewPostExist.setText("No hay publicaciones");
+                    binding.textViewPostExist.setText("Ürün yok");
                     binding.textViewPostExist.setTextColor(Color.GRAY);
                 }
             }

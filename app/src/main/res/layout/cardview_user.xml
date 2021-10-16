@@ -103,7 +103,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:layout_margin="5dp"
-                        android:text="University"
+                        android:text="Department"
                         android:textColor="@color/colorWhite"
                         android:textSize="12dp"
                         android:textStyle="bold" />

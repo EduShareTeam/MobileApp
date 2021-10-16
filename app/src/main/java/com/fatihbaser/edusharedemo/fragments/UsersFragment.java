@@ -34,13 +34,11 @@ import com.mancj.materialsearchbar.MaterialSearchBar;
 public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearchActionListener {
 
     private FragmentUsersBinding binding;
+
     AuthProvider mAuthProvider;
-
-
     UsersProvider mUserProvider;
     UsersAdapter mUsersAdapter;
     UsersAdapter mUsersSearch;
-
 
     public UsersFragment() {
         // Required empty public constructor
@@ -64,13 +62,12 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
         binding = FragmentUsersBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         setHasOptionsMenu(true);
-        // Inflate the layout for this fragment
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         binding.recyclerViewUsersFragment.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         setHasOptionsMenu(true);
         mAuthProvider = new AuthProvider();
-       mUserProvider =new UsersProvider();
+        mUserProvider = new UsersProvider();
 
         binding.searchBarUser.setOnSearchActionListener(this);
         binding.searchBarUser.inflateMenu(R.menu.main_menu);
@@ -83,8 +80,6 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
                 return true;
             }
         });
-
-
 
         return view;
     }
