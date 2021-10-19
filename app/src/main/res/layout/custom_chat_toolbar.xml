@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/circleImageProfile"
         android:maxLines="1"
-        android:text="Kullanici ismi"
+        android:text="Kullanıcı ismi"
         android:textColor="@color/colorWhite"
         android:textSize="18dp" />
 

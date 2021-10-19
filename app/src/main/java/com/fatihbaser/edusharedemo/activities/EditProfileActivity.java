@@ -69,8 +69,8 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(view);
 
         mBuilderSelector = new AlertDialog.Builder(this);
-        mBuilderSelector.setTitle("Bir seçenek seçin");
-        options = new CharSequence[] {"Galeri resmi","Fotoğraf çek"};
+        mBuilderSelector.setTitle("Lütfen bir seçenek seçiniz");
+        options = new CharSequence[] {"Galeriden resim seç ","Fotoğraf çek"};
 
         mImageProvider = new ImageProvider();
         mUsersProvider = new UsersProvider();
@@ -164,7 +164,7 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         }
         else {
-            Toast.makeText(this, "Kullanıcı adını ve telefonu girin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Kullanıcı adını ve diğer bılgileri giriniz", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -65,7 +65,6 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
         DocumentSnapshot document = getSnapshots().getSnapshot(position);
         final String postId = document.getId();
 
-
         /*if (mTextViewNumberFilter != null) {
             int numberFilter = getSnapshots().size();
             mTextViewNumberFilter.setText(String.valueOf(numberFilter));

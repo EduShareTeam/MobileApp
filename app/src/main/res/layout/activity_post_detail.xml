@@ -167,7 +167,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
-                            android:text="Kullanici ismi"
+                            android:text="Kullanıcı ismi"
                             android:textColor="@color/colorBlack" />
                     </LinearLayout>
 
@@ -192,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:text="Urun basligi"
+                android:text="Ürün başlığı"
                 android:textColor="@color/colorAccent"
                 android:textSize="20dp"
                 android:textStyle="bold" />

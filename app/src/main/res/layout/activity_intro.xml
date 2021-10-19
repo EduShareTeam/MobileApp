@@ -23,7 +23,7 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/shape_view_button_layout"
         android:backgroundTint="#FFFFFF"
-        android:text="Hesap Olustur"/>
+        android:text="Hesap Oluştur"/>
 
     <Button
         android:id="@+id/loginAccount"
@@ -32,14 +32,14 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/shape_view_button_layout"
         android:backgroundTint="#FFFFFF"
-        android:text="Giris Yap"/>
+        android:text="GİRİŞ YAP"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
         android:textColor="@color/white"
-        android:text="Google ile hizli erisim icin "/>
+        android:text="Google ile hızlı erişim "/>
 
 
     <com.google.android.gms.common.SignInButton

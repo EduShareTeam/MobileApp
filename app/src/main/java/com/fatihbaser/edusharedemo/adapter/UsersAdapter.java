@@ -28,7 +28,6 @@ public class UsersAdapter extends FirestoreRecyclerAdapter<User, UsersAdapter.Vi
 
     Context context;
     UsersProvider mUsersProvider;
-
     AuthProvider mAuthProvider;
     TextView mTextViewNumberFilter;
     ListenerRegistration mListener;
@@ -37,7 +36,6 @@ public class UsersAdapter extends FirestoreRecyclerAdapter<User, UsersAdapter.Vi
         super(options);
         this.context = context;
         mUsersProvider = new UsersProvider();
-
         mAuthProvider = new AuthProvider();
     }
 
@@ -45,7 +43,6 @@ public class UsersAdapter extends FirestoreRecyclerAdapter<User, UsersAdapter.Vi
         super(options);
         this.context = context;
         mUsersProvider = new UsersProvider();
-
         mAuthProvider = new AuthProvider();
         mTextViewNumberFilter = textView;
     }
@@ -61,7 +58,7 @@ public class UsersAdapter extends FirestoreRecyclerAdapter<User, UsersAdapter.Vi
             mTextViewNumberFilter.setText(String.valueOf(numberFilter));
         }
 
-        holder.textViewTitle.setText(user.getUsername().toUpperCase());
+        holder.textViewUsername.setText(user.getUsername());
         holder.textViewUniversity.setText(user.getUniversity());
         holder.textViewDepartment.setText(user.getDepartment());
         if (user.getImage() != null) {
@@ -104,7 +101,7 @@ public class UsersAdapter extends FirestoreRecyclerAdapter<User, UsersAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewTitle;
+        TextView textViewUsername;
         TextView textViewUniversity;
         TextView textViewDepartment;
         TextView textViewLikes;
@@ -115,7 +112,7 @@ public class UsersAdapter extends FirestoreRecyclerAdapter<User, UsersAdapter.Vi
 
         public ViewHolder(View view) {
             super(view);
-            textViewTitle = view.findViewById(R.id.textViewUserUserCard);
+            textViewUsername = view.findViewById(R.id.textViewUserUserCard);
             textViewUniversity = view.findViewById(R.id.textViewUserCardUniversity);
             textViewDepartment = view.findViewById(R.id.textViewUserCardDepartment);
             textViewLikes = view.findViewById(R.id.textViewLikes);

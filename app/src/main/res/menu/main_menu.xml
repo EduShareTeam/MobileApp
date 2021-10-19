@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/itemLogout"
-        android:title="Cikis Yap"
+        android:title="Çıkış yap"
         app:showAsAction="never" />
 </menu>

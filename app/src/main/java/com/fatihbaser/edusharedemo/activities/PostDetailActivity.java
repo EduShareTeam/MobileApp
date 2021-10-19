@@ -1,26 +1,17 @@
 package com.fatihbaser.edusharedemo.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.adapter.SliderAdapter;
 import com.fatihbaser.edusharedemo.databinding.ActivityPostDetailBinding;
-import com.fatihbaser.edusharedemo.models.FCMBody;
-import com.fatihbaser.edusharedemo.models.FCMResponse;
 import com.fatihbaser.edusharedemo.models.SliderItem;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.LikesProvider;
@@ -30,29 +21,15 @@ import com.fatihbaser.edusharedemo.providers.TokenProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.RelativeTime;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class PostDetailActivity extends AppCompatActivity {
     private ActivityPostDetailBinding binding;
@@ -68,7 +45,7 @@ public class PostDetailActivity extends AppCompatActivity {
     LikesProvider mLikesProvider;
 
     String mExtraPostId;
-    String mExtratitle;
+    String mExtraTitle;
     String mIdUser = "";
 
 
@@ -82,7 +59,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
 
         mExtraPostId = getIntent().getStringExtra("id");
-        mExtratitle= getIntent().getStringExtra("title");
+        mExtraTitle = getIntent().getStringExtra("title");
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PostDetailActivity.this);
         setSupportActionBar(binding.toolbar);
@@ -109,7 +86,7 @@ public class PostDetailActivity extends AppCompatActivity {
         });
         getPost();
        // getNumberLikes();
-        mExtratitle= getIntent().getStringExtra("title");
+        mExtraTitle = getIntent().getStringExtra("title");
         binding.chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,7 +165,7 @@ public class PostDetailActivity extends AppCompatActivity {
                     if (documentSnapshot.contains("title")) {
                         String title = documentSnapshot.getString("title");
                         binding.textViewTitle.setText(title.toUpperCase());
-                        mExtratitle=title;
+                        mExtraTitle =title;
 
                     }
                     if (documentSnapshot.contains("description")) {

@@ -49,7 +49,7 @@
                         android:id="@+id/textInputEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="E-Mail"
+                        android:hint="E-mail"
                         android:inputType="textEmailAddress" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -83,7 +83,7 @@
                         android:id="@+id/textInputPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Sifre"
+                        android:hint="Şifre"
                         android:inputType="textPassword" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -122,7 +122,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hesabınız yok mu?" />
+                android:text="Hala bir hesabınız yok mu?" />
 
             <TextView
                 android:id="@+id/textViewRegister"

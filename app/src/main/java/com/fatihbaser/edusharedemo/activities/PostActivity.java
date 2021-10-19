@@ -101,8 +101,8 @@ public class PostActivity extends AppCompatActivity {
                 .setCancelable(false).build();
 
         mBuilderSelector = new AlertDialog.Builder(this);
-        mBuilderSelector.setTitle("Bir seçenek seçin");
-        options = new CharSequence[]{"Galeriden Resmi alın", "Fotograf çek "};
+        mBuilderSelector.setTitle("Lütfen bir seçenek seçiniz");
+        options = new CharSequence[]{"Galeriden resim seç", "Fotograf çek"};
 
         binding.circleImageBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,38 +131,6 @@ public class PostActivity extends AppCompatActivity {
                 selectOptionImage(2);
             }
         });
-
-//        binding.imageViewPc.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mCategory = "Elektronik ve mimarlık";
-//                binding.textViewCategory.setText(mCategory);
-//            }
-//        });
-//
-//        binding.imageViewPS4.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mCategory = "Dil ve Edebiyat";
-//                binding.textViewCategory.setText(mCategory);
-//            }
-//        });
-//
-//        binding.imageViewXbox.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mCategory = "Sanat";
-//                binding.textViewCategory.setText(mCategory);
-//            }
-//        });
-//
-//        binding.imageViewNintendo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mCategory = "Fen Bilimleri";
-//                binding.textViewCategory.setText(mCategory);
-//            }
-//        });
 
         spinnerDataList = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<String>(PostActivity.this,
@@ -248,7 +216,7 @@ public class PostActivity extends AppCompatActivity {
                 Toast.makeText(this, "Bir resim seçmelisiniz", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(this, "Alanları doldurun lütfen", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Lütfen boş alanları doldurunuz", Toast.LENGTH_SHORT).show();
         }
     }
 

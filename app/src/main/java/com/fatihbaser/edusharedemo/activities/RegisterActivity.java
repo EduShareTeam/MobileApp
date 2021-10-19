@@ -79,8 +79,8 @@ public class RegisterActivity extends AppCompatActivity {
         mUsersProvider = new UsersProvider();
 
         mBuilderSelector = new AlertDialog.Builder(this);
-        mBuilderSelector.setTitle("Bir seçenek seçin");
-        options = new CharSequence[] {"Galeri resmi","Fotoğraf çek"};
+        mBuilderSelector.setTitle("Lütfen bir seçenek seçiniz");
+        options = new CharSequence[] {"Galeriden resim seç","Fotoğraf çek"};
 
 
         mDialog = new SpotsDialog.Builder()
@@ -120,16 +120,16 @@ public class RegisterActivity extends AppCompatActivity {
                         if (password.length() >= 6) {
                             createUser(username, email, password, university, department, bio,mImageFile);
                         } else {
-                            Toast.makeText(this, "Şifre en az 6 karakter olmalıdır", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Şifreniz en az 6 karakter olmalıdır", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Toast.makeText(this, "Parolalar uyuşmuyor", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(this, "Tüm alanları girdiniz ancak e-posta geçerli değil", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Tüm alanları doldurdunuz ancak e-posta geçerli değil", Toast.LENGTH_LONG).show();
                 }
             } else {
-                Toast.makeText(this, "Devam etmek için tüm alanları ekleyin", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Devam etmek için tüm alanları ekleyiniz", Toast.LENGTH_SHORT).show();
             }
         }
       else if (mPhotoFile != null ) {
@@ -139,7 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (password.length() >= 6) {
                             createUser(username, email, password, university, department, bio,mPhotoFile);
                         } else {
-                            Toast.makeText(this, "Şifre en az 6 karakter olmalıdır", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Şifreniz en az 6 karakter olmalıdır", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Toast.makeText(this, "Parolalar uyuşmuyor", Toast.LENGTH_SHORT).show();

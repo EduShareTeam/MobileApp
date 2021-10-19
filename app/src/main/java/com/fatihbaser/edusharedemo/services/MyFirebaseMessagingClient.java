@@ -41,7 +41,7 @@ public class MyFirebaseMessagingClient extends FirebaseMessagingService {
         String title = data.get("title");
         String body = data.get("body");
         if (title != null) {
-            if (title.equals("NUEVO MENSAJE")) {
+            if (title.equals("Yenı Mesaj")) {
                 showNotificationMessage(data);
             }
             else {
@@ -61,7 +61,7 @@ public class MyFirebaseMessagingClient extends FirebaseMessagingService {
     private void showNotificationMessage(Map<String, String> data) {
         final String imageSender = data.get("imageSender");
         final String imageReceiver = data.get("imageReceiver");
-        Log.d("ENTRO", "NUEVO MENSAJE");
+        Log.d("Gir", "Yeni mesaj");
         getImageSender(data, imageSender, imageReceiver);
     }
 

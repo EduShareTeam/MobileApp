@@ -15,39 +15,38 @@
             android:id="@+id/imageViewProfile"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/photo"
             android:layout_gravity="top|center"
             android:layout_marginTop="40dp"
+            android:src="@drawable/photo"
 
             app:civ_border_color="#eeeeee"
-            app:civ_circle_background_color="@color/colorWhite"
-            app:civ_border_width="5dp"/>
+            app:civ_border_width="5dp"
+            app:civ_circle_background_color="@color/colorWhite" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="40dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_person_pin"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_person_pin" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="İsim ve Soyisim"
+                    android:hint="İsim ve soyisim"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -59,28 +58,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            >
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_email_grey"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_email_grey" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Eposta Adresi"
+                    android:hint="E-posta adresi"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -91,53 +88,50 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            >
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_baseline_apartment_24"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_baseline_apartment_24" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/uniname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Üniversite İsmi"
+                    android:hint="Üniversite ismi"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            >
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_baseline_school_24"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_baseline_school_24" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/department"
@@ -154,22 +148,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            >
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_description"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_description" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/bio"
@@ -182,25 +174,25 @@
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_https_black_24dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_https_black_24dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputPassword"
@@ -212,28 +204,26 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_https_black_24dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_https_black_24dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputConfirmPassword"
@@ -247,9 +237,6 @@
 
         </LinearLayout>
 
-
-
-
     </LinearLayout>
 
     <Button
@@ -262,7 +249,6 @@
         android:backgroundTint="@color/colorAccent"
         android:text="KAyıt ol"
         android:textColor="@color/colorWhite" />
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

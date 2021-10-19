@@ -102,12 +102,12 @@ public class EditPostActivity extends AppCompatActivity {
 
         mDialog = new SpotsDialog.Builder()
                 .setContext(this)
-                .setMessage("Biraz bekle ")
+                .setMessage("Lütfen biraz bekleyiniz")
                 .setCancelable(false).build();
 
         mBuilderSelector = new AlertDialog.Builder(this);
-        mBuilderSelector.setTitle("Bir seçenek seçin");
-        options = new CharSequence[]{"Galeriden Resmi alın", "Fotograf çek "};
+        mBuilderSelector.setTitle("Lütfen bir seçenek seçiniz");
+        options = new CharSequence[]{"Galeriden Resmi seç", "Fotograf çek"};
 
         binding.circleImageBack.setOnClickListener(new View.OnClickListener() {
             @Override

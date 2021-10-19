@@ -2,29 +2,22 @@ package com.fatihbaser.edusharedemo.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.activities.IntroActivity;
-import com.fatihbaser.edusharedemo.activities.PostActivity;
-import com.fatihbaser.edusharedemo.activities.UserProfileActivity;
-import com.fatihbaser.edusharedemo.adapter.PostsAdapter;
 import com.fatihbaser.edusharedemo.adapter.UsersAdapter;
-import com.fatihbaser.edusharedemo.databinding.FragmentHomeBinding;
 import com.fatihbaser.edusharedemo.databinding.FragmentUsersBinding;
-import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.models.User;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
-import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
@@ -38,22 +31,10 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
     AuthProvider mAuthProvider;
     UsersProvider mUserProvider;
     UsersAdapter mUsersAdapter;
-    UsersAdapter mUsersSearch;
+    UsersAdapter mUsersAdapterSearch;
 
     public UsersFragment() {
         // Required empty public constructor
-    }
-
-    public static UsersFragment newInstance(String param1, String param2) {
-        UsersFragment fragment = new UsersFragment();
-
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -63,7 +44,6 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
         View view = binding.getRoot();
         setHasOptionsMenu(true);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         binding.recyclerViewUsersFragment.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         setHasOptionsMenu(true);
         mAuthProvider = new AuthProvider();
@@ -90,10 +70,10 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
                 new FirestoreRecyclerOptions.Builder<User>()
                         .setQuery(query, User.class)
                         .build();
-        mUsersSearch = new UsersAdapter(options, getContext());
-        mUsersSearch.notifyDataSetChanged();
-        binding.recyclerViewUsersFragment.setAdapter(mUsersSearch);
-        mUsersSearch.startListening();
+        mUsersAdapterSearch = new UsersAdapter(options, getContext());
+        mUsersAdapterSearch.notifyDataSetChanged();
+        binding.recyclerViewUsersFragment.setAdapter(mUsersAdapterSearch);
+        mUsersAdapterSearch.startListening();
     }
 
     private void getAllUser() {
@@ -118,14 +98,9 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
     public void onStop() {
         super.onStop();
         mUsersAdapter.stopListening();
-        if (mUsersSearch != null) {
-            mUsersSearch.stopListening();
+        if (mUsersAdapterSearch != null) {
+            mUsersAdapterSearch.stopListening();
         }
-    }
-
-    private void goTousers() {
-        Intent intent = new Intent(getContext(), UserProfileActivity.class);
-        startActivity(intent);
     }
 
     private void logout() {

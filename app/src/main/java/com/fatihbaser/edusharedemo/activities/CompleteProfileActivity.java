@@ -75,8 +75,8 @@ public class CompleteProfileActivity extends AppCompatActivity {
         mUsersProvider = new UsersProvider();
 
         mBuilderSelector = new AlertDialog.Builder(this);
-        mBuilderSelector.setTitle("Bir seçenek seçin");
-        options = new CharSequence[] {"Galeri resmi","Fotoğraf çek"};
+        mBuilderSelector.setTitle("Lütfen bir seçenek seçiniz");
+        options = new CharSequence[] {"Galeriden resim seç","Fotoğraf çek"};
 
 
         mDialog = new SpotsDialog.Builder()
@@ -113,7 +113,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
     }
 
     public void myAlert(Context context){
-        new AlertDialog.Builder(context).setIcon(R.drawable.edu).setTitle("Cikis ?").setMessage("Lütfen kayit kismini tamamlayiniz...").setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(context).setIcon(R.drawable.edu).setTitle("Çıkış ?").setMessage("Lütfen kayıt kısmını tamamlayınız...").setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -154,7 +154,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                     else {
-                                        Toast.makeText(CompleteProfileActivity.this, "Kullanıcı veritabanında saklanamadı", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CompleteProfileActivity.this, "Oppss! Kullanıcı veri tabanında saklanamadı", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -193,7 +193,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
             try {
                 photoFile = createPhotoFile(requestCode);
             } catch(Exception e) {
-                Toast.makeText(this, "Dosyada bir hata oluştu " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Oppss! Dosyada bir hata oluştu " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
 
             if (photoFile != null) {
