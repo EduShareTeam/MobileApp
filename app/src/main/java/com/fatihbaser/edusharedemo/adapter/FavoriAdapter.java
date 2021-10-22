@@ -55,7 +55,7 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
     protected void onBindViewHolder(@NonNull final ViewHolder holder, int position, @NonNull final Like like) {
 
 
-        holder.textViewTitle.setText(like.getTitle().toUpperCase());
+        holder.textViewTitle.setText(like.getTitle());
         holder.textViewCategory.setText(like.getCategory());
         if (like.getImage() != null) {
             if (!like.getImage().isEmpty()) {
@@ -81,19 +81,19 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
             }
         });
 
-        holder.imageViewLike.setOnClickListener(new View.OnClickListener() {
+        /*holder.imageViewLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Like like = new Like();
 
-                like(like, holder);
+                //like(like, holder);
 
             }
         });
+*/
 
 
-
-        checkIfExistLike(like.getIdPost(), mAuthProvider.getUid(), holder);
+        //checkIfExistLike(like.getIdPost(), mAuthProvider.getUid(), holder);
 
         // getUserInfo(post.getIdUser(), holder);
 
@@ -159,7 +159,7 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //TODO: burda bazen uygulama patlıyor kayıt ve giriş yaparken kardeşimin telefonunda oldu android 6.0.1 alttaki iki satırı gösteriyor hata
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_post, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardviewfavorite, parent, false);
         return new ViewHolder(view);
     }
 
@@ -178,9 +178,9 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
             textViewTitle = view.findViewById(R.id.textViewTitlePostCard);
             textViewCategory = view.findViewById(R.id.textViewCategory);
             //textViewUsername = view.findViewById(R.id.textViewUsernamePostCard);
-            textViewLikes = view.findViewById(R.id.textViewLikes);
+
             imageViewPost = view.findViewById(R.id.imageViewPostCard);
-            imageViewLike = view.findViewById(R.id.imageViewLike);
+
             bar = view.findViewById(R.id.postLoading);
             viewHolder = view;
         }
