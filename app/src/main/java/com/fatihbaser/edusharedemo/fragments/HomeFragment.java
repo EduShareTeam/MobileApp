@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.fatihbaser.edusharedemo.R;
+import com.fatihbaser.edusharedemo.activities.FavoriteActivity;
 import com.fatihbaser.edusharedemo.activities.IntroActivity;
 import com.fatihbaser.edusharedemo.activities.PostActivity;
 import com.fatihbaser.edusharedemo.adapter.PostsAdapter;
@@ -56,6 +57,10 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.itemLogout) {
                     logout();
+                }
+                else if(item.getItemId() == R.id.itemFav) {
+                    Intent intent = new Intent(getContext(), FavoriteActivity.class);
+                    startActivity(intent);
                 }
                 return true;
             }

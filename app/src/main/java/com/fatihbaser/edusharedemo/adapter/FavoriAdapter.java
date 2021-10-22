@@ -1,6 +1,7 @@
 package com.fatihbaser.edusharedemo.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatihbaser.edusharedemo.R;
@@ -23,7 +26,9 @@ import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -55,7 +60,8 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
     protected void onBindViewHolder(@NonNull final ViewHolder holder, int position, @NonNull final Like like) {
 
 
-        holder.textViewTitle.setText(like.getTitle().toUpperCase());
+        holder.delete.setOnClickListener(view -> deletePost(like.getId()));
+        holder.textViewTitle.setText(like.getTitle());
         holder.textViewCategory.setText(like.getCategory());
         if (like.getImage() != null) {
             if (!like.getImage().isEmpty()) {
@@ -81,75 +87,8 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
             }
         });
 
-        holder.imageViewLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Like like = new Like();
-
-                like(like, holder);
-
-            }
-        });
-
-
-
-        checkIfExistLike(like.getIdPost(), mAuthProvider.getUid(), holder);
-
-        // getUserInfo(post.getIdUser(), holder);
 
     }
-
-
-
-
-    private void like(final Like like, final FavoriAdapter.ViewHolder holder) {
-        mLikeprovider.getLikeByPostAndUser(like.getIdPost(), mAuthProvider.getUid()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int numberDocuments = queryDocumentSnapshots.size();
-                if (numberDocuments > 0) {
-                    String idLike = queryDocumentSnapshots.getDocuments().get(0).getId();
-                    holder.imageViewLike.setImageResource(R.drawable.heart);
-                    mLikeprovider.delete(idLike);
-                } else {
-                    holder.imageViewLike.setImageResource(R.drawable.heartdolu);
-                    mLikeprovider.create(like);
-                }
-            }
-        });
-
-    }
-
-    private void checkIfExistLike(String idPost, String idUser, final FavoriAdapter.ViewHolder holder) {
-        mLikeprovider.getLikeByPostAndUser(idPost, idUser).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int numberDocuments = queryDocumentSnapshots.size();
-                if (numberDocuments > 0) {
-                    holder.imageViewLike.setImageResource(R.drawable.heartdolu);
-                } else {
-                    holder.imageViewLike.setImageResource(R.drawable.heart);
-                }
-            }
-        });
-
-    }
-
-
-   /* private void getUserInfo(String idUser, final ViewHolder holder) {
-        mUsersProvider.getUser(idUser).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    if (documentSnapshot.contains("username")) {
-                        String username = documentSnapshot.getString("username");
-                        //holder.textViewUsername.setText("BY: " + username.toUpperCase());
-                    }
-                }
-            }
-        });
-
-    }*/
 
     public ListenerRegistration getListener() {
         return mListener;
@@ -159,17 +98,17 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //TODO: burda bazen uygulama patlıyor kayıt ve giriş yaparken kardeşimin telefonunda oldu android 6.0.1 alttaki iki satırı gösteriyor hata
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_post, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardviewfavorite, parent, false);
         return new ViewHolder(view);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle;
         TextView textViewCategory;
-        TextView textViewUsername;
-        TextView textViewLikes;
+
         ImageView imageViewPost;
-        ImageView imageViewLike;
+
+        ImageView delete;
         View viewHolder;
         ProgressBar bar;
 
@@ -177,13 +116,42 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
             super(view);
             textViewTitle = view.findViewById(R.id.textViewTitlePostCard);
             textViewCategory = view.findViewById(R.id.textViewCategory);
-            //textViewUsername = view.findViewById(R.id.textViewUsernamePostCard);
-            textViewLikes = view.findViewById(R.id.textViewLikes);
+
+            delete = view.findViewById(R.id.imageViewLikedelete);
             imageViewPost = view.findViewById(R.id.imageViewPostCard);
-            imageViewLike = view.findViewById(R.id.imageViewLike);
+
             bar = view.findViewById(R.id.postLoading);
             viewHolder = view;
         }
+    }
+
+
+   /* private void showConfirmDelete(final String postId) {
+        new AlertDialog.Builder(context)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Gönderiyi sil")
+                .setMessage("Bu eylemi gerçekleştireceğinizden emin misiniz?")
+                .setPositiveButton("Evet", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deletePost(postId);
+                    }
+                })
+                .setNegativeButton("Hayir", null)
+                .show();
+    }*/
+
+    private void deletePost(String postId) {
+        mLikeprovider.delete(postId).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(context, "Yayın başarıyla kaldırıldı", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Gönderi silinemedi", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 }

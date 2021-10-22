@@ -105,11 +105,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageViewLike"
+                    android:id="@+id/imageViewLikedelete"
                     android:layout_width="25dp"
                     android:layout_gravity="center"
                     android:layout_height="25dp"
-                    android:src="@drawable/heart" />
+                    android:src="@drawable/heartdolu" />
 
 
 
@@ -120,3 +120,4 @@
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
+

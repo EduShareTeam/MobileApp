@@ -112,22 +112,22 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
         });
 
        // getUserInfo(post.getIdUser(), holder);
-        //getNumberLikesByPost(postId, holder);
+       getNumberLikesByPost(postId, holder);
         checkIfExistLike(postId, mAuthProvider.getUid(), holder);
     }
 
 
-    /*private void getNumberLikesByPost(String idPost, final ViewHolder holder) {
+    private void getNumberLikesByPost(String idPost, final ViewHolder holder) {
         mListener = mLikesProvider.getLikesByPost(idPost).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 if (queryDocumentSnapshots != null) {
                     int numberLikes = queryDocumentSnapshots.size();
-                    holder.textViewLikes.setText(String.valueOf(numberLikes) + " BEĞENİ");
+                    //holder.textViewLikes.setText(String.valueOf(numberLikes) + " BEĞENİ");
                 }
             }
         });
-    }*/
+    }
 
     private void like(final Like like, final ViewHolder holder) {
         mLikesProvider.getLikeByPostAndUser(like.getIdPost(), mAuthProvider.getUid()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

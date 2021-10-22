@@ -5,4 +5,7 @@
     <item android:id="@+id/itemLogout"
         android:title="Çıkış yap"
         app:showAsAction="never" />
+    <item android:id="@+id/itemFav"
+        android:title="Favoriler"
+        app:showAsAction="never" />
 </menu>
