@@ -35,12 +35,19 @@ public class LikesProvider {
         return mCollection.whereEqualTo("id", idPost).whereEqualTo("idPost", idLikesPost);
     }
 
+
+
     public Task<Void> delete(String id) {
         return mCollection.document(id).delete();
     }
+
+
+
     public Query getAll() {
         return mCollection.orderBy("timestamp", Query.Direction.DESCENDING);
     }
+
+
 }
 
 
