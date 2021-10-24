@@ -1,12 +1,10 @@
 package com.fatihbaser.edusharedemo.activities;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.fragments.ChatsFragment;
@@ -62,32 +60,29 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    if (item.getItemId() == R.id.itemHome) {
-                        // FRAGMENT HOME
-                        openFragment(new HomeFragment());
-                    }else if (item.getItemId() == R.id.itemUsers) {
-                        // FRAGMENT CHATS
-                        openFragment(new UsersFragment());
+            item -> {
+                if (item.getItemId() == R.id.itemHome) {
+                    // FRAGMENT HOME
+                    openFragment(new HomeFragment());
+                }else if (item.getItemId() == R.id.itemUsers) {
+                    // FRAGMENT CHATS
+                    openFragment(new UsersFragment());
 
-                    }
-
-                    else if (item.getItemId() == R.id.itemChats) {
-                        // FRAGMENT CHATS
-                        openFragment(new ChatsFragment());
-
-                    } else if (item.getItemId() == R.id.itemFilters) {
-                        // FRAGMENT FILTROS
-                        openFragment(new FiltersFragment());
-
-                    } else if (item.getItemId() == R.id.itemProfile) {
-                        // FRAGMENT PROFILE
-                        openFragment(new ProfileFragment());
-                    }
-                    return true;
                 }
+
+                else if (item.getItemId() == R.id.itemChats) {
+                    // FRAGMENT CHATS
+                    openFragment(new ChatsFragment());
+
+                } else if (item.getItemId() == R.id.itemFilters) {
+                    // FRAGMENT FILTROS
+                    openFragment(new FiltersFragment());
+
+                } else if (item.getItemId() == R.id.itemProfile) {
+                    // FRAGMENT PROFILE
+                    openFragment(new ProfileFragment());
+                }
+                return true;
             };
 
     private void createToken() {

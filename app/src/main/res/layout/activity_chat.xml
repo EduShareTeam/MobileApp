@@ -52,8 +52,8 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/imageViewSendMessage"
-            android:layout_width="49dp"
-            android:layout_height="49dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             app:cardCornerRadius="360dp"
             app:strokeColor="@color/black"
             app:strokeWidth="2dp"

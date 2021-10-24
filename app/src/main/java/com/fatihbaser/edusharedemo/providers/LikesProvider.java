@@ -31,17 +31,17 @@ public class LikesProvider {
         return mCollection.whereEqualTo("idPost", idPost).whereEqualTo("idUser", idUser);
     }
 
+    public Query getLikeByPostByUser(String id) {
+        return mCollection.whereEqualTo("idUser", id);
+    }
+
     public Query getLikes(String idPost, String idLikesPost) {
         return mCollection.whereEqualTo("id", idPost).whereEqualTo("idPost", idLikesPost);
     }
 
-
-
     public Task<Void> delete(String id) {
         return mCollection.document(id).delete();
     }
-
-
 
     public Query getAll() {
         return mCollection.orderBy("timestamp", Query.Direction.DESCENDING);

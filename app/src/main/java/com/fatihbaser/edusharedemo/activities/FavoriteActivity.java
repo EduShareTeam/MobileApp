@@ -10,6 +10,7 @@ import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.adapter.FavoriAdapter;
 import com.fatihbaser.edusharedemo.databinding.ActivityFavoriteBinding;
 import com.fatihbaser.edusharedemo.models.Like;
+import com.fatihbaser.edusharedemo.models.User;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.LikesProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
@@ -42,7 +43,9 @@ public class FavoriteActivity extends AppCompatActivity {
 
 
     private void getAllPost() {
-        Query query = mLikerProvider.getAll();
+        Like like = new Like();
+        User user = new User();
+        Query query = mLikerProvider.getLikeByPostByUser(mAuthProvider.getUid());
         FirestoreRecyclerOptions<Like> options =
                 new FirestoreRecyclerOptions.Builder<Like>()
                         .setQuery(query, Like.class)
