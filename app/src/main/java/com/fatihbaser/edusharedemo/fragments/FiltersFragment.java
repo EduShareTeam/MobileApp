@@ -35,7 +35,7 @@ public class FiltersFragment extends Fragment {
         binding.eItimbilimleri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Egitim bilimleri");
+                goToFilterActivity("Eğitim bilimleri");
             }
         });
 
@@ -61,19 +61,19 @@ public class FiltersFragment extends Fragment {
         binding.teknolojivemuhendislkik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Teknoloji ve Muhendislik");
+                goToFilterActivity("Teknoloji ve Mühendislik");
             }
         });
         binding.guzelsanatlar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Guzel Sanatlar");
+                goToFilterActivity("Güzel Sanatlar");
             }
         });
         binding.iktisat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Iktisadi bilimler");
+                goToFilterActivity("İktisadi bilimler");
             }
         });
         binding.sporbilimleri.setOnClickListener(new View.OnClickListener() {

@@ -36,6 +36,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
+import java.util.Locale;
 
 public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.ViewHolder> {
 
@@ -61,7 +62,7 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
 
 
         holder.delete.setOnClickListener(view -> deletePost(like.getId()));
-        holder.textViewTitle.setText(like.getTitle());
+        holder.textViewTitle.setText(like.getTitle().toUpperCase(Locale.ROOT));
         holder.textViewCategory.setText(like.getCategory());
         if (like.getImage() != null) {
             if (!like.getImage().isEmpty()) {

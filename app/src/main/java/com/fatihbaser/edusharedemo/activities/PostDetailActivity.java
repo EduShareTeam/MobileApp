@@ -176,25 +176,25 @@ public class PostDetailActivity extends AppCompatActivity {
                         String category = documentSnapshot.getString("category");
                         binding.textViewNameCategory.setText(category);
 
-                        if (category.equals("Fen bilimleri")) {
-                            binding.imageViewCategory.setImageResource(R.drawable.fen);
-                        } else if (category.equals("Egitim bilimleri")) {
-                            binding.imageViewCategory.setImageResource(R.drawable.egitim);
-                        } else if (category.equals("Dil ve Edebiyat")) {
-                            binding.imageViewCategory.setImageResource(R.drawable.literature);
-                        } else if (category.equals("Yabanci diller")) {
-                            binding.imageViewCategory.setImageResource(R.drawable.dil);
-                        } else if (category.equals("Mimarlik")) {
-                            binding.imageViewCategory.setImageResource(R.drawable.arc);
-                        } else if (category.equals("Teknoloji ve Muhendislik")) {
-                            binding.imageViewCategory.setImageResource(R.drawable.tek);
-                        } else if (category.equals("Guzel Sanatlar")) {
-                            binding.imageViewCategory.setImageResource(R.drawable.art);
-                        }else if (category.equals("Iktisadi bilimler")) {
-                            binding.imageViewCategory.setImageResource(R.drawable.economic);
-                        } else if (category.equals("Spor bilimleri")) {
-                            binding.imageViewCategory.setImageResource(R.drawable.sports);
-                        }
+//                        if (category.equals("Fen bilimleri")) {
+//                            binding.imageViewCategory.setImageResource(R.drawable.fen);
+//                        } else if (category.equals("Egitim bilimleri")) {
+//                            binding.imageViewCategory.setImageResource(R.drawable.egitim);
+//                        } else if (category.equals("Dil ve Edebiyat")) {
+//                            binding.imageViewCategory.setImageResource(R.drawable.literature);
+//                        } else if (category.equals("Yabanci diller")) {
+//                            binding.imageViewCategory.setImageResource(R.drawable.dil);
+//                        } else if (category.equals("Mimarlik")) {
+//                            binding.imageViewCategory.setImageResource(R.drawable.arc);
+//                        } else if (category.equals("Teknoloji ve Muhendislik")) {
+//                            binding.imageViewCategory.setImageResource(R.drawable.tek);
+//                        } else if (category.equals("Guzel Sanatlar")) {
+//                            binding.imageViewCategory.setImageResource(R.drawable.art);
+//                        }else if (category.equals("Iktisadi bilimler")) {
+//                            binding.imageViewCategory.setImageResource(R.drawable.economic);
+//                        } else if (category.equals("Spor bilimleri")) {
+//                            binding.imageViewCategory.setImageResource(R.drawable.sports);
+//                        }
                     }
                     if (documentSnapshot.contains("idUser")) {
                         mIdUser = documentSnapshot.getString("idUser");
