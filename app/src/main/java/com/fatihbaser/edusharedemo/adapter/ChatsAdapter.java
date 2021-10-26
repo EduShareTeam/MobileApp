@@ -3,6 +3,7 @@ package com.fatihbaser.edusharedemo.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -23,8 +24,8 @@ import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
-
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -43,6 +44,7 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
     MessagesProvider mMessagesProvider;
     ListenerRegistration mListener;
     ListenerRegistration mListenerLastMessage;
+//    BottomNavigationView bottomNavigationView;
 
     public ChatsAdapter(FirestoreRecyclerOptions<Chat> options, Context context) {
         super(options);
@@ -91,8 +93,12 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
                 if (queryDocumentSnapshots != null) {
                     int size = queryDocumentSnapshots.size();
                     if (size > 0) {
+//                        bottomNavigationView = findViewById(R.id.bottom_navigation);
+//                        Menu menu = bottomNavigationView.getMenu();
+//                        menu.findItem(R.id.itemChats).setIcon(R.drawable.outline_mark_chat_unread_24);
                         frameLayoutMessageNotRead.setVisibility(View.VISIBLE);
                         textViewMessageNotRead.setText(String.valueOf(size));
+
                     } else {
                         frameLayoutMessageNotRead.setVisibility(View.GONE);
                     }
@@ -180,7 +186,6 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         CircleImageView circleImageChat;
         FrameLayout frameLayoutMessageNotRead;
         View viewHolder;
-
         ProgressBar bar;
         public ViewHolder(View view) {
             super(view);
