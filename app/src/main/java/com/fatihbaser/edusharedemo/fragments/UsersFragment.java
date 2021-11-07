@@ -50,16 +50,7 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
         mUserProvider = new UsersProvider();
 
         binding.searchBarUser.setOnSearchActionListener(this);
-        binding.searchBarUser.inflateMenu(R.menu.main_menu);
-        binding.searchBarUser.getMenu().setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.itemLogout) {
-                    logout();
-                }
-                return true;
-            }
-        });
+
 
         return view;
     }

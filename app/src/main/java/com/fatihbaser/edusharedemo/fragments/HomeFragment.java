@@ -3,10 +3,14 @@ package com.fatihbaser.edusharedemo.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -36,6 +40,21 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
         // Required empty public constructor
     }
 
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.main_menu,menu);
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,22 +64,21 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
 
         setHasOptionsMenu(true);
         binding.recyclerViewHome.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        setHasOptionsMenu(true);
+
 
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
 
         binding.searchBar.setOnSearchActionListener(this);
         binding.searchBar.inflateMenu(R.menu.main_menu);
+        binding.searchBar.setMenuIcon(R.drawable.heartdolu);
         binding.searchBar.getMenu().setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.itemLogout) {
-                    logout();
-                }
-                else if(item.getItemId() == R.id.itemFav) {
+                if (item.getItemId() == R.id.itemFav) {
                     Intent intent = new Intent(getContext(), FavoriteActivity.class);
                     startActivity(intent);
+
                 }
                 return true;
             }
