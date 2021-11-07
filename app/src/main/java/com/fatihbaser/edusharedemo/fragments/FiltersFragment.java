@@ -67,7 +67,7 @@ public class FiltersFragment extends Fragment {
         binding.guzelsanatlar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Güzel Sanatlar");
+                goToFilterActivity("Guzel Sanatlar");
             }
         });
         binding.iktisat.setOnClickListener(new View.OnClickListener() {
