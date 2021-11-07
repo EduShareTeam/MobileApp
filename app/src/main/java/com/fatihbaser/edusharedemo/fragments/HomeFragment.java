@@ -76,13 +76,13 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.itemFav) {
+                    Intent intent = new Intent(getContext(), FavoriteActivity.class);
+                    startActivity(intent);
 
                 }
                 return true;
             }
         });
-
-
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override

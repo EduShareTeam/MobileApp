@@ -52,16 +52,6 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
         binding.searchBarUser.setOnSearchActionListener(this);
 
 
-        binding.searchBarUser.getMenu().setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.itemFav) {
-
-                }
-                return true;
-            }
-        });
-
         return view;
     }
 
