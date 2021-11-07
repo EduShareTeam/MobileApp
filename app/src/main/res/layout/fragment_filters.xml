@@ -38,7 +38,7 @@
                     android:layout_margin="3dp"
                     android:layout_gravity="center"
                     android:background="@color/white"
-                    android:src="@drawable/fen"
+                    android:src="@drawable/science"
                     app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             </androidx.cardview.widget.CardView>
@@ -77,7 +77,7 @@
                     android:layout_margin="3dp"
                     android:layout_gravity="center"
                     android:background="@color/white"
-                    android:src="@drawable/egitim"
+                    android:src="@drawable/reading_book"
                     app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             </androidx.cardview.widget.CardView>
@@ -155,7 +155,7 @@
                     android:layout_margin="3dp"
                     android:layout_gravity="center"
                     android:background="@color/white"
-                    android:src="@drawable/dil"
+                    android:src="@drawable/language"
                     app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             </androidx.cardview.widget.CardView>
@@ -194,7 +194,7 @@
                     android:layout_margin="3dp"
                     android:layout_gravity="center"
                     android:background="@color/white"
-                    android:src="@drawable/arc"
+                    android:src="@drawable/compass"
                     app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             </androidx.cardview.widget.CardView>
@@ -233,7 +233,7 @@
                     android:layout_margin="3dp"
                     android:layout_gravity="center"
                     android:background="@color/white"
-                    android:src="@drawable/tek"
+                    android:src="@drawable/cyborg"
                     app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             </androidx.cardview.widget.CardView>
@@ -311,7 +311,7 @@
                 android:layout_margin="3dp"
                 android:layout_gravity="center"
                 android:background="@color/white"
-                android:src="@drawable/economic"
+                android:src="@drawable/economy"
                 app:shapeAppearanceOverlay="@style/roundedImageView" />
 
         </androidx.cardview.widget.CardView>
@@ -350,7 +350,7 @@
                     android:layout_margin="3dp"
                     android:layout_gravity="center"
                     android:background="@color/white"
-                    android:src="@drawable/sports"
+                    android:src="@drawable/running"
                     app:shapeAppearanceOverlay="@style/roundedImageView" />
 
             </androidx.cardview.widget.CardView>

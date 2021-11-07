@@ -183,9 +183,9 @@ public class RegisterActivity extends AppCompatActivity {
                                                     String id = mAuthProvider.getUid();
                                                     user.setId(id);
                                                     user.setImageProfile(urlProfile);
-                                                    user.setUsername(username);
-                                                    user.setUniversity(university);
-                                                    user.setDepartment(department);
+                                                    user.setUsername(username.toLowerCase());
+                                                    user.setUniversity(university.toLowerCase());
+                                                    user.setDepartment(department.toLowerCase());
                                                     user.setBio(bio);
                                                     user.setTimestamp(new Date().getTime());
                                                     mUsersProvider.updateProfile(user).addOnCompleteListener(new OnCompleteListener<Void>() {

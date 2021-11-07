@@ -56,6 +56,10 @@ public class UsersProvider {
         return mCollection.orderBy("username").startAt(username).endAt(username+'\uf8ff');
     }
 
+    public Query getUserByDepartment(String department) {
+        return mCollection.orderBy("department").startAt(department).endAt(department+'\uf8ff');
+    }
+
     public Query getAll() {
         return mCollection.orderBy("timestamp", Query.Direction.DESCENDING);
     }

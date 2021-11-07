@@ -58,7 +58,7 @@ public class UsersAdapter extends FirestoreRecyclerAdapter<User, UsersAdapter.Vi
             mTextViewNumberFilter.setText(String.valueOf(numberFilter));
         }
 
-        holder.textViewUsername.setText(user.getUsername());
+        holder.textViewUsername.setText(user.getUsername().toUpperCase());
         holder.textViewUniversity.setText(user.getUniversity());
         holder.textViewDepartment.setText(user.getDepartment());
         if (user.getImage() != null) {

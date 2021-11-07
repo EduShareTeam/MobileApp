@@ -31,6 +31,9 @@ public class MessagesProvider {
     public Query getMessagesByChatAndSender(String idChat, String idSender) {
         return mCollection.whereEqualTo("idChat", idChat).whereEqualTo("idSender", idSender).whereEqualTo("viewed", false);
     }
+    public Query getMessagesBySender(String idSender) {
+        return mCollection.whereEqualTo("idSender", idSender).whereEqualTo("viewed", false);
+    }
 
     public Query getLastThreeMessagesByChatAndSender(String idChat, String idSender) {
         return mCollection

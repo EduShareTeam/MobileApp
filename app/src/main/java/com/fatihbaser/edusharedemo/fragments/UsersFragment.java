@@ -88,6 +88,18 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
         mUsersAdapter.startListening();
     }
 
+    private void getAllDepartment(String department){
+        Query query = mUserProvider.getUserByDepartment(department);
+        FirestoreRecyclerOptions<User> options =
+                new FirestoreRecyclerOptions.Builder<User>()
+                        .setQuery(query, User.class)
+                        .build();
+        mUsersAdapterSearch = new UsersAdapter(options, getContext());
+        mUsersAdapterSearch.notifyDataSetChanged();
+        binding.recyclerViewUsersFragment.setAdapter(mUsersAdapterSearch);
+        mUsersAdapterSearch.startListening();
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -128,6 +140,7 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
     @Override
     public void onSearchConfirmed(CharSequence text) {
         searchByTitle(text.toString().toLowerCase());
+        getAllDepartment(text.toString());
     }
 
     @Override

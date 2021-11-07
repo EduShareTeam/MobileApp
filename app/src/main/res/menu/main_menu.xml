@@ -7,5 +7,5 @@
         app:showAsAction="never" />
     <item android:id="@+id/itemFav"
         android:title="Favoriler"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 </menu>

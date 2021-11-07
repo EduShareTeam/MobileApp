@@ -12,10 +12,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.activities.ChatActivity;
+import com.fatihbaser.edusharedemo.activities.HomeActivity;
 import com.fatihbaser.edusharedemo.models.Chat;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.ChatsProvider;
@@ -24,6 +26,7 @@ import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -44,7 +47,6 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
     MessagesProvider mMessagesProvider;
     ListenerRegistration mListener;
     ListenerRegistration mListenerLastMessage;
-//    BottomNavigationView bottomNavigationView;
 
     public ChatsAdapter(FirestoreRecyclerOptions<Chat> options, Context context) {
         super(options);
@@ -85,17 +87,21 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
 
     }
 
-    private void getMessageNotRead(String chatId, String idSender, final TextView textViewMessageNotRead, final FrameLayout frameLayoutMessageNotRead) {
+    public interface MyInterface{
+        public void foo();
+    }
 
+    private void getMessageNotRead(String chatId, String idSender, final TextView textViewMessageNotRead, final FrameLayout frameLayoutMessageNotRead) {
         mListener = mMessagesProvider.getMessagesByChatAndSender(chatId, idSender).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 if (queryDocumentSnapshots != null) {
                     int size = queryDocumentSnapshots.size();
                     if (size > 0) {
-//                        bottomNavigationView = findViewById(R.id.bottom_navigation);
-//                        Menu menu = bottomNavigationView.getMenu();
-//                        menu.findItem(R.id.itemChats).setIcon(R.drawable.outline_mark_chat_unread_24);
+                        Intent intent = new Intent("message_subject_intent");
+                        intent.putExtra("size" , size);
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
                         frameLayoutMessageNotRead.setVisibility(View.VISIBLE);
                         textViewMessageNotRead.setText(String.valueOf(size));
 
@@ -187,6 +193,7 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         FrameLayout frameLayoutMessageNotRead;
         View viewHolder;
         ProgressBar bar;
+
         public ViewHolder(View view) {
             super(view);
             textViewUsername = view.findViewById(R.id.textViewUsernameChat);

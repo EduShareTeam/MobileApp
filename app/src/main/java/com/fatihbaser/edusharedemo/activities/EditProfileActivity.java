@@ -154,9 +154,9 @@ public class EditProfileActivity extends AppCompatActivity {
             }
             else {
                 User user = new User();
-                user.setUsername(mUsername);
-                user.setUniversity(mUniversity);
-                user.setDepartment(mDepartment);
+                user.setUsername(mUsername.toLowerCase());
+                user.setUniversity(mUniversity.toLowerCase());
+                user.setDepartment(mDepartment.toLowerCase());
                 user.setBio(mBio);
                 user.setId(mAuthProvider.getUid());
                 user.setImageProfile(mImage);
@@ -180,9 +180,9 @@ public class EditProfileActivity extends AppCompatActivity {
                             final String urlProfile = uri.toString();
                             User user = new User();
                             user.setImageProfile(urlProfile);
-                            user.setUsername(mUsername);
-                            user.setUniversity(mUniversity);
-                            user.setDepartment(mDepartment);
+                            user.setUsername(mUsername.toLowerCase());
+                            user.setUniversity(mUniversity.toLowerCase());
+                            user.setDepartment(mDepartment.toLowerCase());
                             user.setBio(mBio);
                             user.setId(mAuthProvider.getUid());
                             updateInfo(user);
@@ -204,9 +204,9 @@ public class EditProfileActivity extends AppCompatActivity {
                 mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
                     final String url = uri.toString();
                     User user = new User();
-                    user.setUsername(mUsername);
-                    user.setUniversity(mUniversity);
-                    user.setDepartment(mDepartment);
+                    user.setUsername(mUsername.toLowerCase());
+                    user.setUniversity(mUniversity.toLowerCase());
+                    user.setDepartment(mDepartment.toLowerCase());
                     user.setBio(mBio);
                     user.setId(mAuthProvider.getUid());
                     updateInfo(user);

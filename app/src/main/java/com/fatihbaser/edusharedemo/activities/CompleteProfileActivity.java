@@ -139,9 +139,9 @@ public class CompleteProfileActivity extends AppCompatActivity {
                             String id = mAuthProvider.getUid();
                             user.setId(id);
                             user.setImageProfile(urlProfile);
-                            user.setUsername(username);
-                            user.setUniversity(mUniversity);
-                            user.setDepartment(mDepartment);
+                            user.setUsername(username.toLowerCase());
+                            user.setUniversity(mUniversity.toLowerCase());
+                            user.setDepartment(mDepartment.toLowerCase());
                             user.setBio(mBio);
                             user.setTimestamp(new Date().getTime());
                             mUsersProvider.updateProfile(user).addOnCompleteListener(new OnCompleteListener<Void>() {

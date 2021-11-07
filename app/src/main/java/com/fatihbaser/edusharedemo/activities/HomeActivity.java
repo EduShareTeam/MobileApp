@@ -1,7 +1,13 @@
 package com.fatihbaser.edusharedemo.activities;
 
-import android.os.Bundle;
+import static android.content.ContentValues.TAG;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,11 +18,20 @@ import com.fatihbaser.edusharedemo.fragments.FiltersFragment;
 import com.fatihbaser.edusharedemo.fragments.HomeFragment;
 import com.fatihbaser.edusharedemo.fragments.ProfileFragment;
 import com.fatihbaser.edusharedemo.fragments.UsersFragment;
+import com.fatihbaser.edusharedemo.models.Chat;
+import com.fatihbaser.edusharedemo.models.Message;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
+import com.fatihbaser.edusharedemo.providers.ChatsProvider;
+import com.fatihbaser.edusharedemo.providers.MessagesProvider;
 import com.fatihbaser.edusharedemo.providers.TokenProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -24,6 +39,9 @@ public class HomeActivity extends AppCompatActivity {
     TokenProvider mTokenProvider;
     AuthProvider mAuthProvider;
     UsersProvider mUsersProvider;
+    ChatsProvider mChatsProvider;
+    MessagesProvider messagesProvider;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +50,55 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+//
+//
+//        BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                int size = intent.getIntExtra("size", 0);
+//                if (size >= 1) {
+//                    BadgeDrawable badgeDrawable = bottomNavigation.getOrCreateBadge(R.id.itemChats);
+//                    badgeDrawable.setNumber(size);
+//                }
+//                if (size == 0) {
+//                    BadgeDrawable badgeDrawable = bottomNavigation.getOrCreateBadge(R.id.itemChats);
+//                    badgeDrawable.setNumber(size);
+//                }
+//                //badgeDrawable.setNumber(size);
+//            }
+//        };
+//        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("message_subject_intent"));
 
         mTokenProvider = new TokenProvider();
         mAuthProvider = new AuthProvider();
         mUsersProvider = new UsersProvider();
+        mChatsProvider = new ChatsProvider();
+        messagesProvider = new MessagesProvider();
 
+        hasMessages();
         openFragment(new HomeFragment());
         createToken();
     }
+
+
+
+    private void hasMessages() {
+            messagesProvider.getMessagesBySender(mAuthProvider.getUid()).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value != null) {
+                    int size = value.size();
+                    System.out.println(size);
+                    if (size > 0) {
+                        bottomNavigation.getOrCreateBadge(R.id.itemChats);
+                    } else {
+
+                    }
+                }
+            }
+        });
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -64,13 +123,11 @@ public class HomeActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.itemHome) {
                     // FRAGMENT HOME
                     openFragment(new HomeFragment());
-                }else if (item.getItemId() == R.id.itemUsers) {
+                } else if (item.getItemId() == R.id.itemUsers) {
                     // FRAGMENT CHATS
                     openFragment(new UsersFragment());
 
-                }
-
-                else if (item.getItemId() == R.id.itemChats) {
+                } else if (item.getItemId() == R.id.itemChats) {
                     // FRAGMENT CHATS
                     openFragment(new ChatsFragment());
 
