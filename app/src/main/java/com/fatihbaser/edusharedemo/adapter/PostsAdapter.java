@@ -65,10 +65,10 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
         DocumentSnapshot document = getSnapshots().getSnapshot(position);
         final String postId = document.getId();
 
-        /*if (mTextViewNumberFilter != null) {
+        if (mTextViewNumberFilter != null) {
             int numberFilter = getSnapshots().size();
             mTextViewNumberFilter.setText(String.valueOf(numberFilter));
-        }*/
+        }
 
         holder.textViewTitle.setText(post.getTitle().toUpperCase());
         holder.textViewCategory.setText(post.getCategory());
@@ -111,8 +111,8 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
             }
         });
 
-       // getUserInfo(post.getIdUser(), holder);
-       getNumberLikesByPost(postId, holder);
+        // getUserInfo(post.getIdUser(), holder);
+        getNumberLikesByPost(postId, holder);
         checkIfExistLike(postId, mAuthProvider.getUid(), holder);
     }
 
@@ -162,22 +162,9 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
 
     }
 
-   /* private void getUserInfo(String idUser, final ViewHolder holder) {
-        mUsersProvider.getUser(idUser).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    if (documentSnapshot.contains("username")) {
-                        String username = documentSnapshot.getString("username");
-                        //holder.textViewUsername.setText("BY: " + username.toUpperCase());
-                    }
-                }
-            }
-        });
-
-    }*/
-
-    public ListenerRegistration getListener() { return mListener; }
+    public ListenerRegistration getListener() {
+        return mListener;
+    }
 
     @NonNull
     @Override

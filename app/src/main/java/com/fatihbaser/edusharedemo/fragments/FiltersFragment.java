@@ -49,7 +49,7 @@ public class FiltersFragment extends Fragment {
         binding.yabancDiller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Yabanci diller");
+                goToFilterActivity("Yabancı diller");
             }
         });
         binding.mimarliK.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +91,4 @@ public class FiltersFragment extends Fragment {
         intent.putExtra("category", category);
         startActivity(intent);
     }
-
-
 }

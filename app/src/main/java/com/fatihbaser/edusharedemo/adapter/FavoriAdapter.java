@@ -42,7 +42,6 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
 
     Context context;
     UsersProvider mUsersProvider;
-
     LikesProvider mLikeprovider;
     AuthProvider mAuthProvider;
     TextView mTextViewNumberFilter;
@@ -52,18 +51,31 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
         super(options);
         this.context = context;
         mUsersProvider = new UsersProvider();
-
         mLikeprovider=new LikesProvider();
         mAuthProvider = new AuthProvider();
-
     }
+
+    public FavoriAdapter(FirestoreRecyclerOptions<Like> options, Context context, TextView textView) {
+        super(options);
+        this.context = context;
+        mUsersProvider = new UsersProvider();
+        mLikeprovider=new LikesProvider();
+        mAuthProvider = new AuthProvider();
+        mTextViewNumberFilter = textView;
+    }
+
     @Override
     protected void onBindViewHolder(@NonNull final ViewHolder holder, int position, @NonNull final Like like) {
-
+       //TODO: Favori kisminda veri olmadiginda usera bilgi verme
+        if (mTextViewNumberFilter != null) {
+            int numberFilter = getSnapshots().size();
+            mTextViewNumberFilter.setText(String.valueOf(numberFilter));
+        }
 
         holder.delete.setOnClickListener(view -> deletePost(like.getId()));
         holder.textViewTitle.setText(like.getTitle().toUpperCase(Locale.ROOT));
         holder.textViewCategory.setText(like.getCategory());
+
         if (like.getImage() != null) {
             if (!like.getImage().isEmpty()) {
                 Picasso.with(context).load(like.getImage()).into(holder.imageViewPost, new Callback() {

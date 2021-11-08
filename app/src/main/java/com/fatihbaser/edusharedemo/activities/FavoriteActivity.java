@@ -24,6 +24,7 @@ public class FavoriteActivity extends AppCompatActivity {
     PostProvider mPostProvider;
     AuthProvider mAuthProvider;
     FavoriAdapter mPostsAdapter;
+    FavoriAdapter favoriAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,6 @@ public class FavoriteActivity extends AppCompatActivity {
         binding = ActivityFavoriteBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
         mLikerProvider = new LikesProvider();
@@ -59,6 +59,12 @@ public class FavoriteActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        Query query = mLikerProvider.getLikeByPostByUser(mAuthProvider.getUid());
+        FirestoreRecyclerOptions<Like> options =
+                new FirestoreRecyclerOptions.Builder<Like>()
+                        .setQuery(query, Like.class)
+                        .build();
+        favoriAdapter = new FavoriAdapter(options,getApplicationContext(), binding.textViewNumberFilter);
         getAllPost();
     }
 

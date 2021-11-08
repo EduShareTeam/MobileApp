@@ -61,6 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textAllCaps="true"
                         android:layout_marginTop="20dp"
                         android:text="Isim ve Soyisim"
                         android:textColor="@color/black"
@@ -89,6 +90,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
+                                android:textAllCaps="true"
                                 android:layout_marginTop="10dp"
                                 android:text="University"
                                 android:textColor="@color/colorDarkBlue"
@@ -104,6 +106,7 @@
                                 android:layout_marginTop="7dp"
                                 android:layout_weight="6"
                                 android:text="Department"
+                                android:textAllCaps="true"
                                 android:textColor="@color/colorDarkBlue"
                                 android:textSize="12dp"
                                 android:textStyle="bold" />
