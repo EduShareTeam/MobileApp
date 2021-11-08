@@ -141,7 +141,7 @@ public class MyFirebaseMessagingClient extends FirebaseMessagingService {
         intent.putExtra("imageReceiver", imageReceiver);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        RemoteInput remoteInput = new RemoteInput.Builder(NOTIFICATION_REPLY).setLabel("Tu mensaje...").build();
+        RemoteInput remoteInput = new RemoteInput.Builder(NOTIFICATION_REPLY).setLabel("text to reply...").build();
 
         final NotificationCompat.Action action = new NotificationCompat.Action.Builder(
                 R.mipmap.ic_launcher,
@@ -165,6 +165,5 @@ public class MyFirebaseMessagingClient extends FirebaseMessagingService {
                 );
         notificationHelper.getManager().notify(idNotification, builder.build());
     }
-
 }
 

@@ -50,24 +50,6 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-//
-//
-//        BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//                int size = intent.getIntExtra("size", 0);
-//                if (size >= 1) {
-//                    BadgeDrawable badgeDrawable = bottomNavigation.getOrCreateBadge(R.id.itemChats);
-//                    badgeDrawable.setNumber(size);
-//                }
-//                if (size == 0) {
-//                    BadgeDrawable badgeDrawable = bottomNavigation.getOrCreateBadge(R.id.itemChats);
-//                    badgeDrawable.setNumber(size);
-//                }
-//                //badgeDrawable.setNumber(size);
-//            }
-//        };
-//        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("message_subject_intent"));
 
         mTokenProvider = new TokenProvider();
         mAuthProvider = new AuthProvider();

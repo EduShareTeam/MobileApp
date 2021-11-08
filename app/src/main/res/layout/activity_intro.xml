@@ -34,21 +34,14 @@
         android:backgroundTint="#FFFFFF"
         android:text="GİRİŞ YAP"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:textColor="@color/white"
-        android:text="Google ile hızlı erişim "/>
 
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btnLoginGoogle"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp" />
+    <!--    <com.google.android.gms.common.SignInButton-->
+<!--        android:id="@+id/btnLoginGoogle"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginRight="25dp"-->
+<!--        android:layout_marginLeft="25dp" />-->
 
 
 </LinearLayout>

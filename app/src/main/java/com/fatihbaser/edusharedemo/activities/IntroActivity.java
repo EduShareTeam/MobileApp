@@ -34,8 +34,8 @@ public class IntroActivity extends AppCompatActivity {
     UsersProvider mUsersProvider;
     private GoogleSignInClient mGoogleSignInClient;
     AlertDialog mDialog;
-    private static final String TAG = "GoogleActivity";
-    private static final int RC_SIGN_IN = 9001;
+//    private static final String TAG = "GoogleActivity";
+//    private static final int RC_SIGN_IN = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,20 +52,20 @@ public class IntroActivity extends AppCompatActivity {
                 .setMessage("Giriş Yapılıyor ...")
                 .setCancelable(false).build();
 
-        // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
+//        // Configure Google Sign In
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//
+//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        binding.btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signInWithGoogle();
-            }
-        });
+//        binding.btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                signInWithGoogle();
+//            }
+//        });
 
         binding.createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,37 +84,37 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
-    private void checkUserExist(final String id) {
-        mUsersProvider.getUser(id).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    mDialog.dismiss();
-                    Intent intent = new Intent(IntroActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                }
-                else {
-                    String email = mAuthProvider.getEmail();
-                    User user = new User();
-                    user.setEmail(email);
-                    user.setId(id);
-                    mUsersProvider.create(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            mDialog.dismiss();
-                            if (task.isSuccessful()) {
-                                Intent intent = new Intent(IntroActivity.this, CompleteProfileActivity.class);
-                                startActivity(intent);
-                            }
-                            else {
-                                Toast.makeText(IntroActivity.this, "Kullanıcı bilgileri saklanamadı", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-            }
-        });
-    }
+//    private void checkUserExist(final String id) {
+//        mUsersProvider.getUser(id).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                if (documentSnapshot.exists()) {
+//                    mDialog.dismiss();
+//                    Intent intent = new Intent(IntroActivity.this, HomeActivity.class);
+//                    startActivity(intent);
+//                }
+//                else {
+//                    String email = mAuthProvider.getEmail();
+//                    User user = new User();
+//                    user.setEmail(email);
+//                    user.setId(id);
+//                    mUsersProvider.create(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            mDialog.dismiss();
+//                            if (task.isSuccessful()) {
+//                                Intent intent = new Intent(IntroActivity.this, CompleteProfileActivity.class);
+//                                startActivity(intent);
+//                            }
+//                            else {
+//                                Toast.makeText(IntroActivity.this, "Kullanıcı bilgileri saklanamadı", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//        });
+//    }
 
     @Override
     protected void onStart() {
@@ -126,40 +126,40 @@ public class IntroActivity extends AppCompatActivity {
         }
     }
 
-    private void signInWithGoogle() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+//    private void signInWithGoogle() {
+//        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+//        startActivityForResult(signInIntent, RC_SIGN_IN);
+//    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == RC_SIGN_IN) {
+//            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+//            try {
+//                GoogleSignInAccount account = task.getResult(ApiException.class);
+//                firebaseAuthWithGoogle(account);
+//            } catch (ApiException e) {
+//                Log.w("ERROR", "Google sign in failed", e);
+//            }
+//        }
+//    }
 
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                Log.w("ERROR", "Google sign in failed", e);
-            }
-        }
-    }
-
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        mDialog.show();
-        mAuthProvider.googleLogin(acct).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    String id = mAuthProvider.getUid();
-                    checkUserExist(id);
-                }
-                else {
-                    mDialog.dismiss();
-                    Log.w("ERROR", "signInWithCredential:failure", task.getException());
-                    Toast.makeText(IntroActivity.this, "google ile giriş yapılamadı", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
+//    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+//        mDialog.show();
+//        mAuthProvider.googleLogin(acct).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                if (task.isSuccessful()) {
+//                    String id = mAuthProvider.getUid();
+//                    checkUserExist(id);
+//                }
+//                else {
+//                    mDialog.dismiss();
+//                    Log.w("ERROR", "signInWithCredential:failure", task.getException());
+//                    Toast.makeText(IntroActivity.this, "google ile giriş yapılamadı", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//    }
 }
