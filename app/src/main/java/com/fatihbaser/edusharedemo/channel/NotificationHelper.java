@@ -3,8 +3,10 @@ package com.fatihbaser.edusharedemo.channel;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
@@ -16,6 +18,7 @@ import androidx.core.graphics.drawable.IconCompat;
 
 
 import com.fatihbaser.edusharedemo.R;
+import com.fatihbaser.edusharedemo.activities.HomeActivity;
 import com.fatihbaser.edusharedemo.models.Message;
 
 import java.util.Date;
@@ -54,12 +57,19 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getNotification(String title, String body) {
+
+        // Create an explicit intent for an Activity in your app
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
         return new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setColor(Color.GRAY)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.edusharenotificationico)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(body).setBigContentTitle(title));
     }
 
