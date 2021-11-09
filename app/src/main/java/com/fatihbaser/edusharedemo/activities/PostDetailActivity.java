@@ -44,6 +44,7 @@ public class PostDetailActivity extends AppCompatActivity {
     UsersProvider mUsersProvider;
     LikesProvider mLikesProvider;
 
+    String mExtraIdUser;
     String mExtraPostId;
     String mExtraTitle;
     String mIdUser = "";
@@ -61,6 +62,7 @@ public class PostDetailActivity extends AppCompatActivity {
         mExtraPostId = getIntent().getStringExtra("id");
         mExtraTitle = getIntent().getStringExtra("title");
 
+        mExtraIdUser = getIntent().getStringExtra("idUser");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PostDetailActivity.this);
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("");
@@ -74,9 +76,7 @@ public class PostDetailActivity extends AppCompatActivity {
         mTokenProvider = new TokenProvider();
         mNotificationProvider = new NotificationProvider();
 
-        if (mAuthProvider.getUid().equals(mIdUser)) {
-            binding.chat.setVisibility(View.INVISIBLE);
-        }
+
 
         binding.btnShowProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +85,10 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
         getPost();
+        if (mAuthProvider.getUid().equals(mIdUser)) {
+            binding.chat.setVisibility(View.INVISIBLE);
+        }
+
        // getNumberLikes();
         mExtraTitle = getIntent().getStringExtra("title");
         binding.chat.setOnClickListener(new View.OnClickListener() {
@@ -125,10 +129,18 @@ public class PostDetailActivity extends AppCompatActivity {
 
     private void goToChatActivity() {
 
-        Intent intent = new Intent(PostDetailActivity.this, ChatActivity.class);
-        intent.putExtra("idUser1", mAuthProvider.getUid());
-        intent.putExtra("idUser2", mIdUser);
-        startActivity(intent);
+
+        if (!mAuthProvider.getUid().equals(mIdUser)) {
+
+            Intent intent = new Intent(PostDetailActivity.this, ChatActivity.class);
+            intent.putExtra("idUser1", mAuthProvider.getUid());
+            intent.putExtra("idUser2", mIdUser);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(this, "Üzgünüm kendine mesaj gönderemezsin !!", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void instanceSlider() {

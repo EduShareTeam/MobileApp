@@ -60,8 +60,19 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull final Chat chat) {
 
+
+
+
         DocumentSnapshot document = getSnapshots().getSnapshot(position);
         final String chatId = document.getId();
+        int numberFilter = getSnapshots().size();
+
+        if(numberFilter>0){
+            holder.mesajyok.setVisibility(View.INVISIBLE);
+        }
+        else{
+            holder.mesajyok.setVisibility(View.VISIBLE);
+        }
         if (mAuthProvider.getUid().equals(chat.getIdUser1())) {
             getUserInfo(chat.getIdUser2(), holder);
         } else {
@@ -106,6 +117,7 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
                         textViewMessageNotRead.setText(String.valueOf(size));
 
                     } else {
+
                         frameLayoutMessageNotRead.setVisibility(View.GONE);
                     }
                 }
@@ -131,6 +143,8 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
                     if (size > 0) {
                         String lastMessage = queryDocumentSnapshots.getDocuments().get(0).getString("message");
                         textViewLastMessage.setText(lastMessage);
+                    }
+                    else{
                     }
                 }
             }
@@ -191,12 +205,14 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         TextView textViewMessageNotRead;
         CircleImageView circleImageChat;
         FrameLayout frameLayoutMessageNotRead;
+        TextView mesajyok;
         View viewHolder;
         ProgressBar bar;
 
         public ViewHolder(View view) {
             super(view);
             textViewUsername = view.findViewById(R.id.textViewUsernameChat);
+            mesajyok = view.findViewById(R.id.mesajyok);
             textViewLastMessage = view.findViewById(R.id.textViewLastMessageChat);
             textViewMessageNotRead = view.findViewById(R.id.textViewMessageNotRead);
             circleImageChat = view.findViewById(R.id.circleImageChat);
