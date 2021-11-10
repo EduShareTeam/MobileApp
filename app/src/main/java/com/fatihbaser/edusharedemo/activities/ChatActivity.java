@@ -1,5 +1,13 @@
 package com.fatihbaser.edusharedemo.activities;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -7,16 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.adapter.MessagesAdapter;
@@ -31,7 +29,6 @@ import com.fatihbaser.edusharedemo.providers.MessagesProvider;
 import com.fatihbaser.edusharedemo.providers.NotificationProvider;
 import com.fatihbaser.edusharedemo.providers.TokenProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
-import com.fatihbaser.edusharedemo.utils.RelativeTime;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
