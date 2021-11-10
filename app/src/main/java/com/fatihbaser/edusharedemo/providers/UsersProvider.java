@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class UsersProvider {
 
-    private CollectionReference mCollection;
-    private CollectionReference mmCollection;
+    private final CollectionReference mCollection;
+    private final CollectionReference mmCollection;
 
     public UsersProvider() {
         mCollection = FirebaseFirestore.getInstance().collection("Users");

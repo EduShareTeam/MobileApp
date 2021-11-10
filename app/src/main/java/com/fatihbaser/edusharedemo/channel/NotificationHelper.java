@@ -57,7 +57,6 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getNotification(String title, String body) {
-
         // Create an explicit intent for an Activity in your app
         Intent intent = new Intent(this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -82,7 +81,7 @@ public class NotificationHelper extends ContextWrapper {
             Bitmap bitmapReceiver,
             NotificationCompat.Action action) {
 
-        Person person1 = null;
+        Person person1;
         if (bitmapReceiver == null) {
             person1 = new Person.Builder()
                     .setName(usernameReceiver)
@@ -95,7 +94,7 @@ public class NotificationHelper extends ContextWrapper {
                     .build();
         }
 
-        Person person2 = null;
+        Person person2;
 
         if (bitmapSender == null) {
             person2 = new Person.Builder()

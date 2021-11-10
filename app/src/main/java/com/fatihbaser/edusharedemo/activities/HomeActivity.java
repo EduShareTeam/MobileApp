@@ -1,13 +1,7 @@
 package com.fatihbaser.edusharedemo.activities;
 
-import static android.content.ContentValues.TAG;
-
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,20 +12,13 @@ import com.fatihbaser.edusharedemo.fragments.FiltersFragment;
 import com.fatihbaser.edusharedemo.fragments.HomeFragment;
 import com.fatihbaser.edusharedemo.fragments.ProfileFragment;
 import com.fatihbaser.edusharedemo.fragments.UsersFragment;
-import com.fatihbaser.edusharedemo.models.Chat;
-import com.fatihbaser.edusharedemo.models.Message;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.ChatsProvider;
 import com.fatihbaser.edusharedemo.providers.MessagesProvider;
 import com.fatihbaser.edusharedemo.providers.TokenProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -60,10 +47,6 @@ public class HomeActivity extends AppCompatActivity {
         openFragment(new HomeFragment());
         createToken();
     }
-
-
-
-
 
     @Override
     protected void onStart() {

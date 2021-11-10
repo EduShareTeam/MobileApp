@@ -40,8 +40,6 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
         // Required empty public constructor
     }
 
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -65,7 +63,6 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
         setHasOptionsMenu(true);
         binding.recyclerViewHome.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
-
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
 
@@ -84,12 +81,7 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
             }
         });
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToPost();
-            }
-        });
+        binding.fab.setOnClickListener(view1 -> goToPost());
         return view;
     }
 

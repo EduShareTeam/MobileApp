@@ -13,7 +13,6 @@ import com.fatihbaser.edusharedemo.databinding.FragmentFiltersBinding;
 
 
 public class FiltersFragment extends Fragment {
-    private FragmentFiltersBinding binding;
     public FiltersFragment() {
         // Required empty public constructor
     }
@@ -22,7 +21,9 @@ public class FiltersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentFiltersBinding.inflate(inflater, container, false);
+        com.fatihbaser.edusharedemo.databinding.
+                FragmentFiltersBinding binding = FragmentFiltersBinding.
+                inflate(inflater, container, false);
         View view = binding.getRoot();
 
         binding.fenbilimleri.setOnClickListener(new View.OnClickListener() {
@@ -86,9 +87,10 @@ public class FiltersFragment extends Fragment {
         return view;
     }
 
-   private void goToFilterActivity(String category) {
+    private void goToFilterActivity(String category) {
         Intent intent = new Intent(getContext(), FilterActivity.class);
         intent.putExtra("category", category);
         startActivity(intent);
     }
+
 }

@@ -3,24 +3,23 @@ package com.fatihbaser.edusharedemo.activities;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.adapter.PostsAdapter;
 import com.fatihbaser.edusharedemo.databinding.ActivityFilterBinding;
-import com.fatihbaser.edusharedemo.databinding.ActivityMainBinding;
 import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
+
+import java.util.Objects;
 
 
 public class FilterActivity extends AppCompatActivity {
@@ -39,7 +38,7 @@ public class FilterActivity extends AppCompatActivity {
         setContentView(view);
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Filtre");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Filtre");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         binding.recyclerViewFilter.setLayoutManager(new GridLayoutManager(FilterActivity.this, 2));

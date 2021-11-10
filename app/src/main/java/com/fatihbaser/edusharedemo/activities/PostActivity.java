@@ -1,12 +1,6 @@
 package com.fatihbaser.edusharedemo.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
-
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -18,6 +12,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.databinding.ActivityPostBinding;
 import com.fatihbaser.edusharedemo.models.Post;
@@ -26,20 +25,17 @@ import com.fatihbaser.edusharedemo.providers.ImageProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.utils.FileUtil;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 import dmax.dialog.SpotsDialog;
@@ -61,7 +57,7 @@ public class PostActivity extends AppCompatActivity {
     String mDescription = "";
     AlertDialog mDialog;
     AlertDialog.Builder mBuilderSelector;
-    CharSequence options[];
+    CharSequence[] options;
 
     private final int GALLERY_REQUEST_CODE = 1;
     private final int GALLERY_REQUEST_CODE_2 = 2;
@@ -104,58 +100,35 @@ public class PostActivity extends AppCompatActivity {
         mBuilderSelector.setTitle("Lütfen bir seçenek seçiniz");
         options = new CharSequence[]{"Galeriden resim seç", "Fotograf çek"};
 
-        binding.circleImageBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        binding.circleImageBack.setOnClickListener(view1 -> finish());
 
-        binding.btnPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickPost();
-            }
-        });
+        binding.btnPost.setOnClickListener(view12 -> clickPost());
 
-        binding.imageViewPost1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectOptionImage(1);
-            }
-        });
+        binding.imageViewPost1.setOnClickListener(view13 -> selectOptionImage(1));
 
-        binding.imageViewPost2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectOptionImage(2);
-            }
-        });
+        binding.imageViewPost2.setOnClickListener(view14 -> selectOptionImage(2));
 
         spinnerDataList = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter<String>(PostActivity.this,
-                android.R.layout.simple_spinner_dropdown_item,spinnerDataList);
+        arrayAdapter = new ArrayAdapter<>(PostActivity.this,
+                android.R.layout.simple_spinner_dropdown_item, spinnerDataList);
         binding.spinnerProductCategory.setAdapter(arrayAdapter);
         retrieveData();
     }
 
     private void selectOptionImage(final int numberImage) {
 
-        mBuilderSelector.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (i == 0) {
-                    if (numberImage == 1) {
-                        openGallery(GALLERY_REQUEST_CODE);
-                    } else if (numberImage == 2) {
-                        openGallery(GALLERY_REQUEST_CODE_2);
-                    }
-                } else if (i == 1) {
-                    if (numberImage == 1) {
-                        takePhoto(PHOTO_REQUEST_CODE);
-                    } else if (numberImage == 2) {
-                        takePhoto(PHOTO_REQUEST_CODE_2);
-                    }
+        mBuilderSelector.setItems(options, (dialogInterface, i) -> {
+            if (i == 0) {
+                if (numberImage == 1) {
+                    openGallery(GALLERY_REQUEST_CODE);
+                } else if (numberImage == 2) {
+                    openGallery(GALLERY_REQUEST_CODE_2);
+                }
+            } else if (i == 1) {
+                if (numberImage == 1) {
+                    takePhoto(PHOTO_REQUEST_CODE);
+                } else if (numberImage == 2) {
+                    takePhoto(PHOTO_REQUEST_CODE_2);
                 }
             }
         });
@@ -196,8 +169,8 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void clickPost() {
-        mTitle = binding.textInputVideoGame.getText().toString();
-        mDescription = binding.textInputDescription.getText().toString();
+        mTitle = Objects.requireNonNull(binding.textInputVideoGame.getText()).toString();
+        mDescription = Objects.requireNonNull(binding.textInputDescription.getText()).toString();
         mQuality = binding.ratingBarProductQualityUpload.getRating();
         mSpinnerCategories = binding.spinnerProductCategory.getSelectedItem().toString();
         if (!mTitle.isEmpty() && !mDescription.isEmpty()) {
@@ -222,64 +195,49 @@ public class PostActivity extends AppCompatActivity {
 
     private void saveImage(File imageFile1, final File imageFile2) {
         mDialog.show();
-        mImageProvider.save(PostActivity.this, imageFile1).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                if (task.isSuccessful()) {
-                    mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            final String url = uri.toString();
+        mImageProvider.save(PostActivity.this, imageFile1).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
+                    final String url = uri.toString();
 
-                            mImageProvider.save(PostActivity.this, imageFile2).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> taskImage2) {
-                                    if (taskImage2.isSuccessful()) {
-                                        mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                            @Override
-                                            public void onSuccess(Uri uri2) {
-                                                String uuid = UUID.randomUUID().toString();
-                                                final String url2 = uri2.toString();
-                                                Post post = new Post();
-                                                post.setImage1(url);
-                                                post.setImage2(url2);
-                                                post.setId(uuid);
-                                                post.setTitle(mTitle.toLowerCase());
-                                                post.setDescription(mDescription);
-                                                post.setCategory(mSpinnerCategories);
-                                                post.setQuality((double) mQuality);
-                                                post.setIdUser(mAuthProvider.getUid());
-                                                post.setTimestamp(new Date().getTime());
-                                                mPostProvider.save(post).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> taskSave) {
-                                                        mDialog.dismiss();
-                                                        if (taskSave.isSuccessful()) {
-                                                           // clearForm();
-                                                            Toast.makeText(PostActivity.this, "Bilgiler doğru bir şekilde saklandı", Toast.LENGTH_SHORT).show();
-                                                            Intent intent = new Intent(PostActivity.this, HomeActivity.class);
-                                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                            startActivity(intent);
+                    mImageProvider.save(PostActivity.this, imageFile2).addOnCompleteListener(taskImage2 -> {
+                        if (taskImage2.isSuccessful()) {
+                            mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(uri2 -> {
+                                String uuid = UUID.randomUUID().toString();
+                                final String url2 = uri2.toString();
+                                Post post = new Post();
+                                post.setImage1(url);
+                                post.setImage2(url2);
+                                post.setId(uuid);
+                                post.setTitle(mTitle.toLowerCase());
+                                post.setDescription(mDescription);
+                                post.setCategory(mSpinnerCategories);
+                                post.setQuality((double) mQuality);
+                                post.setIdUser(mAuthProvider.getUid());
+                                post.setTimestamp(new Date().getTime());
+                                mPostProvider.save(post).addOnCompleteListener(taskSave -> {
+                                    mDialog.dismiss();
+                                    if (taskSave.isSuccessful()) {
+                                       // clearForm();
+                                        Toast.makeText(PostActivity.this, "Bilgiler doğru bir şekilde saklandı", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(PostActivity.this, HomeActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
 
-                                                        } else {
-                                                            Toast.makeText(PostActivity.this, "Bilgiler saklanamadı", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }
-                                                });
-                                            }
-                                        });
                                     } else {
-                                        mDialog.dismiss();
-                                        Toast.makeText(PostActivity.this, "2 numaralı resim kaydedilemedi", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PostActivity.this, "Bilgiler saklanamadı", Toast.LENGTH_SHORT).show();
                                     }
-                                }
+                                });
                             });
+                        } else {
+                            mDialog.dismiss();
+                            Toast.makeText(PostActivity.this, "2 numaralı resim kaydedilemedi", Toast.LENGTH_SHORT).show();
                         }
                     });
-                } else {
-                    mDialog.dismiss();
-                    Toast.makeText(PostActivity.this, "Görüntü kaydedilirken bir hata oluştu", Toast.LENGTH_LONG).show();
-                }
+                });
+            } else {
+                mDialog.dismiss();
+                Toast.makeText(PostActivity.this, "Görüntü kaydedilirken bir hata oluştu", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -290,7 +248,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot item :snapshot.getChildren()){
-                    spinnerDataList.add(item.child("name").getValue().toString());
+                    spinnerDataList.add(Objects.requireNonNull(item.child("name").getValue()).toString());
                 }
                 arrayAdapter.notifyDataSetChanged();
             }
@@ -327,7 +285,9 @@ public class PostActivity extends AppCompatActivity {
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK) {
             try {
                 mPhotoFile = null;
-                mImageFile = FileUtil.from(this, data.getData());
+                if (data != null) {
+                    mImageFile = FileUtil.from(this, data.getData());
+                }
                 binding.imageViewPost1.setImageBitmap(BitmapFactory.decodeFile(mImageFile.getAbsolutePath()));
             } catch (Exception e) {
                 Log.d("ERROR", "Bir hata oluştu " + e.getMessage());
@@ -337,7 +297,9 @@ public class PostActivity extends AppCompatActivity {
         if (requestCode == GALLERY_REQUEST_CODE_2 && resultCode == RESULT_OK) {
             try {
                 mPhotoFile2 = null;
-                mImageFile2 = FileUtil.from(this, data.getData());
+                if (data != null) {
+                    mImageFile2 = FileUtil.from(this, data.getData());
+                }
                 binding.imageViewPost2.setImageBitmap(BitmapFactory.decodeFile(mImageFile2.getAbsolutePath()));
             } catch (Exception e) {
                 Log.d("ERROR", "Bir hata oluştu " + e.getMessage());

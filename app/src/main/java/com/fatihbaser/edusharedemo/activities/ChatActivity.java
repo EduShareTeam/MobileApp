@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -31,15 +30,9 @@ import com.fatihbaser.edusharedemo.providers.TokenProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -114,12 +107,7 @@ public class ChatActivity extends AppCompatActivity {
         showCustomToolbar(R.layout.custom_chat_toolbar);
         getMyInfoUser();
 
-        binding.imageViewSendMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendMessage();
-            }
-        });
+        binding.imageViewSendMessage.setOnClickListener(view1 -> sendMessage());
         checkIfChatExist();
     }
 
@@ -194,17 +182,14 @@ public class ChatActivity extends AppCompatActivity {
             message.setIdChat(mExtraIdChat);
             message.setMessage(textMessage);
 
-            mMessagesProvider.create(message).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        binding.editTextMessage.setText("");
-                        mAdapter.notifyDataSetChanged();
-                        getToken(message);
-                    }
-                    else {
-                        Toast.makeText(ChatActivity.this, "Mesaj oluşturulamadı", Toast.LENGTH_SHORT).show();
-                    }
+            mMessagesProvider.create(message).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    binding.editTextMessage.setText("");
+                    mAdapter.notifyDataSetChanged();
+                    getToken(message);
+                }
+                else {
+                    Toast.makeText(ChatActivity.this, "Mesaj oluşturulamadı", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -214,28 +199,25 @@ public class ChatActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("");
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setDisplayShowCustomEnabled(true);
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mActionBarView = inflater.inflate(resource, null);
-        actionBar.setCustomView(mActionBarView);
+        if (actionBar!= null){
+            actionBar.setTitle("");
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setDisplayShowCustomEnabled(true);
+            LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mActionBarView = inflater.inflate(resource, null);
+            actionBar.setCustomView(mActionBarView);
+        }
         mCircleImageProfile = mActionBarView.findViewById(R.id.circleImageProfile);
         mTextViewUsername = mActionBarView.findViewById(R.id.textViewUsername);
         mTextViewRelativeTime = mActionBarView.findViewById(R.id.textViewRelativeTime);
         mImageViewBack = mActionBarView.findViewById(R.id.imageViewBack);
 
-        mImageViewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        mImageViewBack.setOnClickListener(view -> finish());
         getUserInfo();
     }
 
     private void getUserInfo() {
-        String idUserInfo = "";
+        String idUserInfo;
         if (mAuthProvider.getUid().equals(mExtraIdUser1)) {
             idUserInfo = mExtraIdUser2;
         }
@@ -243,20 +225,18 @@ public class ChatActivity extends AppCompatActivity {
             idUserInfo = mExtraIdUser1;
         }
 
-        mListener = mUsersProvider.getUserRealtime(idUserInfo).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                if (documentSnapshot.exists()) {
-                    if (documentSnapshot.contains("username")) {
-                        mUsernameChat = documentSnapshot.getString("username");
-                        mTextViewUsername.setText(mUsernameChat);
-                    }
-                    if (documentSnapshot.contains("image")) {
-                        mImageReceiver = documentSnapshot.getString("image");
-                        if (mImageReceiver != null) {
-                            if (!mImageReceiver.equals("")) {
-                                Picasso.with(ChatActivity.this).load(mImageReceiver).into(mCircleImageProfile);
-                            }
+        mListener = mUsersProvider.getUserRealtime(idUserInfo).addSnapshotListener((documentSnapshot, e) -> {
+            assert documentSnapshot != null;
+            if (documentSnapshot.exists()) {
+                if (documentSnapshot.contains("username")) {
+                    mUsernameChat = documentSnapshot.getString("username");
+                    mTextViewUsername.setText(mUsernameChat);
+                }
+                if (documentSnapshot.contains("image")) {
+                    mImageReceiver = documentSnapshot.getString("image");
+                    if (mImageReceiver != null) {
+                        if (!mImageReceiver.equals("")) {
+                            Picasso.with(ChatActivity.this).load(mImageReceiver).into(mCircleImageProfile);
                         }
                     }
                 }
@@ -265,25 +245,22 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void checkIfChatExist() {
-        mChatsProvider.getChatByUser1AndUser2(mExtraIdUser1, mExtraIdUser2).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int size = queryDocumentSnapshots.size();
-                if (size == 0) {
-                    createChat();
-                }
-                else {
-                    mExtraIdChat = queryDocumentSnapshots.getDocuments().get(0).getId();
-                    mIdNotificationChat = queryDocumentSnapshots.getDocuments().get(0).getLong("idNotification");
-                    getMessageChat();
-                    updateViewed();
-                }
+        mChatsProvider.getChatByUser1AndUser2(mExtraIdUser1, mExtraIdUser2).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            int size = queryDocumentSnapshots.size();
+            if (size == 0) {
+                createChat();
+            }
+            else {
+                mExtraIdChat = queryDocumentSnapshots.getDocuments().get(0).getId();
+                mIdNotificationChat = queryDocumentSnapshots.getDocuments().get(0).getLong("idNotification");
+                getMessageChat();
+                updateViewed();
             }
         });
     }
 
     private void updateViewed() {
-        String idSender = "";
+        String idSender;
 
         if (mAuthProvider.getUid().equals(mExtraIdUser1)) {
             idSender = mExtraIdUser2;
@@ -292,12 +269,9 @@ public class ChatActivity extends AppCompatActivity {
             idSender = mExtraIdUser1;
         }
 
-        mMessagesProvider.getMessagesByChatAndSender(mExtraIdChat, idSender).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
-                    mMessagesProvider.updateViewed(document.getId(), true);
-                }
+        mMessagesProvider.getMessagesByChatAndSender(mExtraIdChat, idSender).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                mMessagesProvider.updateViewed(document.getId(), true);
             }
         });
 
@@ -325,53 +299,47 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void getToken(final Message message) {
-        String idUser = "";
+        String idUser;
         if (mAuthProvider.getUid().equals(mExtraIdUser1)) {
             idUser = mExtraIdUser2;
         }
         else {
             idUser = mExtraIdUser1;
         }
-        mTokenProvider.getToken(idUser).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    if (documentSnapshot.contains("token")) {
-                        String token = documentSnapshot.getString("token");
-                        getLastThreeMessages(message, token);
-                    }
+        mTokenProvider.getToken(idUser).addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                if (documentSnapshot.contains("token")) {
+                    String token = documentSnapshot.getString("token");
+                    getLastThreeMessages(message, token);
                 }
-                else {
-                    Toast.makeText(ChatActivity.this, "Kullanıcı talepleri belirteci mevcut değil", Toast.LENGTH_SHORT).show();
-                }
+            }
+            else {
+                Toast.makeText(ChatActivity.this, "Kullanıcı talepleri belirteci mevcut değil", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void getLastThreeMessages(final Message message, final String token) {
-        mMessagesProvider.getLastThreeMessagesByChatAndSender(mExtraIdChat, mAuthProvider.getUid()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                ArrayList<Message> messageArrayList = new ArrayList<>();
+        mMessagesProvider.getLastThreeMessagesByChatAndSender(mExtraIdChat, mAuthProvider.getUid()).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            ArrayList<Message> messageArrayList = new ArrayList<>();
 
-                for (DocumentSnapshot d: queryDocumentSnapshots.getDocuments()) {
-                    if (d.exists()) {
-                        Message message = d.toObject(Message.class);
-                        messageArrayList.add(message);
-                    }
+            for (DocumentSnapshot d: queryDocumentSnapshots.getDocuments()) {
+                if (d.exists()) {
+                    Message message1 = d.toObject(Message.class);
+                    messageArrayList.add(message1);
                 }
-
-                if (messageArrayList.size() == 0) {
-                    messageArrayList.add(message);
-                }
-
-                Collections.reverse(messageArrayList);
-
-                Gson gson = new Gson();
-                String messages = gson.toJson(messageArrayList);
-
-                sendNotification(token, messages, message);
             }
+
+            if (messageArrayList.size() == 0) {
+                messageArrayList.add(message);
+            }
+
+            Collections.reverse(messageArrayList);
+
+            Gson gson = new Gson();
+            String messages = gson.toJson(messageArrayList);
+
+            sendNotification(token, messages, message);
         });
     }
 
@@ -397,7 +365,7 @@ public class ChatActivity extends AppCompatActivity {
         data.put("imageSender", mImageSender);
         data.put("imageReceiver", mImageReceiver);
 
-        String idSender = "";
+        String idSender;
         if (mAuthProvider.getUid().equals(mExtraIdUser1)) {
             idSender = mExtraIdUser2;
         }
@@ -405,54 +373,47 @@ public class ChatActivity extends AppCompatActivity {
             idSender = mExtraIdUser1;
         }
 
-        mMessagesProvider.getLastMessageSender(mExtraIdChat, idSender).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int size = queryDocumentSnapshots.size();
-                String lastMessage = "";
-                if (size > 0) {
-                    lastMessage = queryDocumentSnapshots.getDocuments().get(0).getString("message");
-                    data.put("lastMessage", lastMessage);
-                }
-                FCMBody body = new FCMBody(token, "high", "4500s", data);
-                mNotificationProvider.sendNotification(body).enqueue(new Callback<FCMResponse>() {
-                    @Override
-                    public void onResponse(Call<FCMResponse> call, Response<FCMResponse> response) {
-                        if (response.body() != null) {
-                            if (response.body().getSuccess() == 1) {
-                                //Toast.makeText(ChatActivity.this, "La notificacion se envio correcatemente", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                Toast.makeText(ChatActivity.this, "Bildirim gönderilemedi", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        else {
+        mMessagesProvider.getLastMessageSender(mExtraIdChat, idSender).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            int size = queryDocumentSnapshots.size();
+            String lastMessage;
+            if (size > 0) {
+                lastMessage = queryDocumentSnapshots.getDocuments().get(0).getString("message");
+                data.put("lastMessage", lastMessage);
+            }
+            FCMBody body = new FCMBody(token, "high", "4500s", data);
+            mNotificationProvider.sendNotification(body).enqueue(new Callback<FCMResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<FCMResponse> call, Response<FCMResponse> response) {
+                    if (response.body() != null) {
+                        if (response.body().getSuccess() == 1) {
+                            //Toast.makeText(ChatActivity.this, "Bildirim başarıyla gönderildi", Toast.LENGTH_SHORT).show();
+                        } else {
                             Toast.makeText(ChatActivity.this, "Bildirim gönderilemedi", Toast.LENGTH_SHORT).show();
                         }
                     }
-
-                    @Override
-                    public void onFailure(Call<FCMResponse> call, Throwable t) {
-
+                    else {
+                        Toast.makeText(ChatActivity.this, "Bildirim gönderilemedi", Toast.LENGTH_SHORT).show();
                     }
-                });
-            }
+                }
+
+                @Override
+                public void onFailure(Call<FCMResponse> call, Throwable t) {
+
+                }
+            });
         });
 
     }
 
 
     private void getMyInfoUser() {
-        mUsersProvider.getUser(mAuthProvider.getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    if (documentSnapshot.contains("username")) {
-                        mMyUsername = documentSnapshot.getString("username");
-                    }
-                    if (documentSnapshot.contains("image")) {
-                        mImageSender = documentSnapshot.getString("image");
-                    }
+        mUsersProvider.getUser(mAuthProvider.getUid()).addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                if (documentSnapshot.contains("username")) {
+                    mMyUsername = documentSnapshot.getString("username");
+                }
+                if (documentSnapshot.contains("image")) {
+                    mImageSender = documentSnapshot.getString("image");
                 }
             }
         });

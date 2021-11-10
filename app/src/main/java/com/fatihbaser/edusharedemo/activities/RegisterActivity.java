@@ -10,16 +10,12 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
-import com.fatihbaser.edusharedemo.R;
-import com.fatihbaser.edusharedemo.databinding.ActivityCompleteProfileBinding;
 import com.fatihbaser.edusharedemo.databinding.ActivityRegisterBinding;
 import com.fatihbaser.edusharedemo.models.User;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
@@ -27,16 +23,12 @@ import com.fatihbaser.edusharedemo.providers.ImageProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.FileUtil;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -89,30 +81,20 @@ public class RegisterActivity extends AppCompatActivity {
                 .setMessage("Kayıt  Yapılıyor ...")
                 .setCancelable(false).build();
 
-        binding.imageViewProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectOptionImage(1);
-            }
-        });
+        binding.imageViewProfile.setOnClickListener(view1 -> selectOptionImage(1));
 
-        binding.btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                register();
-            }
-        });
+        binding.btnRegister.setOnClickListener(view12 -> register());
 
     }
 
     private void register() {
-        String username = binding.textInputUsername.getText().toString();
-        String email = binding.textInputEmail.getText().toString();
-        String university = binding.uniname.getText().toString();
-        String department = binding.department.getText().toString();
-        String bio = binding.bio.getText().toString();
-        String password = binding.textInputPassword.getText().toString();
-        String confirmPassword = binding.textInputConfirmPassword.getText().toString();
+        String username = Objects.requireNonNull(binding.textInputUsername.getText()).toString();
+        String email = Objects.requireNonNull(binding.textInputEmail.getText()).toString();
+        String university = Objects.requireNonNull(binding.uniname.getText()).toString();
+        String department = Objects.requireNonNull(binding.department.getText()).toString();
+        String bio = Objects.requireNonNull(binding.bio.getText()).toString();
+        String password = Objects.requireNonNull(binding.textInputPassword.getText()).toString();
+        String confirmPassword = Objects.requireNonNull(binding.textInputConfirmPassword.getText()).toString();
 
         if (mImageFile != null ) {
             if (!username.isEmpty() && !email.isEmpty() && !password.isEmpty() && !university.isEmpty() && !department.isEmpty() && !bio.isEmpty() && !confirmPassword.isEmpty()&&mImageFile != null) {
@@ -157,66 +139,51 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void createUser(final String username, final String email, final String password, final String university, final String department, final String bio,File imageFile1) {
         mDialog.show();
-        mAuthProvider.register(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    String id = mAuthProvider.getUid();
+        mAuthProvider.register(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                String id = mAuthProvider.getUid();
 
-                    User user = new User();
-                    user.setId(id);
-                    user.setEmail(email);
+                User user = new User();
+                user.setId(id);
+                user.setEmail(email);
 
-                    mUsersProvider.create(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            mDialog.dismiss();
-                            if (task.isSuccessful()) {
-                                mImageProvider.save(RegisterActivity.this, imageFile1).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                        if (task.isSuccessful()){
-                                            mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                                @Override
-                                                public void onSuccess(Uri uri) {
-                                                    User user = new User();
-                                                    final String urlProfile = uri.toString();
-                                                    String id = mAuthProvider.getUid();
-                                                    user.setId(id);
-                                                    user.setImageProfile(urlProfile);
-                                                    user.setUsername(username.toLowerCase());
-                                                    user.setUniversity(university.toLowerCase());
-                                                    user.setDepartment(department.toLowerCase());
-                                                    user.setBio(bio);
-                                                    user.setTimestamp(new Date().getTime());
-                                                    mUsersProvider.updateProfile(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            mDialog.dismiss();
-                                                            if (task.isSuccessful()) {
-                                                                Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-                                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                                startActivity(intent);
-                                                            }
-                                                            else {
-                                                                Toast.makeText(RegisterActivity.this, "Kullanıcı veritabanında saklanamadı", Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                        }
-                                    }
-                                });
-                            } else {
-                                Toast.makeText(RegisterActivity.this, "Mail Kullanıcı veritabanında saklanamadı", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                } else {
+                mUsersProvider.create(user).addOnCompleteListener(task1 -> {
                     mDialog.dismiss();
-                    Toast.makeText(RegisterActivity.this, "Kullanıcı kaydedilemedi", Toast.LENGTH_SHORT).show();
-                }
+                    if (task1.isSuccessful()) {
+                        mImageProvider.save(RegisterActivity.this, imageFile1).addOnCompleteListener(task11 -> {
+                            if (task11.isSuccessful()){
+                                mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
+                                    User user1 = new User();
+                                    final String urlProfile = uri.toString();
+                                    String id1 = mAuthProvider.getUid();
+                                    user1.setId(id1);
+                                    user1.setImageProfile(urlProfile);
+                                    user1.setUsername(username.toLowerCase());
+                                    user1.setUniversity(university.toLowerCase());
+                                    user1.setDepartment(department.toLowerCase());
+                                    user1.setBio(bio);
+                                    user1.setTimestamp(new Date().getTime());
+                                    mUsersProvider.updateProfile(user1).addOnCompleteListener(task111 -> {
+                                        mDialog.dismiss();
+                                        if (task111.isSuccessful()) {
+                                            Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                        }
+                                        else {
+                                            Toast.makeText(RegisterActivity.this, "Kullanıcı veritabanında saklanamadı", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                });
+                            }
+                        });
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "Mail Kullanıcı veritabanında saklanamadı", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                mDialog.dismiss();
+                Toast.makeText(RegisterActivity.this, "Kullanıcı kaydedilemedi", Toast.LENGTH_SHORT).show();
             }
         });
     }

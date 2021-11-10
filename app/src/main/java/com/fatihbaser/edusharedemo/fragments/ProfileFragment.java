@@ -1,25 +1,17 @@
 package com.fatihbaser.edusharedemo.fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.activities.EditProfileActivity;
 import com.fatihbaser.edusharedemo.activities.IntroActivity;
-import com.fatihbaser.edusharedemo.activities.MainActivity;
 import com.fatihbaser.edusharedemo.adapter.MyPostsAdapter;
 import com.fatihbaser.edusharedemo.databinding.FragmentProfileBinding;
 import com.fatihbaser.edusharedemo.models.Post;
@@ -29,14 +21,9 @@ import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;

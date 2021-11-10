@@ -3,36 +3,20 @@ package com.fatihbaser.edusharedemo.activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.databinding.ActivityIntroBinding;
-import com.fatihbaser.edusharedemo.models.User;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 import dmax.dialog.SpotsDialog;
 
 public class IntroActivity extends AppCompatActivity {
-    private ActivityIntroBinding binding;
     AuthProvider mAuthProvider;
     UsersProvider mUsersProvider;
-    private GoogleSignInClient mGoogleSignInClient;
+//    private GoogleSignInClient mGoogleSignInClient;
     AlertDialog mDialog;
 //    private static final String TAG = "GoogleActivity";
 //    private static final int RC_SIGN_IN = 9001;
@@ -40,7 +24,7 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityIntroBinding.inflate(getLayoutInflater());
+        com.fatihbaser.edusharedemo.databinding.ActivityIntroBinding binding = ActivityIntroBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -67,20 +51,14 @@ public class IntroActivity extends AppCompatActivity {
 //            }
 //        });
 
-        binding.createAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(IntroActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        binding.createAccount.setOnClickListener(view1 -> {
+            Intent intent = new Intent(IntroActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
 
-        binding.loginAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
+        binding.loginAccount.setOnClickListener(view12 -> {
+            Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+            startActivity(intent);
         });
     }
 

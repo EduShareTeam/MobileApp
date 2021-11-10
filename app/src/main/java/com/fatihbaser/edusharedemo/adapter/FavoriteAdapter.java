@@ -1,7 +1,6 @@
 package com.fatihbaser.edusharedemo.adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,61 +11,43 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.activities.PostDetailActivity;
-import com.fatihbaser.edusharedemo.activities.UserProfileActivity;
 import com.fatihbaser.edusharedemo.models.Like;
-import com.fatihbaser.edusharedemo.models.User;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.LikesProvider;
-import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import java.util.Date;
 import java.util.Locale;
 
-public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.ViewHolder> {
+public class FavoriteAdapter extends FirestoreRecyclerAdapter<Like, FavoriteAdapter.ViewHolder> {
 
     Context context;
     UsersProvider mUsersProvider;
-    LikesProvider mLikeprovider;
+    LikesProvider mLikeProvider;
     AuthProvider mAuthProvider;
     TextView mTextViewNumberOfFavoriteItem;
     ListenerRegistration mListener;
 
-    public FavoriAdapter(FirestoreRecyclerOptions<Like> options, Context context) {
+    public FavoriteAdapter(FirestoreRecyclerOptions<Like> options, Context context, TextView textView) {
         super(options);
         this.context = context;
         mUsersProvider = new UsersProvider();
-        mLikeprovider=new LikesProvider();
-        mAuthProvider = new AuthProvider();
-    }
-
-    public FavoriAdapter(FirestoreRecyclerOptions<Like> options, Context context, TextView textView) {
-        super(options);
-        this.context = context;
-        mUsersProvider = new UsersProvider();
-        mLikeprovider=new LikesProvider();
+        mLikeProvider = new LikesProvider();
         mAuthProvider = new AuthProvider();
         mTextViewNumberOfFavoriteItem = textView;
     }
 
     @Override
     protected void onBindViewHolder(@NonNull final ViewHolder holder, int position, @NonNull final Like like) {
-       //TODO: Favori kisminda veri olmadiginda usera bilgi verme
+        //TODO: Favori kisminda veri olmadiginda usera bilgi verme
         if (mTextViewNumberOfFavoriteItem != null) {
             int numberFilter = getSnapshots().size();
             mTextViewNumberOfFavoriteItem.setText(String.valueOf(numberFilter));
@@ -91,13 +72,11 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
                     }
                 });
             }
-        }     holder.viewHolder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, PostDetailActivity.class);
-                intent.putExtra("id", like.getIdPost());
-                context.startActivity(intent);
-            }
+        }
+        holder.viewHolder.setOnClickListener(view -> {
+            Intent intent = new Intent(context, PostDetailActivity.class);
+            intent.putExtra("id", like.getIdPost());
+            context.startActivity(intent);
         });
 
 
@@ -115,7 +94,7 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
         return new ViewHolder(view);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle;
         TextView textViewCategory;
 
@@ -139,14 +118,11 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
     }
 
     private void deletePost(String postId) {
-        mLikeprovider.delete(postId).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(context, "Yayın başarıyla kaldırıldı", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Gönderi silinemedi", Toast.LENGTH_SHORT).show();
-                }
+        mLikeProvider.delete(postId).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(context, "Yayın başarıyla kaldırıldı", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Gönderi silinemedi", Toast.LENGTH_SHORT).show();
             }
         });
     }

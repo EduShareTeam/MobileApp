@@ -1,20 +1,16 @@
 package com.fatihbaser.edusharedemo.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.fatihbaser.edusharedemo.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.fatihbaser.edusharedemo.adapter.MyPostsAdapter;
-import com.fatihbaser.edusharedemo.databinding.ActivityPostDetailBinding;
 import com.fatihbaser.edusharedemo.databinding.ActivityUserProfileBinding;
 import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
@@ -23,15 +19,11 @@ import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.Objects;
 
 public class UserProfileActivity extends AppCompatActivity {
     private ActivityUserProfileBinding binding;
@@ -66,17 +58,12 @@ public class UserProfileActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UserProfileActivity.this);
         binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         imageFile1= new File("https://github.com/Fatih-Baser/KotlinMovies/blob/master/images/a.jpeg");
 
-        binding.fabChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToChatActivity();
-            }
-        });
+        binding.fabChat.setOnClickListener(view1 -> goToChatActivity());
         getUser();
         checkIfExistPost();
     }
@@ -115,63 +102,60 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void checkIfExistPost() {
-        mPostProvider.getPostByUser(mExtraIdUser).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                int numberPost = queryDocumentSnapshots.size();
-                if (numberPost > 0) {
-                    binding.textViewPostExist.setText("Ürünler");
-                    binding.textViewPostExist.setTextColor(Color.RED);
-                } else {
-                    binding.textViewPostExist.setText("Ürün yok");
-                    binding.textViewPostExist.setTextColor(Color.GRAY);
-                }
+        mPostProvider.getPostByUser(mExtraIdUser).addSnapshotListener((queryDocumentSnapshots, e) -> {
+            int numberPost = 0;
+            if (queryDocumentSnapshots != null) {
+                numberPost = queryDocumentSnapshots.size();
+            }
+            if (numberPost > 0) {
+                binding.textViewPostExist.setText("Ürünler");
+                binding.textViewPostExist.setTextColor(Color.RED);
+            } else {
+                binding.textViewPostExist.setText("Ürün yok");
+                binding.textViewPostExist.setTextColor(Color.GRAY);
             }
         });
     }
 
     private void getUser() {
-        mUsersProvider.getUser(mExtraIdUser).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    if (documentSnapshot.contains("email")) {
-                        String email = documentSnapshot.getString("email");
-                        binding.textViewEmail.setText(email);
-                    }
-
-                    if (documentSnapshot.contains("username")) {
-                        String username = documentSnapshot.getString("username");
-                        binding.textViewUsername.setText(username);
-                    }
-
-                    if (documentSnapshot.contains("university")) {
-                        String university = documentSnapshot.getString("university");
-                        binding.textViewUniversity.setText(university);
-                    }
-
-                    if (documentSnapshot.contains("department")) {
-                        String department = documentSnapshot.getString("department");
-                        binding.textViewDepartment.setText(department);
-                    }
-
-                    if (documentSnapshot.contains("bio")) {
-                        String bio = documentSnapshot.getString("bio");
-                        binding.textViewBio.setText(bio);
-                    }
-                    if (documentSnapshot.contains("image")) {
-                        String imageProfile = documentSnapshot.getString("image");
-                        if (imageProfile != null) {
-                            if (!imageProfile.isEmpty()) {
-                                Picasso.with(UserProfileActivity.this).load(imageProfile).into(binding.circleImageProfile);
-                            }
-                        }
-                        else {
-                            mImageProvider.save(UserProfileActivity.this, imageFile1);
-                        }
-                    }
-
+        mUsersProvider.getUser(mExtraIdUser).addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                if (documentSnapshot.contains("email")) {
+                    String email = documentSnapshot.getString("email");
+                    binding.textViewEmail.setText(email);
                 }
+
+                if (documentSnapshot.contains("username")) {
+                    String username = documentSnapshot.getString("username");
+                    binding.textViewUsername.setText(username);
+                }
+
+                if (documentSnapshot.contains("university")) {
+                    String university = documentSnapshot.getString("university");
+                    binding.textViewUniversity.setText(university);
+                }
+
+                if (documentSnapshot.contains("department")) {
+                    String department = documentSnapshot.getString("department");
+                    binding.textViewDepartment.setText(department);
+                }
+
+                if (documentSnapshot.contains("bio")) {
+                    String bio = documentSnapshot.getString("bio");
+                    binding.textViewBio.setText(bio);
+                }
+                if (documentSnapshot.contains("image")) {
+                    String imageProfile = documentSnapshot.getString("image");
+                    if (imageProfile != null) {
+                        if (!imageProfile.isEmpty()) {
+                            Picasso.with(UserProfileActivity.this).load(imageProfile).into(binding.circleImageProfile);
+                        }
+                    }
+                    else {
+                        mImageProvider.save(UserProfileActivity.this, imageFile1);
+                    }
+                }
+
             }
         });
     }

@@ -1,7 +1,6 @@
 package com.fatihbaser.edusharedemo.activities;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -12,28 +11,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.fatihbaser.edusharedemo.databinding.ActivityEditProfileBinding;
-import com.fatihbaser.edusharedemo.fragments.ProfileFragment;
 import com.fatihbaser.edusharedemo.models.User;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.ImageProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.FileUtil;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -41,7 +35,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private ActivityEditProfileBinding binding;
     AlertDialog.Builder mBuilderSelector;
     AlertDialog mDialog;
-    CharSequence options[];
+    CharSequence[] options;
     private final int GALLERY_REQUEST_CODE_PROFILE = 1;
     private final int PHOTO_REQUEST_CODE_PROFILE = 3;
 
@@ -89,12 +83,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 .setContext(this)
                 .setMessage("Biraz bekle")
                 .setCancelable(false).build();
-        binding.btnEditProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickEditProfile();
-            }
-        });
+        binding.btnEditProfile.setOnClickListener(view13 -> clickEditProfile());
 
         binding.circleImageProfile.setOnClickListener(view12 -> selectOptionImage(1));
 
@@ -135,10 +124,10 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void clickEditProfile() {
-        mUsername = binding.textInputUsername.getText().toString();
-        mUniversity = binding.textInputUniversity.getText().toString();
-        mDepartment = binding.textInputDepartment.getText().toString();
-        mBio = binding.textInputBio.getText().toString();
+        mUsername = Objects.requireNonNull(binding.textInputUsername.getText()).toString();
+        mUniversity = Objects.requireNonNull(binding.textInputUniversity.getText()).toString();
+        mDepartment = Objects.requireNonNull(binding.textInputDepartment.getText()).toString();
+        mBio = Objects.requireNonNull(binding.textInputBio.getText()).toString();
         if (!mUsername.isEmpty() && !mUniversity.isEmpty()&& !mDepartment.isEmpty()&& !mBio.isEmpty()) {
             if (mImageFile != null) {
                 saveImageFirebaseStorage(mImageFile);
@@ -171,29 +160,23 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void saveImageFirebaseStorage(File imageFile1) {
         mDialog.show();
-        mImageProvider.save(EditProfileActivity.this, imageFile1).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                if (task.isSuccessful()) {
-                    mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            final String urlProfile = uri.toString();
-                            User user = new User();
-                            user.setImageProfile(urlProfile);
-                            user.setUsername(mUsername.toLowerCase());
-                            user.setUniversity(mUniversity.toLowerCase());
-                            user.setDepartment(mDepartment.toLowerCase());
-                            user.setBio(mBio);
-                            user.setId(mAuthProvider.getUid());
-                            updateInfo(user);
-                        }
-                    });
-                }
-                else {
-                    mDialog.dismiss();
-                    Toast.makeText(EditProfileActivity.this, "Görüntü kaydedilirken bir hata oluştu", Toast.LENGTH_LONG).show();
-                }
+        mImageProvider.save(EditProfileActivity.this, imageFile1).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
+                    final String urlProfile = uri.toString();
+                    User user = new User();
+                    user.setImageProfile(urlProfile);
+                    user.setUsername(mUsername.toLowerCase());
+                    user.setUniversity(mUniversity.toLowerCase());
+                    user.setDepartment(mDepartment.toLowerCase());
+                    user.setBio(mBio);
+                    user.setId(mAuthProvider.getUid());
+                    updateInfo(user);
+                });
+            }
+            else {
+                mDialog.dismiss();
+                Toast.makeText(EditProfileActivity.this, "Görüntü kaydedilirken bir hata oluştu", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -243,18 +226,15 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void selectOptionImage(final int numberImage) {
 
-        mBuilderSelector.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (i == 0) {
-                    if (numberImage == 1) {
-                        openGallery(GALLERY_REQUEST_CODE_PROFILE);
-                    }
+        mBuilderSelector.setItems(options, (dialogInterface, i) -> {
+            if (i == 0) {
+                if (numberImage == 1) {
+                    openGallery(GALLERY_REQUEST_CODE_PROFILE);
                 }
-                else if (i == 1){
-                    if (numberImage == 1) {
-                        takePhoto(PHOTO_REQUEST_CODE_PROFILE);
-                    }
+            }
+            else if (i == 1){
+                if (numberImage == 1) {
+                    takePhoto(PHOTO_REQUEST_CODE_PROFILE);
                 }
             }
         });

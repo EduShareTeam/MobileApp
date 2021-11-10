@@ -20,7 +20,6 @@ import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.RelativeTime;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 public class MessagesAdapter extends FirestoreRecyclerAdapter<Message, MessagesAdapter.ViewHolder> {
 
@@ -87,7 +86,7 @@ public class MessagesAdapter extends FirestoreRecyclerAdapter<Message, MessagesA
         return new ViewHolder(view);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewMessage;
         TextView textViewDate;
         ImageView imageViewViewed;

@@ -1,7 +1,6 @@
 package com.fatihbaser.edusharedemo.adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,13 +25,9 @@ import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.RelativeTime;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapter.ViewHolder> {
 
@@ -87,23 +82,18 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
                 });
             }
         }
-        holder.viewHolder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, PostDetailActivity.class);
-                intent.putExtra("id", postId);
-                context.startActivity(intent);
-            }
+
+        holder.viewHolder.setOnClickListener(view -> {
+            Intent intent = new Intent(context, PostDetailActivity.class);
+            intent.putExtra("id", postId);
+            context.startActivity(intent);
         });
 
         holder.imageViewDelete.setOnClickListener(view -> showConfirmDelete(postId));
-        holder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =  new Intent(context, EditPostActivity.class);
-                intent.putExtra("id",postId);
-                context.startActivity(intent);
-            }
+        holder.imageViewEdit.setOnClickListener(view -> {
+            Intent intent =  new Intent(context, EditPostActivity.class);
+            intent.putExtra("id",postId);
+            context.startActivity(intent);
         });
     }
 
@@ -112,29 +102,20 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Gönderiyi sil")
                 .setMessage("Bu eylemi gerçekleştireceğinizden emin misiniz?")
-                .setPositiveButton("Evet", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        deletePost(postId);
-                    }
-                })
+                .setPositiveButton("Evet", (dialogInterface, i) -> deletePost(postId))
                 .setNegativeButton("Hayir", null)
                 .show();
     }
 
     private void deletePost(String postId) {
-        mPostProvider.delete(postId).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(context, "Yayın başarıyla kaldırıldı", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Gönderi silinemedi", Toast.LENGTH_SHORT).show();
-                }
+        mPostProvider.delete(postId).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(context, "Yayın başarıyla kaldırıldı", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Gönderi silinemedi", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 
     @NonNull
     @Override
@@ -143,8 +124,7 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
         return new ViewHolder(view);
     }
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle;
         TextView textViewRelativeTime;
         ImageView circleImagePost;
@@ -164,6 +144,5 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
             viewHolder = view;
         }
     }
-
 
 }

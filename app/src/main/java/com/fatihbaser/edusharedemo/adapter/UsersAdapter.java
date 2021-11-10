@@ -39,19 +39,11 @@ public class UsersAdapter extends FirestoreRecyclerAdapter<User, UsersAdapter.Vi
         mAuthProvider = new AuthProvider();
     }
 
-    public UsersAdapter(FirestoreRecyclerOptions<User> options, Context context, TextView textView) {
-        super(options);
-        this.context = context;
-        mUsersProvider = new UsersProvider();
-        mAuthProvider = new AuthProvider();
-        mTextViewNumberFilter = textView;
-    }
-
     @Override
     protected void onBindViewHolder(@NonNull final ViewHolder holder, int position, @NonNull final User user) {
 
         DocumentSnapshot document = getSnapshots().getSnapshot(position);
-        final String userıd = document.getId();
+        final String userId = document.getId();
 
         if (mTextViewNumberFilter != null) {
             int numberFilter = getSnapshots().size();
@@ -77,13 +69,10 @@ public class UsersAdapter extends FirestoreRecyclerAdapter<User, UsersAdapter.Vi
                 });
             }
         }
-        holder.viewHolder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, UserProfileActivity.class);
-                intent.putExtra("idUser", userıd);
-                context.startActivity(intent);
-            }
+        holder.viewHolder.setOnClickListener(view -> {
+            Intent intent = new Intent(context, UserProfileActivity.class);
+            intent.putExtra("idUser", userId);
+            context.startActivity(intent);
         });
 
     }
@@ -100,7 +89,7 @@ public class UsersAdapter extends FirestoreRecyclerAdapter<User, UsersAdapter.Vi
         return new ViewHolder(view);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewUsername;
         TextView textViewUniversity;
         TextView textViewDepartment;

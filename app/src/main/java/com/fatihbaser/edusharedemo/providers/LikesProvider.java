@@ -47,7 +47,6 @@ public class LikesProvider {
         return mCollection.orderBy("timestamp", Query.Direction.DESCENDING);
     }
 
-
 }
 
 

@@ -6,16 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fatihbaser.edusharedemo.databinding.ActivityMainBinding;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -24,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     AuthProvider mAuthProvider;
     UsersProvider mUsersProvider;
-    private GoogleSignInClient mGoogleSignInClient;
+//    private GoogleSignInClient mGoogleSignInClient;
     AlertDialog mDialog;
     //private static final String TAG = "GoogleActivity";
     //private static final int RC_SIGN_IN = 9001;
@@ -52,19 +49,11 @@ public class MainActivity extends AppCompatActivity {
 //
 //        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                login();
-            }
-        });
+        binding.btnLogin.setOnClickListener(view1 -> login());
 
-        binding.textViewRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        binding.textViewRegister.setOnClickListener(view12 -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -148,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
     private void login() {
-        String email = binding.textInputEmail.getText().toString();
-        String password = binding.textInputPassword.getText().toString();
+        String email = Objects.requireNonNull(binding.textInputEmail.getText()).toString();
+        String password = Objects.requireNonNull(binding.textInputPassword.getText()).toString();
         mDialog.show();
         mAuthProvider.login(email, password).addOnCompleteListener(task -> {
             mDialog.dismiss();

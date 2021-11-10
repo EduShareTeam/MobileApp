@@ -3,7 +3,6 @@ package com.fatihbaser.edusharedemo.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -11,13 +10,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.activities.ChatActivity;
-import com.fatihbaser.edusharedemo.activities.HomeActivity;
 import com.fatihbaser.edusharedemo.models.Chat;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.ChatsProvider;
@@ -25,14 +22,8 @@ import com.fatihbaser.edusharedemo.providers.MessagesProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.badge.BadgeDrawable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -49,14 +40,6 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
     ListenerRegistration mListenerLastMessage;
     TextView mTextViewNumberMessage;
 
-    public ChatsAdapter(FirestoreRecyclerOptions<Chat> options, Context context) {
-        super(options);
-        this.context = context;
-        mUsersProvider = new UsersProvider();
-        mAuthProvider = new AuthProvider();
-        mChatsProvider = new ChatsProvider();
-        mMessagesProvider = new MessagesProvider();
-    }
     public ChatsAdapter(FirestoreRecyclerOptions<Chat> options, Context context, TextView textView) {
         super(options);
         this.context = context;
@@ -73,7 +56,7 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         DocumentSnapshot document = getSnapshots().getSnapshot(position);
         final String chatId = document.getId();
 
-        if (mTextViewNumberMessage != null){
+        if (mTextViewNumberMessage != null) {
             int numberFilter = getSnapshots().size();
             mTextViewNumberMessage.setText(String.valueOf(numberFilter));
         }
@@ -84,16 +67,11 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
             getUserInfo(chat.getIdUser1(), holder);
         }
 
-        holder.viewHolder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToChatActivity(chatId, chat.getIdUser1(), chat.getIdUser2());
-            }
-        });
+        holder.viewHolder.setOnClickListener(view -> goToChatActivity(chatId, chat.getIdUser1(), chat.getIdUser2()));
 
         getLastMessage(chatId, holder.textViewLastMessage);
 
-        String idSender = "";
+        String idSender;
         if (mAuthProvider.getUid().equals(chat.getIdUser1())) {
             idSender = chat.getIdUser2();
         } else {
@@ -104,23 +82,20 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
     }
 
     private void getMessageNotRead(String chatId, String idSender, final TextView textViewMessageNotRead, final FrameLayout frameLayoutMessageNotRead) {
-        mListener = mMessagesProvider.getMessagesByChatAndSender(chatId, idSender).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if (queryDocumentSnapshots != null) {
-                    int size = queryDocumentSnapshots.size();
-                    if (size > 0) {
-                        Intent intent = new Intent("message_subject_intent");
-                        intent.putExtra("size" , size);
-                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+        mListener = mMessagesProvider.getMessagesByChatAndSender(chatId, idSender).addSnapshotListener((queryDocumentSnapshots, e) -> {
+            if (queryDocumentSnapshots != null) {
+                int size = queryDocumentSnapshots.size();
+                if (size > 0) {
+                    Intent intent = new Intent("message_subject_intent");
+                    intent.putExtra("size", size);
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
-                        frameLayoutMessageNotRead.setVisibility(View.VISIBLE);
-                        textViewMessageNotRead.setText(String.valueOf(size));
+                    frameLayoutMessageNotRead.setVisibility(View.VISIBLE);
+                    textViewMessageNotRead.setText(String.valueOf(size));
 
-                    } else {
+                } else {
 
-                        frameLayoutMessageNotRead.setVisibility(View.GONE);
-                    }
+                    frameLayoutMessageNotRead.setVisibility(View.GONE);
                 }
             }
         });
@@ -136,15 +111,12 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
     }
 
     private void getLastMessage(String chatId, final TextView textViewLastMessage) {
-        mListenerLastMessage = mMessagesProvider.getLastMessage(chatId).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if (queryDocumentSnapshots != null) {
-                    int size = queryDocumentSnapshots.size();
-                    if (size > 0) {
-                        String lastMessage = queryDocumentSnapshots.getDocuments().get(0).getString("message");
-                        textViewLastMessage.setText(lastMessage);
-                    }
+        mListenerLastMessage = mMessagesProvider.getLastMessage(chatId).addSnapshotListener((queryDocumentSnapshots, e) -> {
+            if (queryDocumentSnapshots != null) {
+                int size = queryDocumentSnapshots.size();
+                if (size > 0) {
+                    String lastMessage = queryDocumentSnapshots.getDocuments().get(0).getString("message");
+                    textViewLastMessage.setText(lastMessage);
                 }
             }
         });
@@ -159,31 +131,30 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
     }
 
     private void getUserInfo(String idUser, final ViewHolder holder) {
-        mUsersProvider.getUser(idUser).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    if (documentSnapshot.contains("username")) {
-                        String username = documentSnapshot.getString("username");
+        mUsersProvider.getUser(idUser).addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                if (documentSnapshot.contains("username")) {
+                    String username = documentSnapshot.getString("username");
+                    if (username != null) {
                         holder.textViewUsername.setText(username.toUpperCase());
                     }
-                    if (documentSnapshot.contains("image")) {
-                        String imageProfile = documentSnapshot.getString("image");
-                        if (imageProfile != null) {
-                            if (!imageProfile.isEmpty()) {
-                                Picasso.with(context).load(imageProfile).into(holder.circleImageChat, new Callback() {
-                                    @Override
-                                    public void onSuccess() {
-                                        holder.bar.setVisibility(View.GONE);
-                                    }
+                }
+                if (documentSnapshot.contains("image")) {
+                    String imageProfile = documentSnapshot.getString("image");
+                    if (imageProfile != null) {
+                        if (!imageProfile.isEmpty()) {
+                            Picasso.with(context).load(imageProfile).into(holder.circleImageChat, new Callback() {
+                                @Override
+                                public void onSuccess() {
+                                    holder.bar.setVisibility(View.GONE);
+                                }
 
-                                    @Override
-                                    public void onError() {
-                                        holder.circleImageChat.setImageResource(R.drawable.ic_baseline_error_24);
-                                        holder.bar.setVisibility(View.INVISIBLE);
-                                    }
-                                });
-                            }
+                                @Override
+                                public void onError() {
+                                    holder.circleImageChat.setImageResource(R.drawable.ic_baseline_error_24);
+                                    holder.bar.setVisibility(View.INVISIBLE);
+                                }
+                            });
                         }
                     }
                 }
@@ -198,7 +169,7 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         return new ViewHolder(view);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewUsername;
         TextView textViewLastMessage;
         TextView textViewMessageNotRead;

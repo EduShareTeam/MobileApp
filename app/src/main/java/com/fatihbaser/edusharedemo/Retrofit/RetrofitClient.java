@@ -6,10 +6,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     public static Retrofit getClient(String url) {
-        Retrofit retrofit = new Retrofit.Builder()
+        return new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        return retrofit;
     }
 }

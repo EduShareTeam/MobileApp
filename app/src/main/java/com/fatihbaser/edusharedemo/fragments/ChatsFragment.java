@@ -18,7 +18,6 @@ import com.google.firebase.firestore.Query;
 public class ChatsFragment extends Fragment {
     private FragmentChatsBinding binding;
     ChatsAdapter mAdapter;
-
     //Provider
     ChatsProvider mChatsProvider;
     AuthProvider mAuthProvider;

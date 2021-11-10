@@ -1,12 +1,6 @@
 package com.fatihbaser.edusharedemo.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
-
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -18,10 +12,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
 import com.fatihbaser.edusharedemo.databinding.ActivityEditPostBinding;
-import com.fatihbaser.edusharedemo.fragments.ProfileFragment;
 import com.fatihbaser.edusharedemo.models.Post;
-import com.fatihbaser.edusharedemo.models.User;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.ImageProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
@@ -33,7 +30,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
@@ -41,6 +37,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -66,7 +63,7 @@ public class EditPostActivity extends AppCompatActivity {
     //AlertDialog
     AlertDialog mDialog;
     AlertDialog.Builder mBuilderSelector;
-    CharSequence options[];
+    CharSequence[] options;
 
     private final int GALLERY_REQUEST_CODE = 1;
     private final int GALLERY_REQUEST_CODE_2 = 2;
@@ -109,49 +106,26 @@ public class EditPostActivity extends AppCompatActivity {
         mBuilderSelector.setTitle("Lütfen bir seçenek seçiniz");
         options = new CharSequence[]{"Galeriden Resmi seç", "Fotograf çek"};
 
-        binding.circleImageBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        binding.circleImageBack.setOnClickListener(view1 -> finish());
 
-        binding.btnPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickEditPost();
-            }
-        });
+        binding.btnPost.setOnClickListener(view12 -> clickEditPost());
 
-        binding.imageViewPost1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectOptionImage(1);
-            }
-        });
+        binding.imageViewPost1.setOnClickListener(view13 -> selectOptionImage(1));
 
-        binding.imageViewPost2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectOptionImage(2);
-            }
-        });
+        binding.imageViewPost2.setOnClickListener(view14 -> selectOptionImage(2));
         //extra
-        mPostProvider.getPostById(mExtraPostId).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    if (documentSnapshot.contains("image1") && documentSnapshot.contains("image2")) {
-                        mImage1 = documentSnapshot.getString("image1");
-                        mImage2 = documentSnapshot.getString("image2");
-                    }
+        mPostProvider.getPostById(mExtraPostId).addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                if (documentSnapshot.contains("image1") && documentSnapshot.contains("image2")) {
+                    mImage1 = documentSnapshot.getString("image1");
+                    mImage2 = documentSnapshot.getString("image2");
                 }
             }
         });
 
 
         spinnerDataList = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter<String>(EditPostActivity.this,
+        arrayAdapter = new ArrayAdapter<>(EditPostActivity.this,
                 android.R.layout.simple_spinner_dropdown_item, spinnerDataList);
         binding.spinnerProductCategory.setAdapter(arrayAdapter);
         retrieveSpinnerData();
@@ -166,15 +140,12 @@ public class EditPostActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot item : snapshot.getChildren()) {
-                    spinnerDataList.add(item.child("name").getValue().toString());
-                    mPostProvider.getPostById(mExtraPostId).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.contains("category")) {
-                                 String category = documentSnapshot.getString("category");
-                                 spinnerDataList.set(0,category);
-                                 arrayAdapter.notifyDataSetChanged();
-                            }
+                    spinnerDataList.add(Objects.requireNonNull(item.child("name").getValue()).toString());
+                    mPostProvider.getPostById(mExtraPostId).addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.contains("category")) {
+                             String category = documentSnapshot.getString("category");
+                             spinnerDataList.set(0,category);
+                             arrayAdapter.notifyDataSetChanged();
                         }
                     });
                 }
@@ -187,48 +158,45 @@ public class EditPostActivity extends AppCompatActivity {
     }
 
     private void getPost() {
-        mPostProvider.getPostById(mExtraPostId).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
+        mPostProvider.getPostById(mExtraPostId).addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
 
-                    if (documentSnapshot.contains("image1")) {
-                        String image1 = documentSnapshot.getString("image1");
-                        if (image1 != null) {
-                            if (!image1.isEmpty()) {
-                                Picasso.with(getApplicationContext()).load(image1).into(binding.imageViewPost1);
-                            }
+                if (documentSnapshot.contains("image1")) {
+                    String image1 = documentSnapshot.getString("image1");
+                    if (image1 != null) {
+                        if (!image1.isEmpty()) {
+                            Picasso.with(getApplicationContext()).load(image1).into(binding.imageViewPost1);
                         }
                     }
-                    if (documentSnapshot.contains("image2")) {
-                        String image2 = documentSnapshot.getString("image2");
-                        if (image2 != null) {
-                            if (!image2.isEmpty()) {
-                                Picasso.with(getApplicationContext()).load(image2).into(binding.imageViewPost2);
-                            }
+                }
+                if (documentSnapshot.contains("image2")) {
+                    String image2 = documentSnapshot.getString("image2");
+                    if (image2 != null) {
+                        if (!image2.isEmpty()) {
+                            Picasso.with(getApplicationContext()).load(image2).into(binding.imageViewPost2);
                         }
                     }
-                    if (documentSnapshot.contains("title")) {
-                        String title = documentSnapshot.getString("title");
-                        assert title != null;
-                        binding.textInputTitle.setText(title);
-                    }
-                    if (documentSnapshot.contains("description")) {
-                        String description = documentSnapshot.getString("description");
-                        binding.textInputDescription.setText(description);
-                    }
-                    if (documentSnapshot.contains("quality")) {
-                        Long quality = documentSnapshot.getLong("quality");
-                        binding.ratingBarProductQualityUpload.setRating(quality);
-                    }
+                }
+                if (documentSnapshot.contains("title")) {
+                    String title = documentSnapshot.getString("title");
+                    assert title != null;
+                    binding.textInputTitle.setText(title);
+                }
+                if (documentSnapshot.contains("description")) {
+                    String description = documentSnapshot.getString("description");
+                    binding.textInputDescription.setText(description);
+                }
+                if (documentSnapshot.contains("quality")) {
+                    Long quality = documentSnapshot.getLong("quality");
+                    binding.ratingBarProductQualityUpload.setRating(quality);
                 }
             }
         });
     }
 
     private void clickEditPost() {
-        mTitle = binding.textInputTitle.getText().toString();
-        mDescription = binding.textInputDescription.getText().toString();
+        mTitle = Objects.requireNonNull(binding.textInputTitle.getText()).toString();
+        mDescription = Objects.requireNonNull(binding.textInputDescription.getText()).toString();
         mQuality = binding.ratingBarProductQualityUpload.getRating();
         mSpinnerCategories = binding.spinnerProductCategory.getSelectedItem().toString();
         if (!mTitle.isEmpty() && !mDescription.isEmpty()) {
@@ -273,47 +241,41 @@ public class EditPostActivity extends AppCompatActivity {
 
     private void saveImageAndEdit(File imageFile1, final File imageFile2) {
         mDialog.show();
-        mImageProvider.save(EditPostActivity.this, imageFile1).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                if (task.isSuccessful()) {
-                    mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            final String url = uri.toString();
+        mImageProvider.save(EditPostActivity.this, imageFile1).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
+                    final String url = uri.toString();
 
-                            mImageProvider.save(EditPostActivity.this, imageFile2).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> taskImage2) {
-                                    if (taskImage2.isSuccessful()) {
-                                        mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                            @Override
-                                            public void onSuccess(Uri uri2) {
-                                                final String url2 = uri2.toString();
-                                                Post post = new Post();
-                                                post.setImage1(url);
-                                                post.setImage2(url2);
-                                                post.setId(mExtraPostId);
-                                                post.setTitle(mTitle);
-                                                post.setDescription(mDescription);
-                                                post.setCategory(mSpinnerCategories);
-                                                post.setQuality((double) mQuality);
-                                                post.setTimestamp(new Date().getTime());
-                                                updatePost(post);
-                                            }
-                                        });
-                                    } else {
-                                        mDialog.dismiss();
-                                        Toast.makeText(EditPostActivity.this, "2 numaralı resim kaydedilemedi", Toast.LENGTH_SHORT).show();
+                    mImageProvider.save(EditPostActivity.this, imageFile2).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> taskImage2) {
+                            if (taskImage2.isSuccessful()) {
+                                mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri2) {
+                                        final String url2 = uri2.toString();
+                                        Post post = new Post();
+                                        post.setImage1(url);
+                                        post.setImage2(url2);
+                                        post.setId(mExtraPostId);
+                                        post.setTitle(mTitle);
+                                        post.setDescription(mDescription);
+                                        post.setCategory(mSpinnerCategories);
+                                        post.setQuality((double) mQuality);
+                                        post.setTimestamp(new Date().getTime());
+                                        updatePost(post);
                                     }
-                                }
-                            });
+                                });
+                            } else {
+                                mDialog.dismiss();
+                                Toast.makeText(EditPostActivity.this, "2 numaralı resim kaydedilemedi", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
-                } else {
-                    mDialog.dismiss();
-                    Toast.makeText(EditPostActivity.this, "Görüntü kaydedilirken bir hata oluştu", Toast.LENGTH_LONG).show();
-                }
+                });
+            } else {
+                mDialog.dismiss();
+                Toast.makeText(EditPostActivity.this, "Görüntü kaydedilirken bir hata oluştu", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -365,21 +327,18 @@ public class EditPostActivity extends AppCompatActivity {
 
     private void selectOptionImage(final int numberImage) {
 
-        mBuilderSelector.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (i == 0) {
-                    if (numberImage == 1) {
-                        openGallery(GALLERY_REQUEST_CODE);
-                    } else if (numberImage == 2) {
-                        openGallery(GALLERY_REQUEST_CODE_2);
-                    }
-                } else if (i == 1) {
-                    if (numberImage == 1) {
-                        takePhoto(PHOTO_REQUEST_CODE);
-                    } else if (numberImage == 2) {
-                        takePhoto(PHOTO_REQUEST_CODE_2);
-                    }
+        mBuilderSelector.setItems(options, (dialogInterface, i) -> {
+            if (i == 0) {
+                if (numberImage == 1) {
+                    openGallery(GALLERY_REQUEST_CODE);
+                } else if (numberImage == 2) {
+                    openGallery(GALLERY_REQUEST_CODE_2);
+                }
+            } else if (i == 1) {
+                if (numberImage == 1) {
+                    takePhoto(PHOTO_REQUEST_CODE);
+                } else if (numberImage == 2) {
+                    takePhoto(PHOTO_REQUEST_CODE_2);
                 }
             }
         });
