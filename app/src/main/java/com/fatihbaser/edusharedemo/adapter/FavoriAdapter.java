@@ -44,7 +44,7 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
     UsersProvider mUsersProvider;
     LikesProvider mLikeprovider;
     AuthProvider mAuthProvider;
-    TextView mTextViewNumberFilter;
+    TextView mTextViewNumberOfFavoriteItem;
     ListenerRegistration mListener;
 
     public FavoriAdapter(FirestoreRecyclerOptions<Like> options, Context context) {
@@ -61,15 +61,15 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
         mUsersProvider = new UsersProvider();
         mLikeprovider=new LikesProvider();
         mAuthProvider = new AuthProvider();
-        mTextViewNumberFilter = textView;
+        mTextViewNumberOfFavoriteItem = textView;
     }
 
     @Override
     protected void onBindViewHolder(@NonNull final ViewHolder holder, int position, @NonNull final Like like) {
        //TODO: Favori kisminda veri olmadiginda usera bilgi verme
-        if (mTextViewNumberFilter != null) {
+        if (mTextViewNumberOfFavoriteItem != null) {
             int numberFilter = getSnapshots().size();
-            mTextViewNumberFilter.setText(String.valueOf(numberFilter));
+            mTextViewNumberOfFavoriteItem.setText(String.valueOf(numberFilter));
         }
 
         holder.delete.setOnClickListener(view -> deletePost(like.getId()));

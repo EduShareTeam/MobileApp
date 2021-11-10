@@ -18,13 +18,11 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
 public class FavoriteActivity extends AppCompatActivity {
-
    private ActivityFavoriteBinding binding;
     LikesProvider mLikerProvider;
     PostProvider mPostProvider;
     AuthProvider mAuthProvider;
     FavoriAdapter mPostsAdapter;
-    FavoriAdapter favoriAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +30,7 @@ public class FavoriteActivity extends AppCompatActivity {
         binding = ActivityFavoriteBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
         mLikerProvider = new LikesProvider();
@@ -47,7 +46,7 @@ public class FavoriteActivity extends AppCompatActivity {
                 new FirestoreRecyclerOptions.Builder<Like>()
                         .setQuery(query, Like.class)
                         .build();
-        mPostsAdapter = new FavoriAdapter(options, FavoriteActivity.this);
+        mPostsAdapter = new FavoriAdapter(options, FavoriteActivity.this, binding.textViewNumberOfFavoriteItem);
         mPostsAdapter.notifyDataSetChanged();
         binding.recyclerViewLikes.setAdapter(mPostsAdapter);
         mPostsAdapter.startListening();
@@ -61,7 +60,7 @@ public class FavoriteActivity extends AppCompatActivity {
                 new FirestoreRecyclerOptions.Builder<Like>()
                         .setQuery(query, Like.class)
                         .build();
-        favoriAdapter = new FavoriAdapter(options,getApplicationContext(), binding.textViewNumberFilter);
+        mPostsAdapter = new FavoriAdapter(options, FavoriteActivity.this, binding.textViewNumberOfFavoriteItem);
         getAllPost();
     }
 
