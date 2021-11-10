@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.fatihbaser.edusharedemo.databinding.ActivityEditProfileBinding;
+import com.fatihbaser.edusharedemo.fragments.ProfileFragment;
 import com.fatihbaser.edusharedemo.models.User;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.ImageProvider;

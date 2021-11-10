@@ -47,6 +47,7 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
     MessagesProvider mMessagesProvider;
     ListenerRegistration mListener;
     ListenerRegistration mListenerLastMessage;
+    TextView mTextViewNumberMessage;
 
     public ChatsAdapter(FirestoreRecyclerOptions<Chat> options, Context context) {
         super(options);
@@ -56,16 +57,26 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         mChatsProvider = new ChatsProvider();
         mMessagesProvider = new MessagesProvider();
     }
+    public ChatsAdapter(FirestoreRecyclerOptions<Chat> options, Context context, TextView textView) {
+        super(options);
+        this.context = context;
+        mUsersProvider = new UsersProvider();
+        mAuthProvider = new AuthProvider();
+        mChatsProvider = new ChatsProvider();
+        mMessagesProvider = new MessagesProvider();
+        mTextViewNumberMessage = textView;
+    }
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull final Chat chat) {
 
-
-
-
         DocumentSnapshot document = getSnapshots().getSnapshot(position);
         final String chatId = document.getId();
-        int numberFilter = getSnapshots().size();
+
+        if (mTextViewNumberMessage != null){
+            int numberFilter = getSnapshots().size();
+            mTextViewNumberMessage.setText(String.valueOf(numberFilter));
+        }
 
         if (mAuthProvider.getUid().equals(chat.getIdUser1())) {
             getUserInfo(chat.getIdUser2(), holder);
@@ -90,10 +101,6 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         }
         getMessageNotRead(chatId, idSender, holder.textViewMessageNotRead, holder.frameLayoutMessageNotRead);
 
-    }
-
-    public interface MyInterface{
-        public void foo();
     }
 
     private void getMessageNotRead(String chatId, String idSender, final TextView textViewMessageNotRead, final FrameLayout frameLayoutMessageNotRead) {
@@ -137,8 +144,6 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
                     if (size > 0) {
                         String lastMessage = queryDocumentSnapshots.getDocuments().get(0).getString("message");
                         textViewLastMessage.setText(lastMessage);
-                    }
-                    else{
                     }
                 }
             }
@@ -199,14 +204,12 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         TextView textViewMessageNotRead;
         CircleImageView circleImageChat;
         FrameLayout frameLayoutMessageNotRead;
-        TextView mesajyok;
         View viewHolder;
         ProgressBar bar;
 
         public ViewHolder(View view) {
             super(view);
             textViewUsername = view.findViewById(R.id.textViewUsernameChat);
-            mesajyok = view.findViewById(R.id.mesajyok);
             textViewLastMessage = view.findViewById(R.id.textViewLastMessageChat);
             textViewMessageNotRead = view.findViewById(R.id.textViewMessageNotRead);
             circleImageChat = view.findViewById(R.id.circleImageChat);

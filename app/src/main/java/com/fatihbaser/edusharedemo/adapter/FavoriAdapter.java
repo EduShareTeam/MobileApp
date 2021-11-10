@@ -138,22 +138,6 @@ public class FavoriAdapter extends FirestoreRecyclerAdapter<Like, FavoriAdapter.
         }
     }
 
-
-   /* private void showConfirmDelete(final String postId) {
-        new AlertDialog.Builder(context)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Gönderiyi sil")
-                .setMessage("Bu eylemi gerçekleştireceğinizden emin misiniz?")
-                .setPositiveButton("Evet", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        deletePost(postId);
-                    }
-                })
-                .setNegativeButton("Hayir", null)
-                .show();
-    }*/
-
     private void deletePost(String postId) {
         mLikeprovider.delete(postId).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

@@ -37,10 +37,7 @@ public class FavoriteActivity extends AppCompatActivity {
         mLikerProvider = new LikesProvider();
 
         binding.recyclerViewLikes.setLayoutManager(new GridLayoutManager(FavoriteActivity.this, 2));
-
     }
-
-
 
     private void getAllPost() {
         Like like = new Like();

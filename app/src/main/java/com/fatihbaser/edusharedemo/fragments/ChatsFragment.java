@@ -1,17 +1,13 @@
 package com.fatihbaser.edusharedemo.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.fatihbaser.edusharedemo.R;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import com.fatihbaser.edusharedemo.adapter.ChatsAdapter;
+import com.fatihbaser.edusharedemo.databinding.FragmentChatsBinding;
 import com.fatihbaser.edusharedemo.models.Chat;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.ChatsProvider;
@@ -20,9 +16,9 @@ import com.google.firebase.firestore.Query;
 
 
 public class ChatsFragment extends Fragment {
+    private FragmentChatsBinding binding;
     ChatsAdapter mAdapter;
-    RecyclerView mRecyclerView;
-    View mView;
+
     //Provider
     ChatsProvider mChatsProvider;
     AuthProvider mAuthProvider;
@@ -34,15 +30,15 @@ public class ChatsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_chats, container, false);
-        mRecyclerView = mView.findViewById(R.id.recyclerViewChats);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+        binding = FragmentChatsBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
         mChatsProvider = new ChatsProvider();
         mAuthProvider = new AuthProvider();
 
-        return mView;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        binding.recyclerViewChats.setLayoutManager(linearLayoutManager);
+        return view;
     }
 
     @Override
@@ -53,8 +49,8 @@ public class ChatsFragment extends Fragment {
                 new FirestoreRecyclerOptions.Builder<Chat>()
                         .setQuery(query, Chat.class)
                         .build();
-        mAdapter = new ChatsAdapter(options, getContext());
-        mRecyclerView.setAdapter(mAdapter);
+        mAdapter = new ChatsAdapter(options, getContext(),binding.textViewNumberMessage);
+        binding.recyclerViewChats.setAdapter(mAdapter);
         mAdapter.startListening();
     }
 
