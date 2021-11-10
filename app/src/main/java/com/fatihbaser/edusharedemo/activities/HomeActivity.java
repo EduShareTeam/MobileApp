@@ -57,29 +57,13 @@ public class HomeActivity extends AppCompatActivity {
         mChatsProvider = new ChatsProvider();
         messagesProvider = new MessagesProvider();
 
-        hasMessages();
         openFragment(new HomeFragment());
         createToken();
     }
 
 
 
-    private void hasMessages() {
-            messagesProvider.getMessagesBySender(mAuthProvider.getUid()).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (value != null) {
-                    int size = value.size();
-                    System.out.println(size);
-                    if (size > 0) {
-                        bottomNavigation.getOrCreateBadge(R.id.itemChats);
-                    } else {
 
-                    }
-                }
-            }
-        });
-    }
 
     @Override
     protected void onStart() {
