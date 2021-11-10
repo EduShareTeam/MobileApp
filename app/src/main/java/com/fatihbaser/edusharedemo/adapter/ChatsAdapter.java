@@ -67,12 +67,6 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
         final String chatId = document.getId();
         int numberFilter = getSnapshots().size();
 
-        if(numberFilter>0){
-            holder.mesajyok.setVisibility(View.INVISIBLE);
-        }
-        else{
-            holder.mesajyok.setVisibility(View.VISIBLE);
-        }
         if (mAuthProvider.getUid().equals(chat.getIdUser1())) {
             getUserInfo(chat.getIdUser2(), holder);
         } else {

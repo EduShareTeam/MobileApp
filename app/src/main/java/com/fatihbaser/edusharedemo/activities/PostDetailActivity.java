@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.adapter.SliderAdapter;
 import com.fatihbaser.edusharedemo.databinding.ActivityPostDetailBinding;
+import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.models.SliderItem;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.LikesProvider;
@@ -63,6 +64,8 @@ public class PostDetailActivity extends AppCompatActivity {
         mExtraTitle = getIntent().getStringExtra("title");
 
         mExtraIdUser = getIntent().getStringExtra("idUser");
+
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PostDetailActivity.this);
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("");
@@ -76,6 +79,7 @@ public class PostDetailActivity extends AppCompatActivity {
         mTokenProvider = new TokenProvider();
         mNotificationProvider = new NotificationProvider();
 
+        getPost();
 
 
         binding.btnShowProfile.setOnClickListener(new View.OnClickListener() {
@@ -84,12 +88,10 @@ public class PostDetailActivity extends AppCompatActivity {
                 goToShowProfile();
             }
         });
-        getPost();
-        if (mAuthProvider.getUid().equals(mIdUser)) {
-            binding.chat.setVisibility(View.INVISIBLE);
-        }
 
-       // getNumberLikes();
+
+
+        // getNumberLikes();
         mExtraTitle = getIntent().getStringExtra("title");
         binding.chat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +122,7 @@ public class PostDetailActivity extends AppCompatActivity {
         if (!mIdUser.equals("")) {
             Intent intent = new Intent(PostDetailActivity.this, UserProfileActivity.class);
             intent.putExtra("idUser", mIdUser);
+            System.out.println(mIdUser+"idUser");
             startActivity(intent);
         } else {
             Toast.makeText(this, "Kullanıcı kimliği hala yüklenmedi", Toast.LENGTH_SHORT).show();
@@ -188,29 +191,17 @@ public class PostDetailActivity extends AppCompatActivity {
                         String category = documentSnapshot.getString("category");
                         binding.textViewNameCategory.setText(category);
 
-//                        if (category.equals("Fen bilimleri")) {
-//                            binding.imageViewCategory.setImageResource(R.drawable.fen);
-//                        } else if (category.equals("Egitim bilimleri")) {
-//                            binding.imageViewCategory.setImageResource(R.drawable.egitim);
-//                        } else if (category.equals("Dil ve Edebiyat")) {
-//                            binding.imageViewCategory.setImageResource(R.drawable.literature);
-//                        } else if (category.equals("Yabanci diller")) {
-//                            binding.imageViewCategory.setImageResource(R.drawable.dil);
-//                        } else if (category.equals("Mimarlik")) {
-//                            binding.imageViewCategory.setImageResource(R.drawable.arc);
-//                        } else if (category.equals("Teknoloji ve Muhendislik")) {
-//                            binding.imageViewCategory.setImageResource(R.drawable.tek);
-//                        } else if (category.equals("Guzel Sanatlar")) {
-//                            binding.imageViewCategory.setImageResource(R.drawable.art);
-//                        }else if (category.equals("Iktisadi bilimler")) {
-//                            binding.imageViewCategory.setImageResource(R.drawable.economic);
-//                        } else if (category.equals("Spor bilimleri")) {
-//                            binding.imageViewCategory.setImageResource(R.drawable.sports);
-//                        }
+
                     }
                     if (documentSnapshot.contains("idUser")) {
                         mIdUser = documentSnapshot.getString("idUser");
                         getUserInfo(mIdUser);
+
+                        if (mAuthProvider.getUid().equals(mIdUser)) {
+                            binding.chat.setVisibility(View.INVISIBLE);
+                        }
+                        System.out.println(mAuthProvider.getUid()+" title");
+                        System.out.println(mIdUser+" titleaaa");
                     }
                     if (documentSnapshot.contains("quality")) {
                         Long mQuality = documentSnapshot.getLong("quality");
@@ -227,6 +218,8 @@ public class PostDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     private void getUserInfo(String idUser) {
