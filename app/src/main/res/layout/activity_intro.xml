@@ -1,47 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#031239"
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context=".activities.IntroActivity">
 
+
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="153dp"
+        android:layout_height="153dp"
+        android:layout_marginBottom="172dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/edunew"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLoginImage"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLoginImage"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLoginImage" />
+
+    <ImageView
+        android:id="@+id/imageViewLoginImage"
+        android:layout_width="406dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/intro"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.373" />
 
     <Button
         android:id="@+id/createAccount"
-        android:layout_width="250dp"
+        android:layout_width="265dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/shape_view_button_layout"
-        android:backgroundTint="#FFFFFF"
-        android:text="Hesap Oluştur"/>
+        android:text="Hesap Oluştur"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginAccount" />
 
     <Button
         android:id="@+id/loginAccount"
+        android:layout_width="265dp"
         android:layout_height="wrap_content"
-        android:layout_width="250dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="72dp"
         android:background="@drawable/shape_view_button_layout"
-        android:backgroundTint="#FFFFFF"
-        android:text="GİRİŞ YAP"/>
+        android:text="GİRİŞ YAP"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLoginImage" />
 
 
-    <!--    <com.google.android.gms.common.SignInButton-->
-<!--        android:id="@+id/btnLoginGoogle"-->
-<!--        android:layout_width="250dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="30dp"-->
-<!--        android:layout_marginRight="25dp"-->
-<!--        android:layout_marginLeft="25dp" />-->
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<LinearLayout-->
+    <!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:background="#FFFFFF"-->
+    <!--    android:layout_gravity="center"-->
+    <!--    android:gravity="center"-->
+    <!--    android:orientation="vertical"-->
+    <!--    tools:context=".activities.IntroActivity">-->
+
+    <!--    <ImageView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:src="@drawable/intro"-->
+    <!--        android:layout_height="wrap_content"/>-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/createAccount"-->
+    <!--        android:layout_width="250dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="50dp"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:background="@drawable/shape_view_button_layout"-->
+    <!--        android:text="Hesap Oluştur"/>-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/loginAccount"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_width="250dp"-->
+    <!--        android:layout_marginTop="30dp"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:background="@drawable/shape_view_button_layout"-->
+    <!--        android:text="GİRİŞ YAP"/>-->
 
 
-</LinearLayout>
+    <!--    &lt;!&ndash;    <com.google.android.gms.common.SignInButton&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:id="@+id/btnLoginGoogle"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_width="250dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_marginTop="30dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_marginRight="25dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_marginLeft="25dp" />&ndash;&gt;-->
+
+
+    <!--</LinearLayout>-->

@@ -61,7 +61,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        binding.imageViewEditProfile.setOnClickListener(new View.OnClickListener() {
+        binding.cardViewEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToEditProfile();
