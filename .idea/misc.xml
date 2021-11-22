@@ -31,6 +31,7 @@
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/drawable/shape_view_linear_layout.xml" value="0.2676923076923077" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/drawable/shape_view_linear_layout_categories.xml" value="0.384375" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/drawable/shape_view_send_chat_button.xml" value="0.384375" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/drawable/shape_view_shadow_image.xml" value="0.26256410256410256" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/drawable/splash_image.xml" value="0.1" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/action_bar_toolbar.xml" value="0.24270833333333333" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_chat.xml" value="0.264" />
@@ -43,7 +44,7 @@
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_home.xml" value="0.12436676798378926" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_intro.xml" value="0.22" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_post.xml" value="0.8" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_post.xml" value="0.2" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_post_detail.xml" value="0.24270833333333333" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_profile.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_register.xml" value="0.2" />

@@ -18,6 +18,7 @@ import com.fatihbaser.edusharedemo.models.Post;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
+import com.fatihbaser.edusharedemo.utils.SpacingItemDecorator;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -49,6 +50,8 @@ public class ProfileFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
+        SpacingItemDecorator spacingItemDecorator = new SpacingItemDecorator(50);
+        binding.recyclerViewMyPost.addItemDecoration(spacingItemDecorator);
         //binding.recyclerViewMyPost.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         binding.linearLayoutEditProfile.setOnClickListener(new View.OnClickListener() {
