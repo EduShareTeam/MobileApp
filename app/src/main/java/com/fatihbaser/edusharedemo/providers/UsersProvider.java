@@ -2,6 +2,8 @@ package com.fatihbaser.edusharedemo.providers;
 
 import com.fatihbaser.edusharedemo.models.User;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -16,6 +18,7 @@ public class UsersProvider {
 
     private final CollectionReference mCollection;
     private final CollectionReference mmCollection;
+    DatabaseReference databaseReference;
 
     public UsersProvider() {
         mCollection = FirebaseFirestore.getInstance().collection("Users");
@@ -63,4 +66,8 @@ public class UsersProvider {
     public Query getAll() {
         return mCollection.orderBy("timestamp", Query.Direction.DESCENDING);
     }
+    public DatabaseReference getUniversiteisForSpinner() {
+        return databaseReference = FirebaseDatabase.getInstance().getReference("universities");
+    }
 }
+

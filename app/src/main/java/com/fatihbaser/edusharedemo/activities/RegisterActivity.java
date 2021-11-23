@@ -10,8 +10,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -23,10 +25,18 @@ import com.fatihbaser.edusharedemo.providers.ImageProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.FileUtil;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -48,17 +58,25 @@ public class RegisterActivity extends AppCompatActivity {
     private final int GALLERY_REQUEST_CODE_PROFILE = 1;
     private final int PHOTO_REQUEST_CODE_PROFILE = 3;
 
+
     // FOTO 1
     String mAbsolutePhotoPath;
     String mPhotoPath;
     File mPhotoFile;
     File mImageFile;
 
+    String mSpinnerUniversity = "";
     String mUsername = "";
     String mUniversity = "";
     String mDepartment = "";
     String mBio = "";
     String mImageProfile = "";
+    DatabaseReference databaseReference;
+
+    //Spınner
+    ValueEventListener valueEventListener;
+    ArrayAdapter<String> arrayAdapter;
+    ArrayList<String> spinnerDataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         //Providers
+        databaseReference = FirebaseDatabase.getInstance().getReference("universities");
         mAuthProvider = new AuthProvider();
         mImageProvider = new ImageProvider();
         mUsersProvider = new UsersProvider();
@@ -75,6 +94,11 @@ public class RegisterActivity extends AppCompatActivity {
         mBuilderSelector.setTitle("Lütfen bir seçenek seçiniz");
         options = new CharSequence[] {"Galeriden resim seç","Fotoğraf çek"};
 
+        spinnerDataList = new ArrayList<>();
+        arrayAdapter = new ArrayAdapter<>(RegisterActivity.this,
+                android.R.layout.simple_spinner_dropdown_item, spinnerDataList);
+        binding.spinnerProductCategory.setAdapter(arrayAdapter);
+        retrieveData();
 
         mDialog = new SpotsDialog.Builder()
                 .setContext(this)
@@ -86,11 +110,28 @@ public class RegisterActivity extends AppCompatActivity {
         binding.btnRegister.setOnClickListener(view12 -> register());
 
     }
+    private void retrieveData() {
+
+        valueEventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot item :snapshot.getChildren()){
+                    spinnerDataList.add(item.child("name").getValue().toString());
+                }
+                arrayAdapter.notifyDataSetChanged();
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 
     private void register() {
         String username = Objects.requireNonNull(binding.textInputUsername.getText()).toString();
         String email = Objects.requireNonNull(binding.textInputEmail.getText()).toString();
-        String university = Objects.requireNonNull(binding.uniname.getText()).toString();
+        String university = Objects.requireNonNull(binding.spinnerProductCategory.getSelectedItem()).toString();
+
         String department = Objects.requireNonNull(binding.department.getText()).toString();
         String bio = Objects.requireNonNull(binding.bio.getText()).toString();
         String password = Objects.requireNonNull(binding.textInputPassword.getText()).toString();
