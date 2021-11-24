@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:mt_hint="Aramak istediğiniz Bölüm"
-            app:mt_placeholder="EduShare"
+            app:mt_placeholder="Kullanıcılar"
             app:mt_searchBarColor="@color/colorAccent"
             app:mt_maxSuggestionsCount="10"
             app:mt_placeholderColor="@color/colorWhite"

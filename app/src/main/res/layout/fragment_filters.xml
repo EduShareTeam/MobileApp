@@ -14,7 +14,6 @@
         android:layout_marginBottom="54dp"
         android:orientation="vertical">
 
-
         <LinearLayout
             android:id="@+id/fenbilimleri"
             android:layout_width="match_parent"
@@ -49,6 +48,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="Fen bilimleri"
+                android:fontFamily="@font/comfortaa_light"
                 android:textColor="#031239"
                 android:textSize="18dp" />
 
@@ -88,6 +88,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="Eğitim bilimleri"
+                android:fontFamily="@font/comfortaa_light"
                 android:textColor="#031239"
                 android:textSize="18dp" />
 
@@ -127,6 +128,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="Dil ve Edebiyat"
+                android:fontFamily="@font/comfortaa_light"
                 android:textColor="#031239"
                 android:textSize="18dp" />
 
@@ -166,6 +168,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="Yabancı diller"
+                android:fontFamily="@font/comfortaa_light"
                 android:textColor="#031239"
                 android:textSize="18dp" />
 
@@ -205,6 +208,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="Mimarlik"
+                android:fontFamily="@font/comfortaa_light"
                 android:textColor="#031239"
                 android:textSize="18dp" />
 
@@ -243,6 +247,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
+                android:fontFamily="@font/comfortaa_light"
                 android:text="Teknoloji ve Mühendislik"
                 android:textColor="#031239"
                 android:textSize="18dp" />
@@ -283,6 +288,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="Güzel Sanatlar"
+                android:fontFamily="@font/comfortaa_light"
                 android:textColor="#031239"
                 android:textSize="18dp" />
 
@@ -322,6 +328,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="İktisadi bilimler"
+            android:fontFamily="@font/comfortaa_light"
             android:textColor="#031239"
             android:textSize="18dp" />
 
@@ -360,6 +367,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
+                android:fontFamily="@font/comfortaa_light"
                 android:text="Spor bilimleri"
                 android:textColor="#031239"
                 android:textSize="18dp" />

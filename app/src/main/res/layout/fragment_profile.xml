@@ -59,7 +59,6 @@
                         android:text="Profilim"
                         android:textColor="@color/colorWhite"
                         android:textSize="24dp"
-                        android:textStyle="bold"
                         android:fontFamily="@font/comfortaa_bold"
                         app:layout_constraintBottom_toBottomOf="@+id/linearLayoutEditProfile"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +117,7 @@
                         app:layout_constraintHorizontal_bias="0.91"
                         app:layout_constraintStart_toStartOf="@+id/constraintLayout"
                         app:layout_constraintTop_toBottomOf="@+id/textViewUsername"
-                        app:layout_constraintVertical_bias="0.110000014">
+                        app:layout_constraintVertical_bias="0.18">
 
                         <ImageView
                             android:layout_gravity="center"

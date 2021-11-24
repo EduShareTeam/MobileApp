@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.adapter.MyPostsAdapter;
 import com.fatihbaser.edusharedemo.databinding.ActivityUserProfileBinding;
 import com.fatihbaser.edusharedemo.models.Post;
@@ -20,6 +21,7 @@ import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -57,9 +59,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UserProfileActivity.this);
         binding.recyclerViewMyPost.setLayoutManager(linearLayoutManager);
-        setSupportActionBar(binding.toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         imageFile1= new File("https://github.com/Fatih-Baser/KotlinMovies/blob/master/images/a.jpeg");
 
@@ -109,10 +109,10 @@ public class UserProfileActivity extends AppCompatActivity {
             }
             if (numberPost > 0) {
                 binding.textViewPostExist.setText("Ürünler");
-                binding.textViewPostExist.setTextColor(Color.RED);
+                binding.textViewPostExist.setTextColor(Color.BLACK);
             } else {
                 binding.textViewPostExist.setText("Ürün yok");
-                binding.textViewPostExist.setTextColor(Color.GRAY);
+                binding.textViewPostExist.setTextColor(Color.BLACK);
             }
         });
     }
@@ -148,7 +148,18 @@ public class UserProfileActivity extends AppCompatActivity {
                     String imageProfile = documentSnapshot.getString("image");
                     if (imageProfile != null) {
                         if (!imageProfile.isEmpty()) {
-                            Picasso.with(UserProfileActivity.this).load(imageProfile).into(binding.circleImageProfile);
+                            Picasso.with(UserProfileActivity.this).load(imageProfile).into(binding.circleImageProfile, new Callback() {
+                                @Override
+                                public void onSuccess() {
+                                    binding.postLoading.setVisibility(View.GONE);
+                                }
+
+                                @Override
+                                public void onError() {
+                                    binding.circleImageProfile.setImageResource(R.drawable.ic_baseline_error_24);
+                                    binding.postLoading.setVisibility(View.INVISIBLE);
+                                }
+                            });
                         }
                     }
                     else {

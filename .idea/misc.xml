@@ -39,7 +39,7 @@
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_complete_profile.xml" value="0.176" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_edit_post.xml" value="0.20742753623188406" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_edit_profile.xml" value="0.264" />
-        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_edit_profile_new.xml" value="1.0" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_edit_profile_new.xml" value="0.33" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_favorite.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_filter.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_home.xml" value="0.12436676798378926" />
@@ -50,18 +50,18 @@
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_profile.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_user_profile.xml" value="0.22" />
-        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/cardview_chats.xml" value="0.2" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/cardview_chats.xml" value="0.18" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/cardview_comment.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/cardview_message.xml" value="0.264" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/cardview_my_post.xml" value="0.4" />
-        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/cardview_post.xml" value="0.176" />
-        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/cardview_user.xml" value="0.25" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/cardview_post.xml" value="0.33" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/cardview_user.xml" value="0.8062953995157385" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/cardviewfavorite.xml" value="0.536" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/custom_chat_toolbar.xml" value="0.33" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_chats.xml" value="0.536" />
-        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_filters.xml" value="0.33" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_filters.xml" value="0.5" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_home.xml" value="0.23595505617977527" />
-        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_profile.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_profile_new.xml" value="0.1" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_users.xml" value="0.17907801418439717" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/sample.xml" value="0.2" />

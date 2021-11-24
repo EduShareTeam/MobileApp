@@ -43,7 +43,7 @@
             android:maxLines="1"
             android:text="Ürün Başlığı"
             android:textColor="@color/colorDarkBlue"
-            android:textSize="14dp"
+            android:textSize="12dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/cardView3"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,11 +68,11 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:maxLength="15"
-                android:fontFamily="@font/comfortaa"
+                android:fontFamily="@font/comfortaa_bold"
                 android:padding="4dp"
                 android:text="Kategori"
                 android:textColor="@color/colorWhite"
-                android:textSize="12dp" />
+                android:textSize="10dp" />
 
         </androidx.cardview.widget.CardView>
 

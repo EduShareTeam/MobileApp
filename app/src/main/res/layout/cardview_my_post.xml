@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="260dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
@@ -53,24 +54,20 @@
                 android:text="Product"
                 android:textColor="@color/colorDarkBlue"
                 android:textSize="14dp"
-                app:layout_constraintBottom_toTopOf="@id/textViewRelativeTimeMyPost"
-                app:layout_constraintStart_toStartOf="@+id/textViewRelativeTimeMyPost"
-                app:layout_constraintTop_toTopOf="@id/constraintLayoutPostCardView" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textViewRelativeTimeMyPost"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="Category"
                 android:textColor="@color/colorDarkBlue"
                 android:textSize="12dp"
-                app:layout_constraintBottom_toBottomOf="@id/constraintLayoutPostCardView"
-                app:layout_constraintEnd_toEndOf="@+id/textViewTitleMyPost"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewTitleMyPost" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitleMyPost" />
 
 
             <ImageView

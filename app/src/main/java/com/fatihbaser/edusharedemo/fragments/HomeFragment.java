@@ -1,6 +1,7 @@
 package com.fatihbaser.edusharedemo.fragments;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.constraintlayout.widget.Placeholder;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -27,6 +30,8 @@ import com.fatihbaser.edusharedemo.providers.PostProvider;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 import com.mancj.materialsearchbar.MaterialSearchBar;
+
+import java.util.Objects;
 
 
 public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearchActionListener {

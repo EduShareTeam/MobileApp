@@ -51,7 +51,6 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
 
         binding.searchBarUser.setOnSearchActionListener(this);
 
-
         return view;
     }
 
