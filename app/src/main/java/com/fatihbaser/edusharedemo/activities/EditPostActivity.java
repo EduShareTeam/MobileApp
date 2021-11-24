@@ -169,6 +169,7 @@ public class EditPostActivity extends AppCompatActivity {
                         }
                     }
                 }
+
                 if (documentSnapshot.contains("image2")) {
                     String image2 = documentSnapshot.getString("image2");
                     if (image2 != null) {

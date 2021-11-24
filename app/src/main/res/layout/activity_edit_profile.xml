@@ -108,19 +108,11 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/ic_baseline_apartment_24" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputUniversity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/comfortaa"
-                    android:hint="Üniversite" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+            <Spinner
+                android:id="@+id/spinner_product_category"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:spinnerMode="dropdown" />
 
 
         </LinearLayout>

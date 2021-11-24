@@ -9,8 +9,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -22,10 +24,16 @@ import com.fatihbaser.edusharedemo.providers.ImageProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
 import com.fatihbaser.edusharedemo.utils.FileUtil;
 import com.fatihbaser.edusharedemo.utils.ViewedMessageHelper;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -56,6 +64,12 @@ public class EditProfileActivity extends AppCompatActivity {
     UsersProvider mUsersProvider;
     AuthProvider mAuthProvider;
 
+    //Spınner
+    ValueEventListener valueEventListener;
+    ArrayAdapter<String> arrayAdapter;
+    ArrayList<String> spinnerDataList;
+
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +80,7 @@ public class EditProfileActivity extends AppCompatActivity {
         mBuilderSelector = new AlertDialog.Builder(this);
         mBuilderSelector.setTitle("Lütfen bir seçenek seçiniz");
         options = new CharSequence[] {"Galeriden resim seç ","Fotoğraf çek"};
+        databaseReference = FirebaseDatabase.getInstance().getReference("universities");
 
         mImageProvider = new ImageProvider();
         mUsersProvider = new UsersProvider();
@@ -88,10 +103,32 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.circleImageProfile.setOnClickListener(view12 -> selectOptionImage(1));
 
         binding.circleImageBack.setOnClickListener(view1 -> finish());
-
+        spinnerDataList = new ArrayList<>();
+        arrayAdapter = new ArrayAdapter<>(EditProfileActivity.this,
+                android.R.layout.simple_spinner_dropdown_item, spinnerDataList);
+        binding.spinnerProductCategory.setAdapter(arrayAdapter);
+        retrieveData();
         getUser();
     }
 
+    private void retrieveData() {
+
+        valueEventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot item :snapshot.getChildren()){
+                    spinnerDataList.add(item.child("name").getValue().toString());
+                }
+
+
+                arrayAdapter.notifyDataSetChanged();
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
     private void getUser() {
         mUsersProvider.getUser(mAuthProvider.getUid()).addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
@@ -99,13 +136,15 @@ public class EditProfileActivity extends AppCompatActivity {
                     mUsername = documentSnapshot.getString("username");
                     binding.textInputUsername.setText(mUsername);
                 }
-                if (documentSnapshot.contains("university")) {
-                    mUniversity = documentSnapshot.getString("university");
-                    binding.textInputUniversity.setText(mUniversity);
-                }
+
                 if (documentSnapshot.contains("department")) {
                     mDepartment = documentSnapshot.getString("department");
                     binding.textInputDepartment.setText(mDepartment);
+                }
+                if (documentSnapshot.contains("university")) {
+                    mUniversity = documentSnapshot.getString("university");
+                    spinnerDataList.set(0,mUniversity);
+                    arrayAdapter.notifyDataSetChanged();
                 }
                 if (documentSnapshot.contains("bio")) {
                     mBio = documentSnapshot.getString("bio");
@@ -125,7 +164,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void clickEditProfile() {
         mUsername = Objects.requireNonNull(binding.textInputUsername.getText()).toString();
-        mUniversity = Objects.requireNonNull(binding.textInputUniversity.getText()).toString();
+        mUniversity = Objects.requireNonNull(binding.spinnerProductCategory.getSelectedItem()).toString();
         mDepartment = Objects.requireNonNull(binding.textInputDepartment.getText()).toString();
         mBio = Objects.requireNonNull(binding.textInputBio.getText()).toString();
         if (!mUsername.isEmpty() && !mUniversity.isEmpty()&& !mDepartment.isEmpty()&& !mBio.isEmpty()) {
