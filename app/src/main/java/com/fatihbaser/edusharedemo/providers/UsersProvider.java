@@ -60,7 +60,7 @@ public class UsersProvider {
     }
 
     public Query getUserByDepartment(String department) {
-        return mCollection.orderBy("department").startAt(department).endAt(department+'\uf8ff');
+        return mCollection.orderBy("university").startAt(department).endAt(department+'\uf8ff');
     }
 
     public Query getAll() {
