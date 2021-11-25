@@ -68,7 +68,7 @@ public class NotificationHelper extends ContextWrapper {
                 .setAutoCancel(true)
                 .setColor(Color.GRAY)
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.edusharenotificationico)
+                .setSmallIcon(R.drawable.artboardnew)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(body).setBigContentTitle(title));
     }
 
