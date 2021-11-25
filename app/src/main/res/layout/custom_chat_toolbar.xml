@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,37 +9,37 @@
         android:id="@+id/imageViewBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_arrow_back_white"
-        android:layout_marginTop="7dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageProfile"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:civ_circle_background_color="@color/colorGray"
+        android:layout_marginStart="10dp"
         android:src="@drawable/ic_person"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toRightOf="@+id/imageViewBack"/>
+        app:civ_circle_background_color="@color/colorGray"
+
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewBack"
+        app:layout_constraintEnd_toStartOf="@+id/textViewUsername"
+        app:layout_constraintStart_toEndOf="@id/imageViewBack"
+        app:layout_constraintTop_toTopOf="@+id/imageViewBack" />
 
     <TextView
         android:id="@+id/textViewUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_toRightOf="@+id/circleImageProfile"
         android:maxLines="1"
         android:text="Kullanıcı ismi"
         android:textColor="@color/colorWhite"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/circleImageProfile"
+        app:layout_constraintStart_toEndOf="@id/circleImageProfile"
+        app:layout_constraintTop_toTopOf="@+id/circleImageProfile" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewUsername"
-        android:layout_toRightOf="@+id/circleImageProfile"
-        android:maxLines="1"
-        android:text=""
-        android:textColor="@color/colorWhite"
-        android:textSize="12dp" />
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
