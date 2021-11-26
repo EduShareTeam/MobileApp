@@ -158,7 +158,7 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
 
     @Override
     public void onSearchConfirmed(CharSequence text) {
-        searchByTitle(text.toString().toLowerCase());
+        searchByTitle(text.toString());
     }
 
     @Override

@@ -130,7 +130,7 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
     @Override
     public void onSearchConfirmed(CharSequence text) {
 
-        getAllDepartment(text.toString().toLowerCase());
+        getAllDepartment(text.toString());
     }
 
     @Override
