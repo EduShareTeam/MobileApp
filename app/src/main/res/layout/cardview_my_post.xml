@@ -48,13 +48,13 @@
 
             <TextView
                 android:id="@+id/textViewTitleMyPost"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/comfortaa_bold"
-                android:text="Product"
-                android:layout_margin="5dp"
+                android:layout_marginStart="8dp"
                 android:ellipsize="end"
+                android:fontFamily="@font/comfortaa_bold"
                 android:maxLines="1"
+                android:text="Product"
                 android:textColor="@color/colorDarkBlue"
                 android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,11 +64,13 @@
                 android:id="@+id/textViewRelativeTimeMyPost"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="Category"
                 android:textColor="@color/colorDarkBlue"
                 android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTitleMyPost" />
 
@@ -77,24 +79,21 @@
                 android:id="@+id/imageViewEditMyPost"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
-                android:layout_marginTop="23dp"
-
+                android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_baseline_edit_24"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewRelativeTimeMyPost"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewDeleteMyPost"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/textViewTitleMyPost" />
 
             <ImageView
                 android:id="@+id/imageViewDeleteMyPost"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
-                android:layout_marginTop="23dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_baseline_delete_24"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewEditMyPost"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.51" />
+                app:layout_constraintTop_toTopOf="@+id/imageViewEditMyPost" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
