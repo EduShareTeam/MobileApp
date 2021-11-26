@@ -34,7 +34,6 @@ public class ChatsFragment extends Fragment {
 
         mChatsProvider = new ChatsProvider();
         mAuthProvider = new AuthProvider();
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         binding.recyclerViewChats.setLayoutManager(linearLayoutManager);
         return view;

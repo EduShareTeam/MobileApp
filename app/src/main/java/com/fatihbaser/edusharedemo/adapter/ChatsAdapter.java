@@ -136,7 +136,7 @@ public class ChatsAdapter extends FirestoreRecyclerAdapter<Chat, ChatsAdapter.Vi
                 if (documentSnapshot.contains("username")) {
                     String username = documentSnapshot.getString("username");
                     if (username != null) {
-                        holder.textViewUsername.setText(username.toUpperCase());
+                        holder.textViewUsername.setText(username);
                     }
                 }
                 if (documentSnapshot.contains("image")) {

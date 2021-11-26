@@ -202,9 +202,9 @@ public class RegisterActivity extends AppCompatActivity {
                                     String id1 = mAuthProvider.getUid();
                                     user1.setId(id1);
                                     user1.setImageProfile(urlProfile);
-                                    user1.setUsername(username.toLowerCase());
-                                    user1.setUniversity(university.toLowerCase());
-                                    user1.setDepartment(department.toLowerCase());
+                                    user1.setUsername(username);
+                                    user1.setUniversity(university);
+                                    user1.setDepartment(department);
                                     user1.setBio(bio);
                                     user1.setTimestamp(new Date().getTime());
                                     mUsersProvider.updateProfile(user1).addOnCompleteListener(task111 -> {

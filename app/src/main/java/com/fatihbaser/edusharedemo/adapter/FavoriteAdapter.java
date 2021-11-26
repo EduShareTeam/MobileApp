@@ -54,7 +54,7 @@ public class FavoriteAdapter extends FirestoreRecyclerAdapter<Like, FavoriteAdap
         }
 
         holder.delete.setOnClickListener(view -> deletePost(like.getId()));
-        holder.textViewTitle.setText(like.getTitle().toUpperCase(Locale.ROOT));
+        holder.textViewTitle.setText(like.getTitle());
         holder.textViewCategory.setText(like.getCategory());
 
         if (like.getImage() != null) {

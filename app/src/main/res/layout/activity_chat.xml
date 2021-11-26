@@ -30,7 +30,7 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -48,17 +48,23 @@
             android:textColor="@color/white"
             android:inputType="textMultiLine"
             android:padding="10dp"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/imageViewSendMessage"
             android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_height="47dp"
+            android:layout_gravity="right"
             app:cardCornerRadius="360dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/black"
-            app:strokeWidth="2dp"
-            android:layout_gravity="right">
+            app:strokeWidth="2dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -67,6 +73,6 @@
                 android:src="@drawable/ic_send" />
 
         </com.google.android.material.card.MaterialCardView>
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

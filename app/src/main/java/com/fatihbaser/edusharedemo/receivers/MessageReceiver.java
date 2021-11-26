@@ -117,8 +117,8 @@ public class MessageReceiver extends BroadcastReceiver {
         data.put("body", message.getMessage());
         data.put("idNotification", String.valueOf(mExtraIdNotification));
         data.put("messages", messages);
-        data.put("usernameSender", mExtraUsernameReceiver.toUpperCase());
-        data.put("usernameReceiver", mExtraUsernameSender.toUpperCase());
+        data.put("usernameSender", mExtraUsernameReceiver);
+        data.put("usernameReceiver", mExtraUsernameSender);
         data.put("idSender", message.getIdSender());
         data.put("idReceiver", message.getIdReceiver());
         data.put("idChat", message.getIdChat());

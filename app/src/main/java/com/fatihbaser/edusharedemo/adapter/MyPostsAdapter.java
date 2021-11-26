@@ -53,7 +53,7 @@ public class MyPostsAdapter extends FirestoreRecyclerAdapter<Post, MyPostsAdapte
         final String postId = document.getId();
         String relativeTime = RelativeTime.getTimeAgo(post.getTimestamp(), context);
         holder.textViewRelativeTime.setText(relativeTime);
-        holder.textViewTitle.setText(post.getTitle().toUpperCase());
+        holder.textViewTitle.setText(post.getTitle());
         if (post.getIdUser().equals(mAuthProvider.getUid())) {
             holder.imageViewDelete.setVisibility(View.VISIBLE);
         } else {

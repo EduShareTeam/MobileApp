@@ -69,7 +69,7 @@ public class PostsAdapter extends FirestoreRecyclerAdapter<Post, PostsAdapter.Vi
             mTextViewNumberFilter.setText(String.valueOf(numberFilter));
         }
 
-        holder.textViewTitle.setText(post.getTitle().toUpperCase());
+        holder.textViewTitle.setText(post.getTitle());
         holder.textViewCategory.setText(post.getCategory());
         if (post.getImage1() != null) {
             if (!post.getImage1().isEmpty()) {

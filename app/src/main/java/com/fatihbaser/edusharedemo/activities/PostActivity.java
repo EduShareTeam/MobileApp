@@ -209,7 +209,7 @@ public class PostActivity extends AppCompatActivity {
                                 post.setImage1(url);
                                 post.setImage2(url2);
                                 post.setId(uuid);
-                                post.setTitle(mTitle.toLowerCase());
+                                post.setTitle(mTitle);
                                 post.setDescription(mDescription);
                                 post.setCategory(mSpinnerCategories);
                                 post.setQuality((double) mQuality);

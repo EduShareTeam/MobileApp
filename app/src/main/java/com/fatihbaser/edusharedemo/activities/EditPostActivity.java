@@ -288,7 +288,7 @@ public class EditPostActivity extends AppCompatActivity {
                 mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
                     final String url = uri.toString();
                     Post post = new Post();
-                    post.setTitle(mTitle.toLowerCase());
+                    post.setTitle(mTitle);
                     post.setDescription(mDescription);
                     post.setCategory(mSpinnerCategories);
                     post.setQuality((double) mQuality);

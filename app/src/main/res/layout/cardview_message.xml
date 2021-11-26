@@ -28,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:fontFamily="@font/comfortaa_light"
             android:text="Yeni mesaj"
             android:textColor="@color/colorWhite"
             android:textSize="15dp" />
@@ -47,6 +48,7 @@
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:fontFamily="@font/comfortaa_light"
                 android:text="Tarih"
                 android:textColor="@color/colorGray"
                 android:textSize="10dp" />
@@ -56,6 +58,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_gravity="bottom"
+                android:fontFamily="@font/comfortaa_light"
                 android:src="@drawable/icon_check_grey" />
 
         </LinearLayout>
