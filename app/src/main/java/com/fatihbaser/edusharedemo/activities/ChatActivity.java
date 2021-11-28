@@ -1,9 +1,11 @@
 package com.fatihbaser.edusharedemo.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -71,7 +74,9 @@ public class ChatActivity extends AppCompatActivity {
     MessagesAdapter mAdapter;
 
     View mActionBarView;
+    Button button;
 
+    ConstraintLayout abc;
     LinearLayoutManager mLinearLayoutManager;
 
     ListenerRegistration mListener;
@@ -212,10 +217,24 @@ public class ChatActivity extends AppCompatActivity {
         mTextViewRelativeTime = mActionBarView.findViewById(R.id.textViewRelativeTime);
         mImageViewBack = mActionBarView.findViewById(R.id.imageViewBack);
 
+        abc=mActionBarView.findViewById(R.id.abc);
+
+        abc.setOnClickListener(view1 -> goToShowProfile());
+
+
         mImageViewBack.setOnClickListener(view -> finish());
         getUserInfo();
     }
-
+    private void goToShowProfile() {
+        if (!mExtraIdUser2.equals("")) {
+            Intent intent = new Intent(ChatActivity.this, UserProfileActivity.class);
+            intent.putExtra("idUser", mExtraIdUser2);
+            System.out.println(mExtraIdUser2+"idUser");
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Kullanıcı kimliği hala yüklenmedi", Toast.LENGTH_SHORT).show();
+        }
+    }
     private void getUserInfo() {
         String idUserInfo;
         if (mAuthProvider.getUid().equals(mExtraIdUser1)) {

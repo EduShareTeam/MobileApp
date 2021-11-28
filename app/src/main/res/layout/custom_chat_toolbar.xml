@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorAccent">
+    android:background="@color/colorAccent"
+    android:id="@+id/abc"
+    tools:ignore="MissingConstraints">
 
     <ImageView
         android:id="@+id/imageViewBack"
@@ -40,6 +43,7 @@
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/circleImageProfile"
         app:layout_constraintStart_toEndOf="@id/circleImageProfile"
-        app:layout_constraintTop_toTopOf="@+id/circleImageProfile" />
+        app:layout_constraintTop_toTopOf="@id/circleImageProfile" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
