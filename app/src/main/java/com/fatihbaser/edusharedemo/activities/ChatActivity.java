@@ -227,12 +227,20 @@ public class ChatActivity extends AppCompatActivity {
         getUserInfo();
     }
     private void goToShowProfile() {
-        if (!mExtraIdUser1.equals("")) {
+        if (!mExtraIdUser1.equals(mAuthProvider.getUid())) {
             Intent intent = new Intent(ChatActivity.this, UserProfileActivity.class);
             intent.putExtra("idUser", mExtraIdUser1);
             System.out.println(mExtraIdUser1+"idUser");
             startActivity(intent);
-        } else {
+        }
+        else if(!mExtraIdUser2.equals(mAuthProvider.getUid())){
+            Intent intent = new Intent(ChatActivity.this, UserProfileActivity.class);
+            intent.putExtra("idUser", mExtraIdUser2);
+            System.out.println(mExtraIdUser2+"idUser");
+            startActivity(intent);
+
+        }
+        else {
             Toast.makeText(this, "Kullanıcı kimliği hala yüklenmedi", Toast.LENGTH_SHORT).show();
         }
     }
