@@ -226,10 +226,10 @@ public class ChatActivity extends AppCompatActivity {
         getUserInfo();
     }
     private void goToShowProfile() {
-        if (!mExtraIdUser2.equals("")) {
+        if (!mExtraIdUser1.equals("")) {
             Intent intent = new Intent(ChatActivity.this, UserProfileActivity.class);
-            intent.putExtra("idUser", mExtraIdUser2);
-            System.out.println(mExtraIdUser2+"idUser");
+            intent.putExtra("idUser", mExtraIdUser1);
+            System.out.println(mExtraIdUser1+"idUser");
             startActivity(intent);
         } else {
             Toast.makeText(this, "Kullanıcı kimliği hala yüklenmedi", Toast.LENGTH_SHORT).show();
