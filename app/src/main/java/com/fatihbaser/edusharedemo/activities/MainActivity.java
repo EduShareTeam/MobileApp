@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.databinding.ActivityMainBinding;
 import com.fatihbaser.edusharedemo.providers.AuthProvider;
 import com.fatihbaser.edusharedemo.providers.UsersProvider;
@@ -53,24 +55,38 @@ public class MainActivity extends AppCompatActivity {
         binding.btnLogin.setOnClickListener(view1 -> login());
 
         binding.textViewReset.setOnClickListener(view13 -> {
-            final EditText resetMail = new EditText(view.getContext());
-            final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(view.getContext());
-            passwordResetDialog.setTitle("Şifreni değiştirmek istiyor musun?");
-            passwordResetDialog.setMessage("Şifre sıfırlama bağlantısı için e-posta adresini giriniz");
-            passwordResetDialog.setView(resetMail);
+            final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(view13.getContext());
+            View view1 = getLayoutInflater().inflate(R.layout.dialog_reset,null);
 
-            passwordResetDialog.setPositiveButton("Yes", (dialog, which) -> {
-                try {
-                    String mail = resetMail.getText().toString();
-                    mAuthProvider.resetPassword(mail);
-                    Toast.makeText(getApplicationContext(), "Password reset link has just sent your e-mail ", Toast.LENGTH_SHORT).show();
-                }catch (Exception e){
-                    Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                } });
-            passwordResetDialog.setNegativeButton("No", (dialog, which) -> {
+            final EditText resetMail = view1.findViewById(R.id.textInputEmailReset);
+            Button button = view1.findViewById(R.id.button_dialog);
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        if (!resetMail.getText().toString().isEmpty()){
+                            String mail = resetMail.getText().toString();
+                            mAuthProvider.resetPassword(mail);
+                            Toast.makeText(getApplicationContext(),
+                                    "Şifre yenileme linki için lütfen e-posta hesabınızı kontrol ediniz.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),
+                                    "Lütfen geçerli bir e-posta adresi giriniz.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
             });
+            passwordResetDialog.setView(view1);
             passwordResetDialog.create().show();
         });
+
+
 
         binding.textViewRegister.setOnClickListener(view12 -> {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);

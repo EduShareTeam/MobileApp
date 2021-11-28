@@ -171,7 +171,8 @@
                     android:id="@+id/bio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Hakkında"
+                    android:maxLength="140"
+                    android:hint="Hakkında (140 karakter)"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>

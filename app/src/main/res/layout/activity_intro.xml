@@ -23,7 +23,7 @@
         android:id="@+id/imageViewLoginImage"
         android:layout_width="406dp"
         android:layout_height="0dp"
-        android:src="@drawable/intro"
+        android:src="@drawable/intropic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="h,16:9"
         app:layout_constraintEnd_toEndOf="parent"

@@ -174,7 +174,8 @@
                     android:layout_height="wrap_content"
                     android:maxLines="3"
                     android:fontFamily="@font/comfortaa"
-                    android:hint="Hakkımda" />
+                    android:maxLength="140"
+                    android:hint="Hakkımda (140 karakter)" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

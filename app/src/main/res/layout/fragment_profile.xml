@@ -109,22 +109,22 @@
                         android:id="@+id/cardViewEditProfile"
                         android:layout_width="42dp"
                         android:layout_height="42dp"
-                        app:strokeWidth="0.5dp"
-                        app:strokeColor="@color/colorAccent"
                         app:cardCornerRadius="360dp"
                         app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
                         app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-                        app:layout_constraintHorizontal_bias="0.91"
+                        app:layout_constraintHorizontal_bias="0.90"
                         app:layout_constraintStart_toStartOf="@+id/constraintLayout"
                         app:layout_constraintTop_toBottomOf="@+id/textViewUsername"
-                        app:layout_constraintVertical_bias="0.18">
+                        app:layout_constraintVertical_bias="0.10"
+                        app:strokeColor="@color/colorAccent"
+                        app:strokeWidth="0.5dp">
 
                         <ImageView
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_baseline_edit_24"/>
+                            android:src="@drawable/ic_baseline_edit_24" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <androidx.constraintlayout.widget.ConstraintLayout

@@ -12,7 +12,7 @@
         android:text="Kategoriler"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="24dp"
         android:fontFamily="@font/comfortaa"
         android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
