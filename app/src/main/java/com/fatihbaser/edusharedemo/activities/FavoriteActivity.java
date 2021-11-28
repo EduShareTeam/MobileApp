@@ -28,6 +28,11 @@ public class FavoriteActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        if (binding.textViewNumberOfFavoriteItem != null){
+            binding.textViewNumberOfFavoriteItem.setVisibility(View.VISIBLE);
+            binding.textView2.setVisibility(View.VISIBLE);
+        }
+
         mAuthProvider = new AuthProvider();
         mPostProvider = new PostProvider();
         mLikerProvider = new LikesProvider();

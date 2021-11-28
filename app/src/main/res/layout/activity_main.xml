@@ -97,6 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Giriş"
+            android:fontFamily="@font/comfortaa_bold"
             android:background="@drawable/shape_view_button_layout"
             android:textColor="#ffffff"
             android:layout_marginTop="50dp"
@@ -121,6 +122,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa"
                 android:text="Hala bir hesabınız yok mu?" />
 
             <TextView
@@ -128,9 +130,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hesap oluştur"
+                android:fontFamily="@font/comfortaa_bold"
                 android:textColor="@color/colorAccent"
                 android:layout_marginLeft="5dp"
                 />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="Şifreni mi unuttun?"
+            android:textColor="@color/colorAccent"
+            />
+
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

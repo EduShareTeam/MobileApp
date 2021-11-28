@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,6 +51,26 @@ public class MainActivity extends AppCompatActivity {
 //        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         binding.btnLogin.setOnClickListener(view1 -> login());
+
+        binding.textViewReset.setOnClickListener(view13 -> {
+            final EditText resetMail = new EditText(view.getContext());
+            final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(view.getContext());
+            passwordResetDialog.setTitle("Şifreni değiştirmek istiyor musun?");
+            passwordResetDialog.setMessage("Şifre sıfırlama bağlantısı için e-posta adresini giriniz");
+            passwordResetDialog.setView(resetMail);
+
+            passwordResetDialog.setPositiveButton("Yes", (dialog, which) -> {
+                try {
+                    String mail = resetMail.getText().toString();
+                    mAuthProvider.resetPassword(mail);
+                    Toast.makeText(getApplicationContext(), "Password reset link has just sent your e-mail ", Toast.LENGTH_SHORT).show();
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                } });
+            passwordResetDialog.setNegativeButton("No", (dialog, which) -> {
+            });
+            passwordResetDialog.create().show();
+        });
 
         binding.textViewRegister.setOnClickListener(view12 -> {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);

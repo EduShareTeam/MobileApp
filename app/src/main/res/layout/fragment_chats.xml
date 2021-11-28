@@ -43,7 +43,7 @@
             android:id="@+id/textViewNumberMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="4dp"
             android:fontFamily="@font/comfortaa_bold"
             android:text="0"
             android:textSize="14dp" />

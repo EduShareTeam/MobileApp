@@ -1,5 +1,11 @@
 package com.fatihbaser.edusharedemo.providers;
 
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,6 +63,10 @@ public class AuthProvider {
         if (mAuth != null) {
             mAuth.signOut();
         }
+    }
+
+    public void resetPassword(String email){
+        mAuth.sendPasswordResetEmail(email);
     }
 
 }
