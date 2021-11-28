@@ -271,7 +271,7 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/comfortaa_light"
                     android:gravity="center"
-                    android:text="Teknoloji ve Mühendislik"
+                    android:text="Mühendislik"
                     android:textColor="#031239"
                     android:textSize="18dp" />
 

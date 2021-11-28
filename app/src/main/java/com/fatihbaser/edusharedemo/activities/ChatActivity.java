@@ -109,6 +109,7 @@ public class ChatActivity extends AppCompatActivity {
         mExtraIdUser2 = getIntent().getStringExtra("idUser2");
         mExtraIdChat  = getIntent().getStringExtra("idChat");
 
+        getMyInfoUser();
         showCustomToolbar(R.layout.custom_chat_toolbar);
         getMyInfoUser();
 
