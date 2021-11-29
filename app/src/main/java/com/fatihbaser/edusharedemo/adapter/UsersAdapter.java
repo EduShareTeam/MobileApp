@@ -84,7 +84,6 @@ public class UsersAdapter extends FirestoreRecyclerAdapter<User, UsersAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //TODO: burda bazen uygulama patlıyor kayıt ve giriş yaparken kardeşimin telefonunda oldu android 6.0.1 alttaki iki satırı gösteriyor hata
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_user, parent, false);
         return new ViewHolder(view);
     }

@@ -71,7 +71,7 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/comfortaa_light"
                     android:gravity="center"
-                    android:text="Fen bilimleri"
+                    android:text="Fen Bilimleri"
                     android:textColor="#031239"
                     android:textSize="18dp" />
 
@@ -111,7 +111,7 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/comfortaa_light"
                     android:gravity="center"
-                    android:text="Eğitim bilimleri"
+                    android:text="Eğitim Bilimleri"
                     android:textColor="#031239"
                     android:textSize="18dp" />
 
@@ -191,7 +191,7 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/comfortaa_light"
                     android:gravity="center"
-                    android:text="Yabancı diller"
+                    android:text="Yabancı Diller"
                     android:textColor="#031239"
                     android:textSize="18dp" />
 
@@ -231,7 +231,7 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/comfortaa_light"
                     android:gravity="center"
-                    android:text="Mimarlik"
+                    android:text="Mimarlık"
                     android:textColor="#031239"
                     android:textSize="18dp" />
 
@@ -351,7 +351,7 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/comfortaa_light"
                     android:gravity="center"
-                    android:text="İktisadi bilimler"
+                    android:text="İktisadi Bilimler"
                     android:textColor="#031239"
                     android:textSize="18dp" />
 
@@ -391,7 +391,7 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/comfortaa_light"
                     android:gravity="center"
-                    android:text="Spor bilimleri"
+                    android:text="Spor Bilimleri"
                     android:textColor="#031239"
                     android:textSize="18dp" />
 

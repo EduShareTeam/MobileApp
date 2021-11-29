@@ -29,14 +29,14 @@ public class FiltersFragment extends Fragment {
         binding.fenbilimleri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Fen bilimleri");
+                goToFilterActivity("Fen Bilimleri");
             }
         });
 
         binding.eItimbilimleri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Eğitim bilimleri");
+                goToFilterActivity("Eğitim Bilimleri");
             }
         });
 
@@ -50,13 +50,13 @@ public class FiltersFragment extends Fragment {
         binding.yabancDiller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Yabancı diller");
+                goToFilterActivity("Yabancı Diller");
             }
         });
         binding.mimarliK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Mimarlik");
+                goToFilterActivity("Mimarlık");
             }
         });
         binding.teknolojivemuhendislkik.setOnClickListener(new View.OnClickListener() {
@@ -74,13 +74,13 @@ public class FiltersFragment extends Fragment {
         binding.iktisat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("İktisadi bilimler");
+                goToFilterActivity("İktisadi Bilimler");
             }
         });
         binding.sporbilimleri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFilterActivity("Spor bilimleri");
+                goToFilterActivity("Spor Bilimleri");
             }
         });
 
