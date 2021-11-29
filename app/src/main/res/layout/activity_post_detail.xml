@@ -171,7 +171,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/comfortaa"
-                            android:textSize="14dp"
+                            android:textSize="12dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:textAllCaps="true"
                             android:text="Kullanıcı ismi"
                             android:textColor="@color/colorBlack" />
@@ -179,14 +181,14 @@
 
                     <Button
                         android:id="@+id/btnShowProfile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:fontFamily="@font/comfortaa_bold"
                         android:textSize="14dp"
                         android:background="@drawable/button_border"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="PROFİLİ GÖRÜNTÜLE"
                         android:textColor="@color/colorAccent" />
 

@@ -91,9 +91,14 @@
 
                     <TextView
                         android:id="@+id/textViewUsername"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         android:text="Isim ve Soyisim"
                         android:textColor="@color/black"
                         android:textSize="24dp"
