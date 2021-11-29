@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.fatihbaser.edusharedemo.R;
 import com.fatihbaser.edusharedemo.activities.EditProfileActivity;
 import com.fatihbaser.edusharedemo.activities.IntroActivity;
+import com.fatihbaser.edusharedemo.activities.PostActivity;
 import com.fatihbaser.edusharedemo.adapter.MyPostsAdapter;
 import com.fatihbaser.edusharedemo.databinding.FragmentProfileBinding;
 import com.fatihbaser.edusharedemo.models.Post;
@@ -85,8 +86,6 @@ public class ProfileFragment extends Fragment {
                 goToEditProfile();
             }
         });
-
-
         getUser();
         return view;
     }

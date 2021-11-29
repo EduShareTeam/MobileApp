@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".activities.MainActivity">
 
@@ -142,13 +142,11 @@
         android:id="@+id/textViewReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/comfortaa_bold"
         android:text="Şifreni mi unuttun?"
         android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
