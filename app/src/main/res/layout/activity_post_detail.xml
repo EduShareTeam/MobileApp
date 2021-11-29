@@ -162,16 +162,16 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="5dp"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/textViewUsername"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:fontFamily="@font/comfortaa"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:textAllCaps="true"
@@ -183,7 +183,7 @@
                         android:id="@+id/btnShowProfile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="18dp"
                         android:fontFamily="@font/comfortaa_bold"
                         android:textSize="14dp"
                         android:background="@drawable/button_border"
