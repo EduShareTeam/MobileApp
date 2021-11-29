@@ -105,6 +105,7 @@ public class ChatActivity extends AppCompatActivity {
         mLinearLayoutManager.setStackFromEnd(true);
         binding.recyclerViewMessage.setLayoutManager(mLinearLayoutManager);
 
+
         mExtraIdUser1 = getIntent().getStringExtra("idUser1");
         mExtraIdUser2 = getIntent().getStringExtra("idUser2");
         mExtraIdChat  = getIntent().getStringExtra("idChat");
