@@ -28,6 +28,7 @@ public class UsersFragment extends Fragment implements MaterialSearchBar.OnSearc
 
     private FragmentUsersBinding binding;
 
+
     AuthProvider mAuthProvider;
     UsersProvider mUserProvider;
     UsersAdapter mUsersAdapter;
