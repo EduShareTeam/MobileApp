@@ -5,4 +5,22 @@
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
     <!--    <string name="default_web_client_id">\"13099645599-gmb1ep5p1hdcestlp257h1u83b2rlmct.apps.googleusercontent.com\"</string>-->
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">Geç</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Hoşgeldiniz</string>
+    <string name="slide_1_desc">EduShare hakkında size bir kaç bilgilendirmemiz var!</string>
+
+    <string name="slide_2_title">EduShare Nedir?</string>
+    <string name="slide_2_desc">Öğrencilerin okul ihtiyaçlarını diğer öğrencilerden hızlı ve kolayca temin edebilecekleri telefon uygulaması.</string>
+
+    <string name="slide_3_title">Mentoring Özelliği</string>
+    <string name="slide_3_desc">Üniversiteye yeni başlayan öğrenciler üst dönemleriyle iletişime geçip onların tecrübe ve bilgilerinden yararlanabiliyor.</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
 </resources>

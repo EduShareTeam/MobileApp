@@ -13,15 +13,43 @@
     <color name="colorAccent">#fa914e</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
-
     <color name="colorGray">#D5D2D2</color>
-
-
     <color name="colorDarkBlue">#090B17</color>
-
-
-
     <color name="colorGrayLight">#F1EFEF</color>
     <color name="colorBlue">#0851B6</color>
     <color name="colorGreen">#24CD38</color>
+
+
+    <!-- Screens background color-->
+    <color name="bg_screen1">#fa914e</color>
+    <color name="bg_screen2">#fa914e</color>
+    <color name="bg_screen3">#fa914e</color>
+
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#787878</color>
+    <color name="dot_dark_screen2">#787878</color>
+    <color name="dot_dark_screen3">#787878</color>
+
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#fa914e</color>
+    <color name="dot_light_screen2">#fa914e</color>
+    <color name="dot_light_screen3">#fa914e</color>
+
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+
+    </array>
+    
 </resources>
