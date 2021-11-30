@@ -19,10 +19,12 @@
         android:theme="@style/Theme.EduSharedemo">
         <activity
             android:name=".activities.IntroActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.FavoriteActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
