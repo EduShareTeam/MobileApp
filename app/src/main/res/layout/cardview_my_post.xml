@@ -78,9 +78,9 @@
 
             <ImageView
                 android:id="@+id/imageViewEditMyPost"
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:layout_marginEnd="8dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="7dp"
                 android:src="@drawable/ic_baseline_edit_24"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewRelativeTimeMyPost"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewDeleteMyPost"
@@ -88,9 +88,9 @@
 
             <ImageView
                 android:id="@+id/imageViewDeleteMyPost"
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:layout_marginEnd="8dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="5dp"
                 android:src="@drawable/ic_baseline_delete_24"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewEditMyPost"
                 app:layout_constraintEnd_toEndOf="parent"
