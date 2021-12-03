@@ -125,6 +125,7 @@
         <entry key="app/src/main/res/layout/cardview_my_post.xml" value="0.35203579031387866" />
         <entry key="app/src/main/res/layout/cardview_post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/cardview_user.xml" value="0.2006340579710145" />
+        <entry key="app/src/main/res/layout/cardviewfavorite.xml" value="0.13006756756756757" />
         <entry key="app/src/main/res/layout/custom_chat_toolbar.xml" value="0.20516304347826086" />
         <entry key="app/src/main/res/layout/fragment_chats.xml" value="0.21422101449275363" />
         <entry key="app/src/main/res/layout/fragment_filters.xml" value="0.33" />
