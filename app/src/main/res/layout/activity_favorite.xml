@@ -16,10 +16,9 @@
         android:text="Favorilerim"
         android:textColor="@color/white"
         android:textSize="24dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayoutFavorite"
@@ -27,9 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView3">
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/comfortaa_bold"
             android:text="Beğenilen içerik sayısı:"
-            android:textSize="14dp"/>
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/textViewNumberOfFavoriteItem"
@@ -47,7 +47,7 @@
             android:layout_marginStart="4dp"
             android:fontFamily="@font/comfortaa_bold"
             android:text="0"
-            android:textSize="12dp"/>
+            android:textSize="12dp" />
 
     </LinearLayout>
 
@@ -55,10 +55,9 @@
         android:id="@+id/recyclerViewLikes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutFavorite" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

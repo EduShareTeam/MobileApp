@@ -8,5 +8,5 @@
     <dimen name="img_width_height">120dp</dimen>
     <dimen name="slide_title">36dp</dimen>
     <dimen name="slide_desc">17dp</dimen>
-    <dimen name="desc_padding">40dp</dimen>
+    <dimen name="desc_padding">20dp</dimen>
 </resources>
