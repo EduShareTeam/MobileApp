@@ -39,6 +39,8 @@
         android:layout_toRightOf="@+id/circleImageProfile"
         android:maxLines="1"
         android:text="Kullanıcı ismi"
+        android:layout_marginEnd="20dp"
+        android:maxLength="18"
         android:textColor="@color/colorWhite"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/circleImageProfile"
