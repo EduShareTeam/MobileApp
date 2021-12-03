@@ -67,7 +67,7 @@ public class RelativeTime extends Application {
         } else if (diff < 48 * HOUR_MILLIS) {
             return "Dun";
         } else {
-            return "gun " + diff / DAY_MILLIS + " gunler";
+            return  diff / DAY_MILLIS+ " gün " + "önce";
         }
 
     }
