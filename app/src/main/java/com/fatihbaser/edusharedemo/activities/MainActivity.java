@@ -176,17 +176,21 @@ public class MainActivity extends AppCompatActivity {
     private void login() {
         String email = Objects.requireNonNull(binding.textInputEmail.getText()).toString();
         String password = Objects.requireNonNull(binding.textInputPassword.getText()).toString();
-        mDialog.show();
-        mAuthProvider.login(email, password).addOnCompleteListener(task -> {
-            mDialog.dismiss();
-            if (task.isSuccessful()) {
+        if(!email.isEmpty() && !password.isEmpty() ) {
+            mDialog.show();
+            mAuthProvider.login(email, password).addOnCompleteListener(task -> {
+                mDialog.dismiss();
+                if (task.isSuccessful()) {
                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 
-            } else {
-                Toast.makeText(MainActivity.this, "Girdiğiniz e-posta veya şifre doğru değil", Toast.LENGTH_LONG).show();
-            }
-        });
+                } else {
+                    Toast.makeText(MainActivity.this, "Girdiğiniz e-posta veya şifre doğru değil", Toast.LENGTH_LONG).show();
+                }
+            });
+        }else{
+            Toast.makeText(MainActivity.this, "Lütfen boş alanları dodurunuz !", Toast.LENGTH_LONG).show();
+        }
     }
 }
