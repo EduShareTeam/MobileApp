@@ -45,7 +45,7 @@
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_favorite.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_filter.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_home.xml" value="0.12436676798378926" />
-        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_intro.xml" value="0.22" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_intro.xml" value="0.2" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_post.xml" value="0.176" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/activity_post_detail.xml" value="0.24270833333333333" />
@@ -69,6 +69,7 @@
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/fragment_users.xml" value="0.17907801418439717" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/sample.xml" value="0.2" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/slider_layout_item.xml" value="0.36822916666666666" />
+        <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/layout/welcome_slide1.xml" value="0.1875" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/menu/main_menu.xml" value="0.1" />
         <entry key="..\:/Users/yusuf/AndroidStudioProjects/EduShareBeta/app/src/main/res/mipmap-anydpi-v26/edushare.xml" value="0.32685185185185184" />

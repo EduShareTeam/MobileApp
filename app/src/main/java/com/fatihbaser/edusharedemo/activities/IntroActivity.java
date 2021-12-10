@@ -2,6 +2,7 @@ package com.fatihbaser.edusharedemo.activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -59,6 +60,14 @@ public class IntroActivity extends AppCompatActivity {
         binding.loginAccount.setOnClickListener(view12 -> {
             Intent intent = new Intent(IntroActivity.this, MainActivity.class);
             startActivity(intent);
+        });
+
+        binding.textViewPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://edushare.site/guvenlik-politikasi/")));
+            }
         });
     }
 
