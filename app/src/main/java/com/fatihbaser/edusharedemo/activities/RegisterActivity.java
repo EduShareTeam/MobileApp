@@ -178,6 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(this, "Adınızı doldurun", Toast.LENGTH_SHORT).show();
             }
         }
+
       else if (mPhotoFile != null ) {
             if (!username.isEmpty() && !email.isEmpty() && !password.isEmpty() && !university.isEmpty() && !department.isEmpty() && !bio.isEmpty() && !confirmPassword.isEmpty()&&mPhotoFile != null) {
                 if (isEmailValid(email)) {
@@ -196,6 +197,9 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Devam etmek için tüm alanları ekleyin", Toast.LENGTH_SHORT).show();
             }
+        }
+        else {
+            Toast.makeText(this, "Lütfen Profil fotografı ekleyiniz ", Toast.LENGTH_SHORT).show();
         }
 
     }
