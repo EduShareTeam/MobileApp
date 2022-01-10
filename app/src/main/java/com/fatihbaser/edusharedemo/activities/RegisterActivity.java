@@ -144,16 +144,16 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (!username.isEmpty()) {
                 if (university.isEmpty()) {
-                    Toast.makeText(this, "Ünüversiteyi doldurun", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Üniversitenizi doldurun", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     if (department.isEmpty()) {
-                        Toast.makeText(this, "Departman doldurun", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Bölümünüzü doldurun", Toast.LENGTH_SHORT).show();
                     }
                     else {
 
                         if (bio.isEmpty()) {
-                            Toast.makeText(this, "bio doldurun", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Lütfen Hakkınızda kısmını doldurun", Toast.LENGTH_SHORT).show();
                         }
                         else {
 
@@ -168,34 +168,52 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(this, "Parolalar uyuşmuyor", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(this, "Tüm alanları doldurdunuz ancak e-posta geçerli değil", Toast.LENGTH_LONG).show();
+                                Toast.makeText(this, "E-posta geçerli değil", Toast.LENGTH_LONG).show();
                             }
                         }
                         }
                     }
                 }
                else {
-                Toast.makeText(this, "Adınızı doldurun", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Lütfen isim ve soyisminizi doldurun", Toast.LENGTH_SHORT).show();
             }
         }
 
       else if (mPhotoFile != null ) {
-            if (!username.isEmpty() && !email.isEmpty() && !password.isEmpty() && !university.isEmpty() && !department.isEmpty() && !bio.isEmpty() && !confirmPassword.isEmpty()&&mPhotoFile != null) {
-                if (isEmailValid(email)) {
-                    if (password.equals(confirmPassword)) {
-                        if (password.length() >= 6) {
-                            createUser(username, email, password, university, department, bio,mPhotoFile);
-                        } else {
-                            Toast.makeText(this, "Şifreniz en az 6 karakter olmalıdır", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(this, "Parolalar uyuşmuyor", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(this, "Tüm alanları girdiniz ancak e-posta geçerli değil", Toast.LENGTH_LONG).show();
+            if (!username.isEmpty()) {
+                if (university.isEmpty()) {
+                    Toast.makeText(this, "Üniversitenizi doldurun", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(this, "Devam etmek için tüm alanları ekleyin", Toast.LENGTH_SHORT).show();
+                else {
+                    if (department.isEmpty()) {
+                        Toast.makeText(this, "Bölümünüzü doldurun", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+
+                        if (bio.isEmpty()) {
+                            Toast.makeText(this, "Lütfen Hakkınızda kısmını doldurun", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+
+                            if (isEmailValid(email)) {
+                                if (password.equals(confirmPassword)) {
+                                    if (password.length() >= 6) {
+                                        createUser(username, email, password, university, department, bio,mImageFile);
+                                    } else {
+                                        Toast.makeText(this, "Şifreniz en az 6 karakter olmalıdır", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(this, "Parolalar uyuşmuyor", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(this, "E-posta geçerli değil", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                Toast.makeText(this, "Lütfen isim ve soyisminizi doldurun", Toast.LENGTH_SHORT).show();
             }
         }
         else {
