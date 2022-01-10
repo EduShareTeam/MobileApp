@@ -20,7 +20,7 @@
             app:mt_hint="Arama metni"
             app:mt_placeholder="Ürünler"
             app:mt_searchBarColor="@color/colorAccent"
-            app:mt_maxSuggestionsCount="10"
+            app:mt_maxSuggestionsCount="0"
             app:mt_placeholderColor="@color/colorWhite"
             app:mt_textColor="@color/colorWhite"
             app:mt_searchIconTint="@color/colorWhite"
